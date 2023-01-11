@@ -49,4 +49,8 @@ public class User {
     public void setEmail(String email) {
         Email = email;
     }
+
+    public UserTypes getUserType() {
+        return userType;
+    }
 }

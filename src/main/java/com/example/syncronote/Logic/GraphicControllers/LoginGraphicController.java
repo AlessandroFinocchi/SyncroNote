@@ -25,7 +25,7 @@ public class LoginGraphicController extends IController{
     public void initialize(){
         super.initialize();
         SignUpLbl.setOnMouseClicked(mouseEvent -> {
-            UserSignup();
+            goToPage("SignUp.fxml");
         });
     }
 
@@ -41,22 +41,14 @@ public class LoginGraphicController extends IController{
             }
             User user = UserDAO.findUser(username, password);
 
-            if(user != null)
-                m.ChangeScene("Home.fxml");
+            /*TODO: save user as a Session Singleton to keep trace about the profile
+             *  (it is a method in IController because is shared with SignUPGC)*/
+
+            goToPage("Home.fxml");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
             MsgLbl.setText("Wrong credentials");
-        }
-    }
-
-    private void UserSignup() {
-        try{
-            Main m = new Main();
-            m.ChangeScene("SignUp.fxml");
-        }
-        catch (IOException e){
-            System.out.println(e.getMessage());
         }
     }
 }

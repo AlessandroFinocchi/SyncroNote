@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
+
 public abstract class IController{
 
     @FXML
@@ -41,5 +43,15 @@ public abstract class IController{
 
         CloseBtn.setOnMouseClicked(mouseEvent -> Main.stg.close());
         MinimizeBtn.setOnMouseClicked(mouseEvent -> Main.stg.setIconified(true));
+    }
+
+    protected void goToPage(String page) {
+        try{
+            Main m = new Main();
+            m.ChangeScene(page);
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

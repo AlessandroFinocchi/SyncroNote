@@ -73,6 +73,7 @@ public class UserDAO {
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // CODE SMELL
+
             ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
                     "WHERE Nickname = '" + username + "' AND " +
                     "Password = '" + password + "';");
@@ -90,7 +91,7 @@ public class UserDAO {
             if(rs.getString("Role").equals("Student"))
                 type = UserTypes.STUDENT;
             else if (rs.getString("Role").equals("Professor"))
-                type = UserTypes.STUDENT;
+                type = UserTypes.PROFESSOR;
             else
                 type = UserTypes.ADMIN;
 
@@ -111,5 +112,94 @@ public class UserDAO {
         }
 
         return user;
+    }
+
+    public static User findUsername(String username) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        User user = null;
+
+        try {
+            // CODE SMELL
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Creazione dello statement ed esecuzione della query
+            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // CODE SMELL
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
+                    "WHERE Nickname = '" + username + "';");
+
+            // Verifica se è stato restituito un insieme vuoto
+            if(!rs.first()) {
+                return null;
+            }
+
+            // Riposizionamento del cursore
+            rs.first();
+
+            UserTypes type;
+
+            if(rs.getString("Role").equals("Student"))
+                type = UserTypes.STUDENT;
+            else if (rs.getString("Role").equals("Professor"))
+                type = UserTypes.PROFESSOR;
+            else
+                type = UserTypes.ADMIN;
+
+            user = new User(
+                    rs.getString("Nickname"),
+                    rs.getString("Name"),
+                    rs.getString("Surname"),
+                    rs.getString("Email"),
+                    type);
+
+            // Chiusura del result set e rilascio delle risorse
+            rs.close();
+        } finally {
+            if(stmt != null)
+                stmt.close();
+            if(conn != null)
+                conn.close();
+        }
+
+        return user;
+    }
+
+    public static int addUser(String username, String name, String surname, String email, String psw, String role) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        int result = -1;
+
+        try {
+            // CODE SMELL
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Creazione dello statement ed esecuzione della query
+            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // CODE SMELL
+
+            String query = "INSERT INTO User (Nickname, Name, Surname, Email, Password, Role)"
+                    + " VALUES('" + username + "','" + name + "','" + surname + "','" + email + "','" + psw + "','" + role + "')";
+
+
+            result = stmt.executeUpdate(query);
+
+            if (result > 0) {
+                System.out.println("ROW INSERTED");
+            } else {
+                System.out.println("ROW NOT INSERTED");
+            }
+
+        } finally {
+            if(stmt != null)
+                stmt.close();
+            if(conn != null)
+                conn.close();
+        }
+
+        return result;
     }
 }
