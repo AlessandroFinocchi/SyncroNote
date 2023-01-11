@@ -19,6 +19,13 @@ public class UserDAO {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/syncronotesdb";
     /* END CODE SMELL */
 
+    private static final String USERNAME = "Nickname";
+    private static final String NAME = "Name";
+    private static final String SURNAME = "Surname";
+    private static final String EMAIL = "Email";
+    private static final String PSW = "Password";
+    private static final String ROLE = "Role";
+
     private static Logger logger = Logger.getAnonymousLogger();
 
     public static List<User> getAllUsers() throws Exception {
@@ -34,7 +41,7 @@ public class UserDAO {
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // CODE SMELL
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
 
             // Verifica se è stato restituito un insieme vuoto
             if(!rs.first()) {
@@ -45,9 +52,9 @@ public class UserDAO {
             rs.first();
             do {
                 // lettura delle colonne usando il nome delle colonne
-                String nickname = rs.getString("Nickname");
-                String name = rs.getString("Name");
-                String surname = rs.getString("Surname");
+                String nickname = rs.getString(USERNAME);
+                String name = rs.getString(NAME);
+                String surname = rs.getString(SURNAME);
 
                 userList.add(new User(nickname, name, surname,"", UserTypes.STUDENT));
             } while(rs.next());
@@ -79,8 +86,8 @@ public class UserDAO {
             // CODE SMELL
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
-                    "WHERE Nickname = '" + username + "' AND " +
-                    "Password = '" + password + "';");
+                    "WHERE " + USERNAME + " = '" + username + "' AND " +
+                     PSW + " = '" + password + "';");
 
             // Verifica se è stato restituito un insieme vuoto
             if(!rs.first()) {
@@ -92,18 +99,18 @@ public class UserDAO {
 
             UserTypes type;
 
-            if(rs.getString("Role").equals("Student"))
+            if(rs.getString(ROLE).equals("Student"))
                 type = UserTypes.STUDENT;
-            else if (rs.getString("Role").equals("Professor"))
+            else if (rs.getString(ROLE).equals("Professor"))
                 type = UserTypes.PROFESSOR;
             else
                 type = UserTypes.ADMIN;
 
             user = new User(
-                    rs.getString("Nickname"),
-                    rs.getString("Name"),
-                    rs.getString("Surname"),
-                    rs.getString("Email"),
+                    rs.getString(USERNAME),
+                    rs.getString(NAME),
+                    rs.getString(SURNAME),
+                    rs.getString(EMAIL),
                     type);
 
             // Chiusura del result set e rilascio delle risorse
@@ -145,18 +152,18 @@ public class UserDAO {
 
             UserTypes type;
 
-            if(rs.getString("Role").equals("Student"))
+            if(rs.getString(ROLE).equals("Student"))
                 type = UserTypes.STUDENT;
-            else if (rs.getString("Role").equals("Professor"))
+            else if (rs.getString(ROLE).equals("Professor"))
                 type = UserTypes.PROFESSOR;
             else
                 type = UserTypes.ADMIN;
 
             user = new User(
-                    rs.getString("Nickname"),
-                    rs.getString("Name"),
-                    rs.getString("Surname"),
-                    rs.getString("Email"),
+                    rs.getString(USERNAME),
+                    rs.getString(NAME),
+                    rs.getString(SURNAME),
+                    rs.getString(EMAIL),
                     type);
 
             // Chiusura del result set e rilascio delle risorse
@@ -185,7 +192,7 @@ public class UserDAO {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // CODE SMELL
 
-            String query = "INSERT INTO User (Nickname, Name, Surname, Email, Password, Role)"
+            String query = "INSERT INTO User (" + USERNAME + ", " + NAME +", " + SURNAME +", " + EMAIL + ", " + PSW + ", " + ROLE + ")"
                     + " VALUES('" + username + "','" + name + "','" + surname + "','" + email + "','" + psw + "','" + role + "')";
 
 

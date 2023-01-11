@@ -3,51 +3,51 @@ package com.example.syncronote.logic.model;
 import com.example.syncronote.logic.enums.UserTypes;
 
 public class User {
-    private String Nickname;
-    private String Name;
-    private String Surname;
-    private String Email;
+    private String username;
+    private String name;
+    private String surname;
+    private String email;
     //private ImageView ProfilePhoto;
     private final UserTypes userType;
 
-    public User(String nickname, String name, String surname, String email, UserTypes userType) {
-        Nickname = nickname;
-        Name = name;
-        Surname = surname;
-        Email = email;
+    public User(String username, String name, String surname, String email, UserTypes userType) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
         this.userType = userType;
     }
 
-    public String getNickname() {
-        return Nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        Nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public UserTypes getUserType() {
