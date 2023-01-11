@@ -12,10 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.syncronote.Logic.GraphicControllers.LoginGraphicController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.Logic.GraphicControllers.LoginGraphicController">
    <left>
       <AnchorPane prefHeight="375.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -57,26 +54,28 @@
                   <Font name="Calibri" size="16.0" />
                </font>
             </CheckBox>
-            <Button fx:id="LoginBtn" layoutX="213.0" layoutY="384.0" mnemonicParsing="false" onAction="#UserLogin"
-                    style="-fx-background-color: #00acf5;" text="Log in" textFill="WHITE">
+            <Button fx:id="LoginBtn" layoutX="213.0" layoutY="384.0" mnemonicParsing="false" onAction="#UserLogin" style="-fx-background-color: #00acf5;" text="Log in" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Button>
+            <Label fx:id="SignUpLbl" layoutX="126.0" layoutY="452.0" prefHeight="18.0" prefWidth="247.0" text="Still without an account? Sign up here" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
    <top>
       <Pane fx:id="TitlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="MinimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true"
-                       preserveRatio="true">
+            <ImageView fx:id="MinimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/hide.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="CloseBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true"
-                       preserveRatio="true">
+            <ImageView fx:id="CloseBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/close.png" />
                </image>

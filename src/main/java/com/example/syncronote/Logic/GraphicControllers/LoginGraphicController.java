@@ -8,11 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LoginGraphicController extends IController{
-    @FXML
-    private Button LoginBtn;
     @FXML
     private Label MsgLbl;
     @FXML
@@ -20,38 +17,46 @@ public class LoginGraphicController extends IController{
     @FXML
     private PasswordField PswField;
     @FXML
-    private CheckBox RememberChkb;                  //add a json to remember if login has to be done or not
+    private CheckBox RememberChkb;                  //TODO: add a json to remember if login has to be done or not
+    @FXML
+    private Label SignUpLbl;
 
-    public void UserLogin(ActionEvent event) throws IOException {
-        CheckLogin();
+    @Override
+    public void initialize(){
+        super.initialize();
+        SignUpLbl.setOnMouseClicked(mouseEvent -> {
+            UserSignup();
+        });
     }
 
-    private void CheckLogin() throws IOException {
+    public void UserLogin(ActionEvent event) {
         Main m = new Main();
-        String username = "pippo";
-        String password = "1234";
+        String username = UserField.getText();
+        String password = PswField.getText();
 
-        if(UserField.getText().equals(username) && PswField.getText().equals(password)){
-            m.ChangeScene("Home.fxml");
+        try{
+            if(username.isEmpty() || password.isEmpty()){
+                MsgLbl.setText("Empty Fields");
+                return;
+            }
+            User user = UserDAO.findUser(username, password);
+
+            if(user != null)
+                m.ChangeScene("Home.fxml");
         }
-        else if(UserField.getText().isEmpty() || PswField.getText().isEmpty()){
-            MsgLbl.setText("Empty Fields");
-        }
-        else{
+        catch (Exception e){
+            System.out.println(e.getMessage());
             MsgLbl.setText("Wrong credentials");
         }
-        Dummy();
     }
 
-    public void Dummy(){
+    private void UserSignup() {
         try{
-            List<User> userList = UserDAO.GetAllUsers();
-            for(User u: userList){
-                System.out.println("Nickname = " + u.getNickname() + "\n");
-            }
+            Main m = new Main();
+            m.ChangeScene("SignUp.fxml");
         }
-        catch(Exception ex){
-
+        catch (IOException e){
+            System.out.println(e.getMessage());
         }
     }
 }

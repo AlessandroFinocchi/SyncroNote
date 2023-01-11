@@ -17,7 +17,7 @@ public class UserDAO {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/syncronotesdb";
     /* END CODE SMELL */
 
-    public static List<User> GetAllUsers() throws Exception {
+    public static List<User> getAllUsers() throws Exception {
         Statement stmt = null;
         Connection conn = null;
         List<User> userList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class UserDAO {
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // CODE SMELL
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user;");
 
             // Verifica se è stato restituito un insieme vuoto
             if(!rs.first()) {
@@ -58,5 +58,58 @@ public class UserDAO {
         }
 
         return userList;
+    }
+
+    public static User findUser(String username, String password) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        User user = null;
+
+        try {
+            // CODE SMELL
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Creazione dello statement ed esecuzione della query
+            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // CODE SMELL
+            ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
+                    "WHERE Nickname = '" + username + "' AND " +
+                    "Password = '" + password + "';");
+
+            // Verifica se è stato restituito un insieme vuoto
+            if(!rs.first()) {
+                throw new Exception("Non esiste alcun utente chiamato ");
+            }
+
+            // Riposizionamento del cursore
+            rs.first();
+
+            UserTypes type;
+
+            if(rs.getString("Role").equals("Student"))
+                type = UserTypes.STUDENT;
+            else if (rs.getString("Role").equals("Professor"))
+                type = UserTypes.STUDENT;
+            else
+                type = UserTypes.ADMIN;
+
+            user = new User(
+                    rs.getString("Nickname"),
+                    rs.getString("Name"),
+                    rs.getString("Surname"),
+                    rs.getString("Email"),
+                    type);
+
+            // Chiusura del result set e rilascio delle risorse
+            rs.close();
+        } finally {
+            if(stmt != null)
+                stmt.close();
+            if(conn != null)
+                conn.close();
+        }
+
+        return user;
     }
 }
