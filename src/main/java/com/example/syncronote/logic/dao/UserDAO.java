@@ -1,7 +1,7 @@
-package com.example.syncronote.Logic.DAO;
+package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.Logic.Enums.UserTypes;
-import com.example.syncronote.Logic.Model.User;
+import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.model.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDAO {
     /* BEGIN CODE SMELL */
@@ -16,6 +18,8 @@ public class UserDAO {
     private static final String PASS = "Perarossa01?";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/syncronotesdb";
     /* END CODE SMELL */
+
+    private static Logger logger = Logger.getAnonymousLogger();
 
     public static List<User> getAllUsers() throws Exception {
         Statement stmt = null;
@@ -188,9 +192,9 @@ public class UserDAO {
             result = stmt.executeUpdate(query);
 
             if (result > 0) {
-                System.out.println("ROW INSERTED");
+                logger.log(Level.INFO, "ROW INSERTED");
             } else {
-                System.out.println("ROW NOT INSERTED");
+                logger.log(Level.INFO, "ROW NOT INSERTED");
             }
 
         } finally {

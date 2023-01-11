@@ -1,4 +1,4 @@
-package com.example.syncronote.Logic.GraphicControllers;
+package com.example.syncronote.logic.graphic_controllers;
 
 public class HomeGraphicController extends ILoggedController{
 

@@ -1,6 +1,6 @@
-package com.example.syncronote.Logic.Model;
+package com.example.syncronote.logic.model;
 
-import com.example.syncronote.Logic.Enums.UserTypes;
+import com.example.syncronote.logic.enums.UserTypes;
 
 public class User {
     private String Nickname;

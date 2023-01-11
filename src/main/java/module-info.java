@@ -6,6 +6,6 @@ module com.example.syncronote {
 
     opens com.example.syncronote to javafx.fxml;
     exports com.example.syncronote;
-    exports com.example.syncronote.Logic.GraphicControllers;
-    opens com.example.syncronote.Logic.GraphicControllers to javafx.fxml;
+    exports com.example.syncronote.logic.graphic_controllers;
+    opens com.example.syncronote.logic.graphic_controllers to javafx.fxml;
 }

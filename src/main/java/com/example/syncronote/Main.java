@@ -10,15 +10,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
-    public static Stage stg;
+    private static Stage stg;
+
+    private Logger logger = Logger.getAnonymousLogger();
+
+    public static Stage getStg() {
+        return stg;
+    }
+
+    public static void setStg(Stage stage) {
+        stg = stage;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         String firstPage = "Login.fxml";
-        System.out.println(getClass().getResource(firstPage));
+        logger.log(Level.INFO, getClass().getResource(firstPage).toString());
         Parent root = FXMLLoader.load(getClass().getResource(firstPage));
         Scene scene = new Scene(root, 800, 600);
         scene.setFill(Color.TRANSPARENT);

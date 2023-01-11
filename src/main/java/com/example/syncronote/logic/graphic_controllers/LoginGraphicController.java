@@ -1,13 +1,13 @@
-package com.example.syncronote.Logic.GraphicControllers;
+package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.Logic.DAO.UserDAO;
-import com.example.syncronote.Logic.Model.User;
+import com.example.syncronote.logic.dao.UserDAO;
+import com.example.syncronote.logic.model.User;
 import com.example.syncronote.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.IOException;
+import java.util.logging.Level;
 
 public class LoginGraphicController extends IController{
     @FXML
@@ -29,7 +29,7 @@ public class LoginGraphicController extends IController{
         });
     }
 
-    public void UserLogin(ActionEvent event) {
+    public void userLogin(ActionEvent event) {
         Main m = new Main();
         String username = UserField.getText();
         String password = PswField.getText();
@@ -47,7 +47,7 @@ public class LoginGraphicController extends IController{
             goToPage("Home.fxml");
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.INFO, e.getMessage());
             MsgLbl.setText("Wrong credentials");
         }
     }

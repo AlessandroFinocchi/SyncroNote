@@ -1,4 +1,4 @@
-package com.example.syncronote.Logic.Enums;
+package com.example.syncronote.logic.enums;
 
 public enum UserTypes {
     STUDENT("Student"),

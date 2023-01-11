@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.Logic.GraphicControllers.HomeGraphicController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.HomeGraphicController">
    <children>
-      <AnchorPane fx:id="ContainerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
+      <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
          <children>
             <Button layoutX="502.0" layoutY="189.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="52.0" text="Button" />
          </children></AnchorPane>
-      <AnchorPane fx:id="LeftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
+      <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
          <children>
             <VBox layoutX="98.0" layoutY="180.0" prefHeight="290.0" prefWidth="50.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
                <children>
@@ -82,19 +82,19 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Pane fx:id="TitlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
+      <Pane fx:id="titlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
          <children>
-            <ImageView fx:id="MinimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="minimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/hide.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="CloseBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/close.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="Burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/SideBarImages/Menu.png" />
                </image>
