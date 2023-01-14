@@ -11,15 +11,15 @@ import java.util.logging.Level;
 
 public class LoginGraphicController extends IGraphicController {
     @FXML
-    private Label MsgLbl;
+    private Label msgLbl;
     @FXML
-    private TextField UserField;
+    private TextField userField;
     @FXML
-    private PasswordField PswField;
+    private PasswordField pswField;
     @FXML
-    private CheckBox RememberChkb;                  //TODO: add a json to remember if login has to be done or not
+    private CheckBox rememberChkb;                  //TODO: add a json to remember if login has to be done or not
     @FXML
-    private Label SignUpLbl;
+    private Label signUpLbl;
 
     private LoginController loginController;
 
@@ -29,19 +29,19 @@ public class LoginGraphicController extends IGraphicController {
 
         loginController = new LoginController();
 
-        SignUpLbl.setOnMouseClicked(mouseEvent -> {
+        signUpLbl.setOnMouseClicked(mouseEvent -> {
             goToPage("SignUp.fxml");
         });
     }
 
     public void userLogin(ActionEvent event) {
         Main m = new Main();
-        String username = UserField.getText();
-        String password = PswField.getText();
+        String username = userField.getText();
+        String password = pswField.getText();
 
         try{
             if(username.isEmpty() || password.isEmpty()){
-                MsgLbl.setText("Empty Fields");
+                msgLbl.setText("Empty Fields");
                 return;
             }
             User user = loginController.login(username, password);
@@ -50,7 +50,7 @@ public class LoginGraphicController extends IGraphicController {
         }
         catch (Exception e){
             logger.log(Level.INFO, e.getMessage());
-            MsgLbl.setText("Wrong credentials");
+            msgLbl.setText("Wrong credentials");
         }
     }
 }

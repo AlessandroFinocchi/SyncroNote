@@ -34,7 +34,7 @@ public class UserDAO extends ParentDAO{
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -77,7 +77,7 @@ public class UserDAO extends ParentDAO{
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -131,7 +131,7 @@ public class UserDAO extends ParentDAO{
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -184,7 +184,7 @@ public class UserDAO extends ParentDAO{
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db

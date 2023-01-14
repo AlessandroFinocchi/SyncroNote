@@ -7,7 +7,6 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    //private ImageView ProfilePhoto;
     private final UserTypes userType;
 
     public User(String username, String name, String surname, String email, UserTypes userType) {

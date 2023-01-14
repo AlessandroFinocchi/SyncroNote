@@ -42,14 +42,14 @@
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="MsgLbl" layoutX="130.0" layoutY="155.0" prefHeight="25.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="msgLbl" layoutX="130.0" layoutY="155.0" prefHeight="25.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="UserField" layoutX="130.0" layoutY="212.0" prefHeight="25.0" prefWidth="300.0" promptText="Username" />
-            <PasswordField fx:id="PswField" layoutX="130.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
-            <CheckBox fx:id="RememberChkb" layoutX="130.0" layoutY="309.0" mnemonicParsing="false" text="Remember me" textFill="#00acf5">
+            <TextField fx:id="userField" layoutX="130.0" layoutY="212.0" prefHeight="25.0" prefWidth="300.0" promptText="Username" />
+            <PasswordField fx:id="pswField" layoutX="130.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
+            <CheckBox fx:id="rememberChkb" layoutX="130.0" layoutY="309.0" mnemonicParsing="false" text="Remember me" textFill="#00acf5">
                <font>
                   <Font name="Calibri" size="16.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Font name="Calibri" size="20.0" />
                </font>
             </Button>
-            <Label fx:id="SignUpLbl" layoutX="126.0" layoutY="452.0" prefHeight="18.0" prefWidth="247.0" text="Still without an account? Sign up here" textFill="#00acf5">
+            <Label fx:id="signUpLbl" layoutX="126.0" layoutY="452.0" prefHeight="18.0" prefWidth="247.0" text="Still without an account? Sign up here" textFill="#00acf5">
                <font>
                   <Font name="Calibri" size="16.0" />
                </font>

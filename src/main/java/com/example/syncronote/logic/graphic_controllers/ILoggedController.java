@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class ILoggedController extends IGraphicController {
+public abstract class ILoggedController extends IGraphicController {
     @FXML
     protected AnchorPane containerPane; // Value injected by FXMLLoader
     @FXML
