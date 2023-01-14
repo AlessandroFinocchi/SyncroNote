@@ -3,6 +3,9 @@ package com.example.syncronote.logic.session;
 import com.example.syncronote.logic.exceptions.UserNotSetException;
 import com.example.syncronote.logic.model.User;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class SessionSingleton {
     private static SessionSingleton instance = null;
 
@@ -14,8 +17,9 @@ public class SessionSingleton {
 
     public synchronized static SessionSingleton getInstance(User user){
         if(SessionSingleton.instance == null){
+            Logger logger = Logger.getAnonymousLogger();
             SessionSingleton.instance = new SessionSingleton(user);
-            System.out.println("Session singleton instance = " +
+            logger.log(Level.INFO, "Session singleton instance = " +
                     user.getUsername() + " " +
                     user.getName() + " " +
                     user.getSurname() + " " +

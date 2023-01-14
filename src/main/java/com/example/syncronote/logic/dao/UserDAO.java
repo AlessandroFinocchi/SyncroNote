@@ -2,6 +2,7 @@ package com.example.syncronote.logic.dao;
 
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.model.User;
+import com.example.syncronote.logic.session.ConnectionSingleton;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserDAO extends ParentDAO{
+public class UserDAO {
 
     private static final String USERNAME = "Username";
     private static final String NAME = "Name";
@@ -31,10 +32,11 @@ public class UserDAO extends ParentDAO{
         Statement stmt = null;
         Connection conn = null;
         List<User> userList = new ArrayList<>();
+        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
+            conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -55,7 +57,7 @@ public class UserDAO extends ParentDAO{
                 String name = rs.getString(NAME);
                 String surname = rs.getString(SURNAME);
 
-                userList.add(new User(username, name, surname,"", UserTypes.STUDENT));
+                userList.add(new User(username, name, surname,"", UserTypes.Student));
             } while(rs.next());
 
             // Chiusura del result set e rilascio delle risorse
@@ -74,10 +76,11 @@ public class UserDAO extends ParentDAO{
         Statement stmt = null;
         Connection conn = null;
         User user = null;
+        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
+            conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -99,11 +102,11 @@ public class UserDAO extends ParentDAO{
             UserTypes type;
 
             if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.STUDENT;
+                type = UserTypes.Student;
             else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.PROFESSOR;
+                type = UserTypes.Professor;
             else
-                type = UserTypes.ADMIN;
+                type = UserTypes.Admin;
 
             user = new User(
                     rs.getString(USERNAME),
@@ -128,10 +131,11 @@ public class UserDAO extends ParentDAO{
         Statement stmt = null;
         Connection conn = null;
         User user = null;
+        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
+            conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
@@ -152,11 +156,11 @@ public class UserDAO extends ParentDAO{
             UserTypes type;
 
             if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.STUDENT;
+                type = UserTypes.Student;
             else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.PROFESSOR;
+                type = UserTypes.Professor;
             else
-                type = UserTypes.ADMIN;
+                type = UserTypes.Admin;
 
             user = new User(
                     rs.getString(USERNAME),
@@ -181,10 +185,11 @@ public class UserDAO extends ParentDAO{
         Statement stmt = null;
         Connection conn = null;
         int result = -1;
+        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
             // CODE SMELL
-            conn = DriverManager.getConnection(dbUrlConfig, userConfig, passConfig);
+            conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             // Creazione dello statement ed esecuzione della query
             // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db

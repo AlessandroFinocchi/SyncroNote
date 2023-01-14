@@ -2,6 +2,7 @@ package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -17,7 +18,10 @@ public abstract class IGraphicController {
     @FXML
     private ImageView minimizeBtn; // Value injected by FXMLLoader
 
+    protected Alert errorAlert;
+
     private double x, y;
+
     protected Logger logger = Logger.getAnonymousLogger();
 
     @FXML
@@ -38,6 +42,8 @@ public abstract class IGraphicController {
 
         closeBtn.setOnMouseClicked(mouseEvent -> Main.getStg().close());
         minimizeBtn.setOnMouseClicked(mouseEvent -> Main.getStg().setIconified(true));
+        
+        errorAlert = new Alert(Alert.AlertType.ERROR);
     }
 
     protected void goToPage(String page) {

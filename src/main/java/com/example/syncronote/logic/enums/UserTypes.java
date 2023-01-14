@@ -1,9 +1,9 @@
 package com.example.syncronote.logic.enums;
 
 public enum UserTypes {
-    STUDENT("Student"),
-    PROFESSOR("Professor"),
-    ADMIN("Admin");
+    Student("Student"),
+    Professor("Professor"),
+    Admin("Admin");
 
     UserTypes(String userType) {
 

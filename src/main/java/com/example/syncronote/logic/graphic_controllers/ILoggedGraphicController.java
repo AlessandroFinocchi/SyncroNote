@@ -4,13 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public abstract class ILoggedController extends IGraphicController {
+public abstract class ILoggedGraphicController extends IGraphicController {
     @FXML
     protected AnchorPane containerPane; // Value injected by FXMLLoader
     @FXML
     protected AnchorPane leftPane; // Value injected by FXMLLoader
     @FXML
     protected ImageView burger; // Value injected by FXMLLoader
+
     @Override
     public void initialize(){
         super.initialize();

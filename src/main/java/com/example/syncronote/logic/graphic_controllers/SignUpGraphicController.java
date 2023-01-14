@@ -70,8 +70,12 @@ public class SignUpGraphicController extends IGraphicController {
                 goToPage("Home.fxml");
             }
 
-            else
+            else{
                 logger.log(Level.INFO, "Username already in use");
+                errorAlert.setTitle("Sign up error");
+                errorAlert.setHeaderText("Username already in use");
+                errorAlert.show();
+            }
         }
         catch(Exception e){
             logger.log(Level.INFO, e.getMessage());

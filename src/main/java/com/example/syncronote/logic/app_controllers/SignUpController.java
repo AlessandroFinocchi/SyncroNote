@@ -4,6 +4,8 @@ import com.example.syncronote.logic.dao.UserDAO;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.model.User;
 
+import java.util.logging.Level;
+
 public class SignUpController extends IController{
 
     public int signUp(String username, String name, String surname, String email, String psw, String role) {
@@ -22,6 +24,7 @@ public class SignUpController extends IController{
                         psw,
                         role);
             }
+            else return result;
 
             UserTypes userType = UserTypes.valueOf(role);
 
@@ -35,7 +38,7 @@ public class SignUpController extends IController{
             return result;
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.INFO, e.getMessage());
         }
 
         return result;
