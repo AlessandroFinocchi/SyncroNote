@@ -16,8 +16,6 @@ import java.util.logging.Logger;
 public class Main extends Application {
     private static Stage stg;
 
-    private Logger logger = Logger.getAnonymousLogger();
-
     public static Stage getStg() {
         return stg;
     }
@@ -30,7 +28,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         String firstPage = "Login.fxml";
-        logger.log(Level.INFO, getClass().getResource(firstPage).toString());
         Parent root = FXMLLoader.load(getClass().getResource(firstPage));
         Scene scene = new Scene(root, 800, 600);
         scene.setFill(Color.TRANSPARENT);

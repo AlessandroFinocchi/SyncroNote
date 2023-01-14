@@ -1,13 +1,13 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.dao.UserDAO;
+import com.example.syncronote.logic.app_controllers.SignUpController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.logging.Level;
 
-public class SignUpGraphicController extends IController{
+public class SignUpGraphicController extends IGraphicController {
     @FXML
     private TextField nameField;
     @FXML
@@ -27,9 +27,13 @@ public class SignUpGraphicController extends IController{
     @FXML
     private Label loginLbl;
 
+    private SignUpController signUpController;
+
     @Override
     public void initialize(){
         super.initialize();
+
+        signUpController = new SignUpController();
 
         loginLbl.setOnMouseClicked(mouseEvent -> {
             goToPage("Login.fxml");
@@ -48,30 +52,24 @@ public class SignUpGraphicController extends IController{
         });
 
         studentSelected();
+        roleCombo.setValue("Student");
 
     }
 
     public void userSignup(ActionEvent event){
         try{
-            String username = userField.getText();
-            if(UserDAO.findUsername(username) == null){
-                int result = UserDAO.addUser(
-                        userField.getText(),
-                        nameField.getText(),
-                        surnameField.getText(),
-                        emailField.getText(),
-                        pswField.getText(),
-                        roleCombo.getValue());
+            int result = signUpController.signUp(
+                    userField.getText(),
+                    nameField.getText(),
+                    surnameField.getText(),
+                    emailField.getText(),
+                    pswField.getText(),
+                    roleCombo.getValue());
 
-                if(result == 1){
-
-                    /*TODO: save user as a Session Singleton to keep trace about the profile
-                    *  (it is a method in IController because is shared with LoginGC)*/
-
-                    goToPage("Home.fxml");
-                }
-
+            if(result == 1){
+                goToPage("Home.fxml");
             }
+
             else
                 logger.log(Level.INFO, "Username already in use");
         }

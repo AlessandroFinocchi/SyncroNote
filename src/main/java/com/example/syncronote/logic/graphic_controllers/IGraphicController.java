@@ -3,14 +3,13 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.Main;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class IController{
+public abstract class IGraphicController {
     @FXML
     private Pane titlePane; // Value injected by FXMLLoader
     @FXML

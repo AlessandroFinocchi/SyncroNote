@@ -12,23 +12,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserDAO {
-    /* BEGIN CODE SMELL */
-    private static final String USER = "root";
-    private static final String PASS = "Perarossa01?";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/syncronotesdb";
-    /* END CODE SMELL */
+public class UserDAO extends ParentDAO{
 
-    private static final String USERNAME = "Nickname";
+    private static final String USERNAME = "Username";
     private static final String NAME = "Name";
     private static final String SURNAME = "Surname";
     private static final String EMAIL = "Email";
     private static final String PSW = "Password";
     private static final String ROLE = "Role";
 
+    public UserDAO(){
+        super();
+    }
+
     private static Logger logger = Logger.getAnonymousLogger();
 
-    public static List<User> getAllUsers() throws Exception {
+    public List<User> getAllUsers() throws Exception {
         Statement stmt = null;
         Connection conn = null;
         List<User> userList = new ArrayList<>();
@@ -52,11 +51,11 @@ public class UserDAO {
             rs.first();
             do {
                 // lettura delle colonne usando il nome delle colonne
-                String nickname = rs.getString(USERNAME);
+                String username = rs.getString(USERNAME);
                 String name = rs.getString(NAME);
                 String surname = rs.getString(SURNAME);
 
-                userList.add(new User(nickname, name, surname,"", UserTypes.STUDENT));
+                userList.add(new User(username, name, surname,"", UserTypes.STUDENT));
             } while(rs.next());
 
             // Chiusura del result set e rilascio delle risorse
@@ -71,7 +70,7 @@ public class UserDAO {
         return userList;
     }
 
-    public static User findUser(String username, String password) throws Exception {
+    public User findUser(String username, String password) throws Exception {
         Statement stmt = null;
         Connection conn = null;
         User user = null;
@@ -125,7 +124,7 @@ public class UserDAO {
         return user;
     }
 
-    public static User findUsername(String username) throws Exception {
+    public User findUsername(String username) throws Exception {
         Statement stmt = null;
         Connection conn = null;
         User user = null;
@@ -140,7 +139,7 @@ public class UserDAO {
             // CODE SMELL
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
-                    "WHERE Nickname = '" + username + "';");
+                    "WHERE " + USERNAME + " = '" + username + "';");
 
             // Verifica se è stato restituito un insieme vuoto
             if(!rs.first()) {
@@ -178,7 +177,7 @@ public class UserDAO {
         return user;
     }
 
-    public static int addUser(String username, String name, String surname, String email, String psw, String role) throws Exception {
+    public int addUser(String username, String name, String surname, String email, String psw, String role) throws Exception {
         Statement stmt = null;
         Connection conn = null;
         int result = -1;

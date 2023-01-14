@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.dao.UserDAO;
+import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.Main;
 import javafx.event.ActionEvent;
@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 
 import java.util.logging.Level;
 
-public class LoginGraphicController extends IController{
+public class LoginGraphicController extends IGraphicController {
     @FXML
     private Label MsgLbl;
     @FXML
@@ -21,9 +21,14 @@ public class LoginGraphicController extends IController{
     @FXML
     private Label SignUpLbl;
 
+    private LoginController loginController;
+
     @Override
     public void initialize(){
         super.initialize();
+
+        loginController = new LoginController();
+
         SignUpLbl.setOnMouseClicked(mouseEvent -> {
             goToPage("SignUp.fxml");
         });
@@ -39,10 +44,7 @@ public class LoginGraphicController extends IController{
                 MsgLbl.setText("Empty Fields");
                 return;
             }
-            User user = UserDAO.findUser(username, password);
-
-            /*TODO: save user as a Session Singleton to keep trace about the profile
-             *  (it is a method in IController because is shared with SignUPGC)*/
+            User user = loginController.login(username, password);
 
             goToPage("Home.fxml");
         }
