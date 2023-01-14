@@ -50,7 +50,7 @@ public abstract class IGraphicController {
     protected void goToPage(String page) {
         try{
             Main m = new Main();
-            m.ChangeScene(page);
+            m.changeScene(page);
         }
         catch (IOException e){
             logger.log(Level.INFO, e.getMessage());

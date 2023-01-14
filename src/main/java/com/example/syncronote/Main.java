@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Main extends Application {
     private static Stage stg;
@@ -26,7 +24,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        stg = primaryStage;
+        setStg(primaryStage);
         String firstPage = "Login.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(firstPage));
         Scene scene = new Scene(root, 800, 600);
@@ -39,7 +37,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void ChangeScene(String fxml) throws IOException {
+    public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stg.getScene().setRoot(pane);
     }
