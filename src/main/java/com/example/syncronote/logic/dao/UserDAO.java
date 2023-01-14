@@ -57,7 +57,7 @@ public class UserDAO {
                 String name = rs.getString(NAME);
                 String surname = rs.getString(SURNAME);
 
-                userList.add(new User(username, name, surname,"", UserTypes.Student));
+                userList.add(new User(username, name, surname,"", UserTypes.STUDENT));
             } while(rs.next());
 
             // Chiusura del result set e rilascio delle risorse
@@ -102,11 +102,11 @@ public class UserDAO {
             UserTypes type;
 
             if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.Student;
+                type = UserTypes.STUDENT;
             else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.Professor;
+                type = UserTypes.PROFESSOR;
             else
-                type = UserTypes.Admin;
+                type = UserTypes.ADMIN;
 
             user = new User(
                     rs.getString(USERNAME),
@@ -156,11 +156,11 @@ public class UserDAO {
             UserTypes type;
 
             if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.Student;
+                type = UserTypes.STUDENT;
             else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.Professor;
+                type = UserTypes.PROFESSOR;
             else
-                type = UserTypes.Admin;
+                type = UserTypes.ADMIN;
 
             user = new User(
                     rs.getString(USERNAME),

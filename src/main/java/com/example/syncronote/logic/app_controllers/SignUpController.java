@@ -26,9 +26,10 @@ public class SignUpController extends IController{
             }
             else return result;
 
-            UserTypes userType = UserTypes.valueOf(role);
+            UserTypes userType = UserTypes.valueOf(role.toUpperCase());     //because the enum is in upper case
 
-            storeSessionUser(new User(username,
+            storeSessionUser(new User(
+                    username,
                     name,
                     surname,
                     email,

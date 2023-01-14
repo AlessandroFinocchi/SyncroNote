@@ -35,7 +35,6 @@ public class LoginGraphicController extends IGraphicController {
     }
 
     public void userLogin(ActionEvent event) {
-        Main m = new Main();
         String username = userField.getText();
         String password = pswField.getText();
 
@@ -44,7 +43,7 @@ public class LoginGraphicController extends IGraphicController {
                 msgLbl.setText("Empty Fields");
                 return;
             }
-            User user = loginController.login(username, password);
+            loginController.login(username, password);
 
             goToPage("Home.fxml");
         }

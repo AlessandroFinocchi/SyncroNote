@@ -15,21 +15,23 @@ public class SessionSingleton {
         this.sessionUser = user;
     }
 
-    public synchronized static SessionSingleton getInstance(User user){
+    public static synchronized SessionSingleton getInstance(User user){
         if(SessionSingleton.instance == null){
-            Logger logger = Logger.getAnonymousLogger();
             SessionSingleton.instance = new SessionSingleton(user);
-            logger.log(Level.INFO, "Session singleton instance = " +
-                    user.getUsername() + " " +
-                    user.getName() + " " +
-                    user.getSurname() + " " +
+
+            String message = String.format("Session singleton instance = %s %s %s %s",
+                    user.getUsername(),
+                    user.getName(),
+                    user.getSurname(),
                     user.getUserType());
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.INFO, message);
         }
 
         return instance;
     }
 
-    public synchronized static SessionSingleton getInstance() throws UserNotSetException{
+    public static synchronized SessionSingleton getInstance() throws UserNotSetException{
         if(SessionSingleton.instance == null){
             throw new UserNotSetException();
         }

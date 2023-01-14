@@ -29,6 +29,8 @@ public class SignUpGraphicController extends IGraphicController {
 
     private SignUpController signUpController;
 
+    private static final String STUDENT = "Student";
+    private static final String PROFESSOR = "Professor";
     @Override
     public void initialize(){
         super.initialize();
@@ -40,19 +42,19 @@ public class SignUpGraphicController extends IGraphicController {
         });
 
         roleCombo.getItems().addAll(
-                "Student",
-                "Professor"
+                STUDENT,
+                PROFESSOR
         );
 
         roleCombo.setOnAction(event -> {
-            if(roleCombo.getValue().equals("Student"))
+            if(roleCombo.getValue().equals(STUDENT))
                 studentSelected();
-            else if(roleCombo.getValue().equals("Professor"))
+            else if(roleCombo.getValue().equals(PROFESSOR))
                 professorSelected();
         });
 
         studentSelected();
-        roleCombo.setValue("Student");
+        roleCombo.setValue(STUDENT);
 
     }
 

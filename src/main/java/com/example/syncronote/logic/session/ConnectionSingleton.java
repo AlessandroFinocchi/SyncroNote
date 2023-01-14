@@ -27,7 +27,7 @@ public class ConnectionSingleton {
         dbUrlConfig = prop.getProperty("DB_URL");
     }
 
-    public synchronized static ConnectionSingleton getInstance() throws IOException{
+    public static synchronized ConnectionSingleton getInstance() throws IOException{
         if(ConnectionSingleton.instance == null){
             ConnectionSingleton.instance = new ConnectionSingleton();
         }

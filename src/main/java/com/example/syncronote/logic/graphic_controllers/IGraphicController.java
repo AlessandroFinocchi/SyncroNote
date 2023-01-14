@@ -20,7 +20,8 @@ public abstract class IGraphicController {
 
     protected Alert errorAlert;
 
-    private double x, y;
+    private double x;
+    private double y;
 
     protected Logger logger = Logger.getAnonymousLogger();
 
