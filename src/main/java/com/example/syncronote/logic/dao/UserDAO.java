@@ -4,10 +4,7 @@ import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.ConnectionSingleton;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,100 +19,36 @@ public class UserDAO {
     private static final String PSW = "Password";
     private static final String ROLE = "Role";
 
-    public UserDAO(){
-        super();
-    }
-
     private static Logger logger = Logger.getAnonymousLogger();
 
-    public List<User> getAllUsers() throws Exception {
-        Statement stmt = null;
-        Connection conn = null;
-        List<User> userList = new ArrayList<>();
-        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
-
-        try {
-            // CODE SMELL
-            conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
-
-            // Creazione dello statement ed esecuzione della query
-            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // CODE SMELL
-            ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
-
-            // Verifica se è stato restituito un insieme vuoto
-            if(!rs.first()) {
-                throw new Exception("Non esiste alcun utente chiamato ");
-            }
-
-            // Riposizionamento del cursore
-            rs.first();
-            do {
-                // lettura delle colonne usando il nome delle colonne
-                String username = rs.getString(USERNAME);
-                String name = rs.getString(NAME);
-                String surname = rs.getString(SURNAME);
-
-                userList.add(new User(username, name, surname,"", UserTypes.STUDENT));
-            } while(rs.next());
-
-            // Chiusura del result set e rilascio delle risorse
-            rs.close();
-        } finally {
-            if(stmt != null)
-                stmt.close();
-            if(conn != null)
-                conn.close();
-        }
-
-        return userList;
-    }
-
     public User findUser(String username, String password) throws Exception {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
         ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
-            // CODE SMELL
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
-            // Creazione dello statement ed esecuzione della query
-            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // CODE SMELL
+            String sql = "SELECT * FROM User WHERE " + USERNAME + " = ? AND " + PSW + " = ?;";
+            // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
+            stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
-                    "WHERE " + USERNAME + " = '" + username + "' AND " +
-                     PSW + " = '" + password + "';");
+            ResultSet rs = stmt.executeQuery();
 
-            // Verifica se è stato restituito un insieme vuoto
+            // Verify if ResultSet is empty
             if(!rs.first()) {
                 throw new Exception("Non esiste alcun utente chiamato ");
             }
 
-            // Riposizionamento del cursore
+            // Repositioning of the cursor
             rs.first();
 
-            UserTypes type;
+            user = getUser(rs);
 
-            if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.STUDENT;
-            else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.PROFESSOR;
-            else
-                type = UserTypes.ADMIN;
-
-            user = new User(
-                    rs.getString(USERNAME),
-                    rs.getString(NAME),
-                    rs.getString(SURNAME),
-                    rs.getString(EMAIL),
-                    type);
-
-            // Chiusura del result set e rilascio delle risorse
+            // Closing ResultSet and freeing resources
             rs.close();
         } finally {
             if(stmt != null)
@@ -128,50 +61,38 @@ public class UserDAO {
     }
 
     public User findUsername(String username) throws Exception {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
         ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
-            // CODE SMELL
+
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
-            // Creazione dello statement ed esecuzione della query
-            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // CODE SMELL
+            String sql = "SELECT * FROM User WHERE " + USERNAME + " = ?";
+            // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
+            stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1, username);
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM User " +
-                    "WHERE " + USERNAME + " = '" + username + "';");
+            ResultSet rs = stmt.executeQuery();
 
-            // Verifica se è stato restituito un insieme vuoto
+            // Verify if ResultSet is empty
             if(!rs.first()) {
                 return null;
             }
 
-            // Riposizionamento del cursore
+            // Repositioning of the cursor
             rs.first();
 
-            UserTypes type;
+            user = getUser(rs);
 
-            if(rs.getString(ROLE).equals("Student"))
-                type = UserTypes.STUDENT;
-            else if (rs.getString(ROLE).equals("Professor"))
-                type = UserTypes.PROFESSOR;
-            else
-                type = UserTypes.ADMIN;
-
-            user = new User(
-                    rs.getString(USERNAME),
-                    rs.getString(NAME),
-                    rs.getString(SURNAME),
-                    rs.getString(EMAIL),
-                    type);
-
-            // Chiusura del result set e rilascio delle risorse
+            // Closing ResultSet and freeing resources
             rs.close();
-        } finally {
+        }
+        catch(SQLException e){
+            logger.info(e.getMessage());
+        }finally {
             if(stmt != null)
                 stmt.close();
             if(conn != null)
@@ -182,25 +103,26 @@ public class UserDAO {
     }
 
     public int addUser(String username, String name, String surname, String email, String psw, String role) throws Exception {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         Connection conn = null;
         int result = -1;
         ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
-            // CODE SMELL
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
-            // Creazione dello statement ed esecuzione della query
-            // TYPE_SCROLL_INSENSITIVE: il result set può essere scandito, ma non è sensibile a variazioni nei dati nel db
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // CODE SMELL
+            String sql = "INSERT INTO User (" + USERNAME + ", " + NAME +", " + SURNAME +", " + EMAIL + ", " + PSW + ", " + ROLE + ")"
+                    + " VALUES(?, ?, ?, ?, ?, ?)";
+                    // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
+            stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt.setString(1, username);
+            stmt.setString(2, name);
+            stmt.setString(3, surname);
+            stmt.setString(4, email);
+            stmt.setString(5, psw);
+            stmt.setString(6, role);
 
-            String query = "INSERT INTO User (" + USERNAME + ", " + NAME +", " + SURNAME +", " + EMAIL + ", " + PSW + ", " + ROLE + ")"
-                    + " VALUES('" + username + "','" + name + "','" + surname + "','" + email + "','" + psw + "','" + role + "')";
-
-
-            result = stmt.executeUpdate(query);
+            result = stmt.executeUpdate();
 
             if (result > 0) {
                 logger.log(Level.INFO, "ROW INSERTED");
@@ -216,5 +138,26 @@ public class UserDAO {
         }
 
         return result;
+    }
+    
+    private User getUser(ResultSet rs) throws SQLException{
+        User user;
+        UserTypes type;
+
+        if(rs.getString(ROLE).equals("Student"))
+            type = UserTypes.STUDENT;
+        else if (rs.getString(ROLE).equals("Professor"))
+            type = UserTypes.PROFESSOR;
+        else
+            type = UserTypes.ADMIN;
+
+        user = new User(
+                rs.getString(USERNAME),
+                rs.getString(NAME),
+                rs.getString(SURNAME),
+                rs.getString(EMAIL),
+                type);
+        
+        return user;
     }
 }

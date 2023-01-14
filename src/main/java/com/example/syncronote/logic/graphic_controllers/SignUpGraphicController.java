@@ -71,11 +71,16 @@ public class SignUpGraphicController extends IGraphicController {
             if(result == 1){
                 goToPage("Home.fxml");
             }
-
-            else{
+            else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");
                 errorAlert.setTitle("Sign up error");
                 errorAlert.setHeaderText("Username already in use");
+                errorAlert.show();
+            }
+            else {
+                logger.log(Level.INFO, "Unknown error");
+                errorAlert.setTitle("Sign up error");
+                errorAlert.setHeaderText("Unknown error");
                 errorAlert.show();
             }
         }
