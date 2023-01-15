@@ -1,12 +1,17 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.LoginController;
+import com.example.syncronote.logic.beans.LoginCredentialsBean;
+import com.example.syncronote.logic.exceptions.EmptyFieldsException;
+import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class LoginGraphicController extends IGraphicController {
@@ -35,21 +40,31 @@ public class LoginGraphicController extends IGraphicController {
     }
 
     public void userLogin(ActionEvent event) {
-        String username = userField.getText();
-        String password = pswField.getText();
-
         try{
-            if(username.isEmpty() || password.isEmpty()){
-                msgLbl.setText("Empty Fields");
-                return;
-            }
-            loginController.login(username, password);
+            LoginCredentialsBean credentialsBean = new LoginCredentialsBean(
+                    userField.getText(),
+                    pswField.getText()
+            );
+
+            loginController.login(credentialsBean);
 
             goToPage("Home.fxml");
         }
-        catch (Exception e){
+        catch (EmptyFieldsException e){
+            logger.log(Level.INFO, e.getMessage());
+            msgLbl.setText("Empty Fields");
+        }
+        catch (UserNotFoundException e){
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Wrong credentials");
+        }
+        catch (SQLException e){
+            logger.log(Level.INFO, e.getMessage());
+            msgLbl.setText("Database not working");
+        }
+        catch (IOException e){
+            logger.log(Level.INFO, e.getMessage());
+            msgLbl.setText("Couldn't access the database");
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.example.syncronote.logic.dao;
 
 import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.ConnectionSingleton;
 
+import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +21,7 @@ public class UserDAO {
 
     private static Logger logger = Logger.getAnonymousLogger();
 
-    public User findUser(String username, String password) throws Exception {
+    public User findUser(String username, String password) throws UserNotFoundException, SQLException, IOException {
         PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
@@ -40,7 +40,7 @@ public class UserDAO {
 
             // Verify if ResultSet is empty
             if(!rs.first()) {
-                throw new Exception("Non esiste alcun utente chiamato ");
+                throw new UserNotFoundException();
             }
 
             // Repositioning of the cursor
