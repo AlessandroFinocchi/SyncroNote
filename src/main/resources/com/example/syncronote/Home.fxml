@@ -15,7 +15,7 @@
    <children>
       <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
          <children>
-            <Button layoutX="502.0" layoutY="189.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="52.0" text="Button" />
+            <Button fx:id="generalBtn" layoutX="502.0" layoutY="189.0" mnemonicParsing="false" onAction="#onGeneralBtnClicked" prefHeight="31.0" prefWidth="52.0" text="Button" />
          </children></AnchorPane>
       <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
          <children>

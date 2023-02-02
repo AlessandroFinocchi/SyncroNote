@@ -38,4 +38,8 @@ public class SessionSingleton {
 
         return instance;
     }
+
+    public User getSessionUser() {
+        return sessionUser;
+    }
 }
