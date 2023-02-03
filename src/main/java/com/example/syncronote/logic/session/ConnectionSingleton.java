@@ -10,7 +10,6 @@ import java.util.Properties;
 public class ConnectionSingleton {
     private static ConnectionSingleton instance = null;
 
-    private User sessionUser;
     private String userConfig;
     private String passConfig;
     private String dbUrlConfig;

@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.session;
 
+import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.UserNotSetException;
-import com.example.syncronote.logic.model.User;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,21 +9,29 @@ import java.util.logging.Logger;
 public class SessionSingleton {
     private static SessionSingleton instance = null;
 
-    private User sessionUser;
+    protected String username;
+    protected String name;
+    protected String surname;
+    protected String email;
+    protected final UserTypes userType;
 
-    protected SessionSingleton(User user){
-        this.sessionUser = user;
+    protected SessionSingleton(String username, String name, String surname, String email, UserTypes userType) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.userType = userType;
     }
 
-    public static synchronized SessionSingleton getInstance(User user){
+    public static synchronized SessionSingleton getInstance(String username, String name, String surname, String email, UserTypes userType){
         if(SessionSingleton.instance == null){
-            SessionSingleton.instance = new SessionSingleton(user);
+            SessionSingleton.instance = new SessionSingleton(username, name, surname, email, userType);
 
             String message = String.format("Session singleton instance = %s %s %s %s",
-                    user.getUsername(),
-                    user.getName(),
-                    user.getSurname(),
-                    user.getUserType());
+                    username,
+                    name,
+                    surname,
+                    userType);
             Logger logger = Logger.getAnonymousLogger();
             logger.log(Level.INFO, message);
         }
@@ -37,9 +45,5 @@ public class SessionSingleton {
         }
 
         return instance;
-    }
-
-    public User getSessionUser() {
-        return sessionUser;
     }
 }

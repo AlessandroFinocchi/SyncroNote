@@ -16,7 +16,7 @@ public class LoginController extends IController{
                 credentialsBean.getUsername(),
                 credentialsBean.getPassword());
 
-        storeSessionUser(user);
+        storeSessionUser(user.getUsername(), user.getName(), user.getSurname(), user.getEmail(), user.getUserType());
 
         return user;
     }

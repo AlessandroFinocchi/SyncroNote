@@ -4,8 +4,6 @@ import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
 import com.example.syncronote.logic.exceptions.EmptyFieldsException;
 import com.example.syncronote.logic.exceptions.UserNotFoundException;
-import com.example.syncronote.logic.model.User;
-import com.example.syncronote.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

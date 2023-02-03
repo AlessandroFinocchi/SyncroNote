@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.Main;
+import com.example.syncronote.logic.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
@@ -32,8 +32,8 @@ public abstract class IGraphicController {
         assert titlePane != null : "fx:id=\"TitlePane\" was not injected: check your FXML file.";
 
         titlePane.setOnMouseDragged(mouseEvent -> {
-            Main.getStg().setX(mouseEvent.getScreenX() - x);
-            Main.getStg().setY(mouseEvent.getScreenY() - y);
+            NavigatorSingleton.getStg().setX(mouseEvent.getScreenX() - x);
+            NavigatorSingleton.getStg().setY(mouseEvent.getScreenY() - y);
         });
 
         titlePane.setOnMousePressed(mouseEvent -> {
@@ -41,16 +41,15 @@ public abstract class IGraphicController {
             y = mouseEvent.getSceneY();
         });
 
-        closeBtn.setOnMouseClicked(mouseEvent -> Main.getStg().close());
-        minimizeBtn.setOnMouseClicked(mouseEvent -> Main.getStg().setIconified(true));
+        closeBtn.setOnMouseClicked(mouseEvent -> NavigatorSingleton.getStg().close());
+        minimizeBtn.setOnMouseClicked(mouseEvent -> NavigatorSingleton.getStg().setIconified(true));
         
         errorAlert = new Alert(Alert.AlertType.ERROR);
     }
 
     protected void goToPage(String page) {
         try{
-            Main m = new Main();
-            m.changeScene(page);
+            NavigatorSingleton.getInstance().gotoPage(page);
         }
         catch (IOException e){
             logger.log(Level.INFO, e.getMessage());
