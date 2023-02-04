@@ -41,7 +41,7 @@ public class SessionSingleton {
 
     public static synchronized SessionSingleton getInstance() throws UserNotSetException{
         if(SessionSingleton.instance == null){
-            throw new UserNotSetException();
+            throw new UserNotSetException("User not set in the singleton");
         }
 
         return instance;

@@ -10,4 +10,8 @@ public class NotImplementedException extends Exception{
     public NotImplementedException(Throwable cause){
         super(cause);
     }
+
+    public NotImplementedException(String message) {
+        super(message);
+    }
 }

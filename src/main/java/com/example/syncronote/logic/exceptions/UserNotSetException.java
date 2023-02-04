@@ -10,4 +10,8 @@ public class UserNotSetException extends Exception{
     public UserNotSetException(Throwable cause){
         super(cause);
     }
+
+    public UserNotSetException(String message) {
+        super(message);
+    }
 }

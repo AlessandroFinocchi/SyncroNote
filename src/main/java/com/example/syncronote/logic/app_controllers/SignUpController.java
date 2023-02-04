@@ -1,5 +1,6 @@
 package com.example.syncronote.logic.app_controllers;
 
+import com.example.syncronote.logic.beans.SignupBean;
 import com.example.syncronote.logic.dao.professor_procedures.InsertProfessorDAO;
 import com.example.syncronote.logic.dao.student_procedures.InsertStudentProcedureDAO;
 import com.example.syncronote.logic.dao.user_procedures.FindUsernameProcedureDAO;
@@ -13,45 +14,40 @@ import java.util.logging.Level;
 
 public class SignUpController extends IController{
 
-    public int signUp(String username, String name, String surname, String email, String psw, String role, String userTypeAttrLbl) {
+    public int signUp(SignupBean signupBean) throws SQLException, DAOException{
         User user = null;
         int result = -1;
-        try{
-            user = new FindUsernameProcedureDAO().execute(username);
 
-            if (user == null) {
-                result = new InsertUserProcedureDAO().execute(
-                        username,
-                        name,
-                        surname,
-                        email,
-                        psw,
-                        role);
-            }
-            else return result;
+        user = new FindUsernameProcedureDAO().execute(signupBean.getUsername());
 
-            UserTypes userType = UserTypes.valueOf(role.toUpperCase());     //because the enum is in upper case
-
-            switch (userType){
-                case PROFESSOR : new InsertProfessorDAO().execute(username, userTypeAttrLbl);
-                    break;
-                case STUDENT : new InsertStudentProcedureDAO().execute(username, userTypeAttrLbl);
-                    break;
-            }
-
-            storeSessionUser(
-                    username,
-                    name,
-                    surname,
-                    email,
-                    userType
-                    );
-
-            return result;
+        if (user == null) {
+            result = new InsertUserProcedureDAO().execute(
+                    signupBean.getUsername(),
+                    signupBean.getName(),
+                    signupBean.getSurname(),
+                    signupBean.getEmail(),
+                    signupBean.getPassword(),
+                    signupBean.getRole());
         }
-        catch (SQLException | DAOException e){
-            logger.log(Level.INFO, e.getMessage());
+        else return result;
+
+        UserTypes userType = UserTypes.valueOf(signupBean.getRole().toUpperCase());     //because the enum is in upper case
+
+        switch (userType){
+            case PROFESSOR : new InsertProfessorDAO().execute(signupBean.getUsername(), signupBean.getUserTypeAttr());
+                break;
+            case STUDENT : new InsertStudentProcedureDAO().execute(signupBean.getUsername(), signupBean.getUserTypeAttr());
+                break;
+            default: throw new RuntimeException("Unknown user type provided");
         }
+
+        storeSessionUser(
+                signupBean.getUsername(),
+                signupBean.getName(),
+                signupBean.getSurname(),
+                signupBean.getEmail(),
+                userType
+                );
 
         return result;
     }

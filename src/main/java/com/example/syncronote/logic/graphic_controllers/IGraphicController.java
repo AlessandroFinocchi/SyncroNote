@@ -64,4 +64,10 @@ public abstract class IGraphicController {
             logger.log(Level.INFO, e.getMessage());
         }
     }
+
+    protected void showAlert(String title, String header){
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(header);
+        errorAlert.show();
+    }
 }

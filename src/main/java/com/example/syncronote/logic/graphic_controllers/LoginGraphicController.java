@@ -3,7 +3,7 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.exceptions.EmptyFieldsException;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -47,7 +47,7 @@ public class LoginGraphicController extends IGraphicController {
 
             goToPage("Home.fxml");
         }
-        catch (EmptyFieldsException e){
+        catch (InvalidFormatException e){
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Empty Fields");
         }

@@ -1,10 +1,14 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.SignUpController;
+import com.example.syncronote.logic.beans.SignupBean;
+import com.example.syncronote.logic.exceptions.DAOException;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class SignUpGraphicController extends IGraphicController {
@@ -60,7 +64,7 @@ public class SignUpGraphicController extends IGraphicController {
 
     public void userSignup(ActionEvent event){
         try{
-            int result = signUpController.signUp(
+            SignupBean signupBean = new SignupBean(
                     userField.getText(),
                     nameField.getText(),
                     surnameField.getText(),
@@ -68,25 +72,27 @@ public class SignUpGraphicController extends IGraphicController {
                     pswField.getText(),
                     roleCombo.getValue(),
                     userTypeAttrField.getText());
+            int result = signUpController.signUp(signupBean);
 
             if(result == 1){
                 goToPage("Home.fxml");
             }
             else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");
-                errorAlert.setTitle("Sign up error");
-                errorAlert.setHeaderText("Username already in use");
-                errorAlert.show();
+                showAlert("Sign up error", "Username already in use");
             }
             else {
                 logger.log(Level.INFO, "Unknown error");
-                errorAlert.setTitle("Sign up error");
-                errorAlert.setHeaderText("Unknown error");
-                errorAlert.show();
+                showAlert("Sign up error", "Unknown error");
             }
         }
-        catch(Exception e){
+        catch (InvalidFormatException e){
             logger.log(Level.INFO, e.getMessage());
+            showAlert("Sign up error", e.getMessage());
+        }
+        catch (DAOException | SQLException e){
+            logger.log(Level.INFO, "Error in database");
+            showAlert("Sign up error", "Error in database");
         }
     }
 
