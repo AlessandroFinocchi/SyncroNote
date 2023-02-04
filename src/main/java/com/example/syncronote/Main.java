@@ -23,7 +23,6 @@ public class Main extends Application {
 
         NavigatorSingleton n = NavigatorSingleton.getInstance(primaryStage);
 
-        //NavigatorSingleton.getInstance(primaryStage);
         n.getStg().initStyle(StageStyle.TRANSPARENT);
         n.getStg().setTitle("SyncroNotes");
         n.getStg().setResizable(false);

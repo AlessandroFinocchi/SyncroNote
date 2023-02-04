@@ -1,17 +1,16 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
-import com.example.syncronote.logic.dao.UserDAO;
-import com.example.syncronote.logic.exceptions.UserNotFoundException;
+import com.example.syncronote.logic.dao.student_procedures.FindUserProcedureDAO;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.User;
 
 import java.sql.SQLException;
 
 public class LoginController extends IController{
 
-    public User login(LoginCredentialsBean credentialsBean) throws UserNotFoundException, SQLException {
-        UserDAO userDAO = new UserDAO();
-        User user = userDAO.findUser(
+    public User login(LoginCredentialsBean credentialsBean) throws DAOException, SQLException {
+        User user = new FindUserProcedureDAO().execute(
                 credentialsBean.getUsername(),
                 credentialsBean.getPassword());
 

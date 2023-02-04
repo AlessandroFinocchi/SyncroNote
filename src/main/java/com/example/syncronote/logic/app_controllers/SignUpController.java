@@ -1,22 +1,24 @@
 package com.example.syncronote.logic.app_controllers;
 
-import com.example.syncronote.logic.dao.UserDAO;
+import com.example.syncronote.logic.dao.student_procedures.FindUsernameProcedureDAO;
+import com.example.syncronote.logic.dao.student_procedures.InsertUserProcedureDAO;
 import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.User;
 
+import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class SignUpController extends IController{
 
     public int signUp(String username, String name, String surname, String email, String psw, String role) {
-        UserDAO userDAO = new UserDAO();
         User user = null;
         int result = -1;
         try{
-            user = userDAO.findUsername(username);
+            user = new FindUsernameProcedureDAO().execute(username);
 
             if (user == null) {
-                result = userDAO.addUser(
+                result = new InsertUserProcedureDAO().execute(
                         username,
                         name,
                         surname,
@@ -38,7 +40,7 @@ public class SignUpController extends IController{
 
             return result;
         }
-        catch (Exception e){
+        catch (SQLException | DAOException e){
             logger.log(Level.INFO, e.getMessage());
         }
 

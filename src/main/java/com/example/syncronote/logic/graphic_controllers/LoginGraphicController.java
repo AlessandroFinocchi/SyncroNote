@@ -2,6 +2,7 @@ package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.EmptyFieldsException;
 import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
@@ -52,7 +53,7 @@ public class LoginGraphicController extends IGraphicController {
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Empty Fields");
         }
-        catch (UserNotFoundException e){
+        catch (DAOException e){
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Wrong credentials");
         }
