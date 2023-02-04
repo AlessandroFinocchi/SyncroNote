@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public abstract class GenericProcedureDAO<P> {
 
-    protected final String USERNAME = "Username";
-    protected final String NAME = "Name";
-    protected final String SURNAME = "Surname";
-    protected final String EMAIL = "Email";
-    protected final String PSW = "Password";
-    protected final String ROLE = "Role";
+    protected static final String USERNAME = "Username";
+    protected static final String NAME = "Name";
+    protected static final String SURNAME = "Surname";
+    protected static final String EMAIL = "Email";
+    protected static final String PSW = "Password";
+    protected static final String ROLE = "Role";
 
     protected abstract P execute(Object... params) throws DAOException, SQLException;
 
