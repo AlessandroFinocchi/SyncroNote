@@ -13,7 +13,7 @@ public class NavigatorSingleton {
     protected static Stage stg;
 
     public static Stage getStg() {
-        return stg;
+        return NavigatorSingleton.stg;
     }
 
     protected NavigatorSingleton(Stage stg) {

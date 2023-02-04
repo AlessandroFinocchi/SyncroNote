@@ -4,17 +4,20 @@ import com.example.syncronote.logic.exceptions.NotImplementedException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import java.util.logging.Logger;
-
 public class CLIPrinter {
-    public static void PrintMessage(String s) throws NotImplementedException{
+
+    private CLIPrinter(){
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static void printMessage(String s) throws NotImplementedException{
+        //System.out.println(s);
         Logger.getAnonymousLogger().log(Level.INFO, "Not implemented PrintMessage!");
         throw new NotImplementedException();
-        //System.out.println(s);
     }
-    public static void PrintError(String s) throws NotImplementedException{
+    public static void printError(String s) throws NotImplementedException{
+        //System.err.println(s);
         Logger.getAnonymousLogger().log(Level.INFO, "Not implemented PrintError!");
         throw new NotImplementedException();
-        //System.err.println(s);
     }
 }

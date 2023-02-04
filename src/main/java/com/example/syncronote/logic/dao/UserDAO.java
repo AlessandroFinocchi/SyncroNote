@@ -21,13 +21,13 @@ public class UserDAO {
 
     private static Logger logger = Logger.getAnonymousLogger();
 
-    public User findUser(String username, String password) throws UserNotFoundException, SQLException, IOException {
+    public User findUser(String username, String password) throws UserNotFoundException {
         PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
-        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
+            ConnectionSingleton credentials = ConnectionSingleton.getInstance();
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             String sql = "SELECT * FROM User WHERE " + USERNAME + " = ? AND " + PSW + " = ?;";
@@ -50,23 +50,23 @@ public class UserDAO {
 
             // Closing ResultSet and freeing resources
             rs.close();
-        } finally {
-            if(stmt != null)
-                stmt.close();
-            if(conn != null)
-                conn.close();
+            stmt.close();
+            conn.close();
+        }
+        catch(SQLException | IOException e){
+            logger.info(e.getMessage());
         }
 
         return user;
     }
 
-    public User findUsername(String username) throws Exception {
+    public User findUsername(String username) {
         PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
-        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
+            ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
@@ -89,26 +89,23 @@ public class UserDAO {
 
             // Closing ResultSet and freeing resources
             rs.close();
+            stmt.close();
+            conn.close();
         }
-        catch(SQLException e){
+        catch(SQLException | IOException e){
             logger.info(e.getMessage());
-        }finally {
-            if(stmt != null)
-                stmt.close();
-            if(conn != null)
-                conn.close();
         }
 
         return user;
     }
 
-    public int addUser(String username, String name, String surname, String email, String psw, String role) throws Exception {
+    public int addUser(String username, String name, String surname, String email, String psw, String role) {
         PreparedStatement stmt = null;
         Connection conn = null;
         int result = -1;
-        ConnectionSingleton credentials = ConnectionSingleton.getInstance();
 
         try {
+            ConnectionSingleton credentials = ConnectionSingleton.getInstance();
             conn = DriverManager.getConnection(credentials.getDbUrlConfig(), credentials.getUserConfig(), credentials.getPassConfig());
 
             String sql = "INSERT INTO User (" + USERNAME + ", " + NAME +", " + SURNAME +", " + EMAIL + ", " + PSW + ", " + ROLE + ")"
@@ -130,11 +127,13 @@ public class UserDAO {
                 logger.log(Level.INFO, "ROW NOT INSERTED");
             }
 
-        } finally {
-            if(stmt != null)
-                stmt.close();
-            if(conn != null)
-                conn.close();
+            stmt.close();
+            conn.close();
+
+        }
+
+        catch(SQLException | IOException e){
+            logger.info(e.getMessage());
         }
 
         return result;

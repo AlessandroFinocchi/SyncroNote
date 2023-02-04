@@ -1,7 +1,5 @@
 package com.example.syncronote.logic.session;
 
-import com.example.syncronote.logic.model.User;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

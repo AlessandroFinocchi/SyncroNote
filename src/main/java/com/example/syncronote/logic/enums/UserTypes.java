@@ -5,7 +5,22 @@ public enum UserTypes {
     PROFESSOR("Professor"),
     ADMIN("Admin");
 
-    UserTypes(String userType) {
+    private final String id;
 
+    private UserTypes(String id) {
+        this.id = id;
+    }
+
+    public static UserTypes fromString(String id) {
+        for (UserTypes type : values()) {
+            if (type.getId() == id) {
+                return type;
+            }
+        }
+        return null;
+    }
+
+    public String getId() {
+        return id;
     }
 }
