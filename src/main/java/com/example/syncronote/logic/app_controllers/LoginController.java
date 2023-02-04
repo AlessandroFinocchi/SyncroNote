@@ -5,12 +5,11 @@ import com.example.syncronote.logic.dao.UserDAO;
 import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import com.example.syncronote.logic.model.User;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginController extends IController{
 
-    public User login(LoginCredentialsBean credentialsBean) throws UserNotFoundException{
+    public User login(LoginCredentialsBean credentialsBean) throws UserNotFoundException, SQLException {
         UserDAO userDAO = new UserDAO();
         User user = userDAO.findUser(
                 credentialsBean.getUsername(),

@@ -60,9 +60,5 @@ public class LoginGraphicController extends IGraphicController {
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Database not working");
         }
-        catch (IOException e){
-            logger.log(Level.INFO, e.getMessage());
-            msgLbl.setText("Couldn't access the database");
-        }
     }
 }
