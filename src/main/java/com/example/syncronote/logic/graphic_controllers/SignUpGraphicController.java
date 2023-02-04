@@ -4,6 +4,7 @@ import com.example.syncronote.logic.app_controllers.SignUpController;
 import com.example.syncronote.logic.beans.SignupBean;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
+import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -62,7 +63,7 @@ public class SignUpGraphicController extends IGraphicController {
     }
 
     public void userSignup(ActionEvent event){
-        String SignUpErrorString = "Sign up error";
+        String signUpErrorString = "Sign up error";
         try{
             SignupBean signupBean = new SignupBean(
                     userField.getText(),
@@ -79,20 +80,20 @@ public class SignUpGraphicController extends IGraphicController {
             }
             else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");
-                showAlert(SignUpErrorString, "Username already in use");
+                showAlert(signUpErrorString, "Username already in use");
             }
             else {
                 logger.log(Level.INFO, "Unknown error");
-                showAlert(SignUpErrorString, "Unknown error");
+                showAlert(signUpErrorString, "Unknown error");
             }
         }
-        catch (InvalidFormatException e){
+        catch (InvalidFormatException | SessionUserException e){
             logger.log(Level.INFO, e.getMessage());
-            showAlert(SignUpErrorString, e.getMessage());
+            showAlert(signUpErrorString, e.getMessage());
         }
         catch (DAOException | SQLException e){
             logger.log(Level.INFO, "Error in database");
-            showAlert(SignUpErrorString, "Error in database");
+            showAlert(signUpErrorString, "Error in database");
         }
     }
 

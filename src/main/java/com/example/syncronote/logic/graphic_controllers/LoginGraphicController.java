@@ -4,6 +4,7 @@ import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
+import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -58,6 +59,10 @@ public class LoginGraphicController extends IGraphicController {
         catch (SQLException e){
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("Database not working");
+        }
+        catch (SessionUserException e){
+            logger.log(Level.INFO, e.getMessage());
+            msgLbl.setText(e.getMessage());
         }
     }
 }

@@ -1,17 +1,17 @@
 package com.example.syncronote.logic.exceptions;
 
-public class UserNotSetException extends Exception{
+public class SessionUserException extends Exception{
     private static final long serialVersionUID = 3L;
 
-    public UserNotSetException(){
+    public SessionUserException(){
         super("The user hasn't been defined yet");
     }
 
-    public UserNotSetException(Throwable cause){
+    public SessionUserException(Throwable cause){
         super(cause);
     }
 
-    public UserNotSetException(String message) {
+    public SessionUserException(String message) {
         super(message);
     }
 }

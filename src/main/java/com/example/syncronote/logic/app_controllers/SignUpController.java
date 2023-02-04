@@ -8,13 +8,14 @@ import com.example.syncronote.logic.dao.user_procedures.InsertUserProcedureDAO;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
+import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.model.User;
 
 import java.sql.SQLException;
 
 public class SignUpController extends IController{
 
-    public int signUp(SignupBean signupBean) throws SQLException, DAOException, InvalidFormatException{
+    public int signUp(SignupBean signupBean) throws SQLException, DAOException, InvalidFormatException, SessionUserException {
         User user = null;
         int result = -1;
 
