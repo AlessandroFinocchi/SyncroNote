@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
-import com.example.syncronote.logic.dao.student_procedures.FindUserProcedureDAO;
+import com.example.syncronote.logic.dao.user_procedures.FindUserProcedureDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.User;
 

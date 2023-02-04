@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 public class SessionSingleton {
     private static SessionSingleton instance = null;
 
-    protected String username;
-    protected String name;
-    protected String surname;
-    protected String email;
+    protected final String username;
+    protected final String name;
+    protected final String surname;
+    protected final String email;
     protected final UserTypes userType;
 
     protected SessionSingleton(String username, String name, String surname, String email, UserTypes userType) {

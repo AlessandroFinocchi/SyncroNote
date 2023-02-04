@@ -1,8 +1,7 @@
-package com.example.syncronote.logic.dao.student_procedures;
+package com.example.syncronote.logic.dao.user_procedures;
 
 import com.example.syncronote.logic.dao.GenericProcedureDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InsertUserProcedureDAO extends GenericProcedureDAO<Integer> {
+public class InsertUserProcedureDAO extends GenericUserProcedureDAO<Integer> {
 
     @Override
     public Integer execute(Object... params) throws DAOException, SQLException {

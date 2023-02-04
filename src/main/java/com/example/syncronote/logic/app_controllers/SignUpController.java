@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
-import com.example.syncronote.logic.dao.student_procedures.FindUsernameProcedureDAO;
-import com.example.syncronote.logic.dao.student_procedures.InsertUserProcedureDAO;
+import com.example.syncronote.logic.dao.user_procedures.FindUsernameProcedureDAO;
+import com.example.syncronote.logic.dao.user_procedures.InsertUserProcedureDAO;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.User;
