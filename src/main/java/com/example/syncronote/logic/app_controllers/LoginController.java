@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class LoginController extends IController{
 
-    public User login(LoginCredentialsBean credentialsBean) throws UserNotFoundException, SQLException, IOException {
+    public User login(LoginCredentialsBean credentialsBean) throws UserNotFoundException{
         UserDAO userDAO = new UserDAO();
         User user = userDAO.findUser(
                 credentialsBean.getUsername(),

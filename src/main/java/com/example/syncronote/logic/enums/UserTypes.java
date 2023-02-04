@@ -13,7 +13,7 @@ public enum UserTypes {
 
     public static UserTypes fromString(String id) {
         for (UserTypes type : values()) {
-            if (type.getId() == id) {
+            if (type.getId().equals(id)) {
                 return type;
             }
         }

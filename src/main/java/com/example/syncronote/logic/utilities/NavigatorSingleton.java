@@ -17,7 +17,7 @@ public class NavigatorSingleton {
     }
 
     protected NavigatorSingleton(Stage stg) {
-        this.stg = stg;
+        NavigatorSingleton.stg = stg;
     }
 
 
