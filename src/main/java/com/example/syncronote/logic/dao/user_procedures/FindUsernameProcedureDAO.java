@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao.user_procedures;
 
-import com.example.syncronote.logic.dao.GenericProcedureDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.ConnectionFactory;

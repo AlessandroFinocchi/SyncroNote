@@ -66,7 +66,8 @@ public class SignUpGraphicController extends IGraphicController {
                     surnameField.getText(),
                     emailField.getText(),
                     pswField.getText(),
-                    roleCombo.getValue());
+                    roleCombo.getValue(),
+                    userTypeAttrField.getText());
 
             if(result == 1){
                 goToPage("Home.fxml");

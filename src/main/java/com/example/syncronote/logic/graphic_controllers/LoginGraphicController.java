@@ -4,12 +4,10 @@ import com.example.syncronote.logic.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.EmptyFieldsException;
-import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
