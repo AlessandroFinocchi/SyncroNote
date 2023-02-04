@@ -13,7 +13,7 @@ import com.example.syncronote.logic.model.User;
 
 import java.sql.SQLException;
 
-public class SignUpController extends IController{
+public class SignUpController extends AbsController {
 
     public int signUp(SignupBean signupBean) throws SQLException, DAOException, InvalidFormatException, SessionUserException {
         User user = null;

@@ -14,7 +14,43 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.HomeGraphicController">
    <children>
-      <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);" />
+      <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
+         <children>
+            <Label fx:id="typeLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="35.0" prefHeight="30.0" prefWidth="300.0" text="Tipo_Utente" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="500.0" text="Nome_Utente" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <Pane fx:id="titlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fx:id="minimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/hide.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="closeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/close.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/SideBarImages/Menu.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="355.0" layoutY="9.0" text="SyncroNotes" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
          <children>
             <VBox layoutY="20.0" prefHeight="540.0" prefWidth="295.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
@@ -100,29 +136,5 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Pane fx:id="titlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
-         <children>
-            <ImageView fx:id="minimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/hide.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="closeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/close.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/SideBarImages/Menu.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="355.0" layoutY="9.0" text="SyncroNotes" textFill="#00acf5">
-               <font>
-                  <Font name="Calibri Italic" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

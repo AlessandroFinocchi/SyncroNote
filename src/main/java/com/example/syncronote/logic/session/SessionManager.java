@@ -62,8 +62,10 @@ public class SessionManager {
 
     public synchronized User changeCurrentUser(String username){
         for (User u: loggedUsers) {
-            if(u.getUsername().equals(username))
+            if(u.getUsername().equals(username)){
+                currentUser = u;
                 return u;
+            }
         }
         return null;
     }

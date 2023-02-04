@@ -8,7 +8,7 @@ import com.example.syncronote.logic.model.User;
 
 import java.sql.SQLException;
 
-public class LoginController extends IController{
+public class LoginController extends AbsController {
 
     public User login(LoginCredentialsBean credentialsBean) throws DAOException, SQLException, SessionUserException {
         User user = new FindUserProcedureDAO().execute(

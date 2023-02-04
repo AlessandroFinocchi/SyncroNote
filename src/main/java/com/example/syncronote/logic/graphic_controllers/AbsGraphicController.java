@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class IGraphicController {
+public abstract class AbsGraphicController {
     @FXML
     private Pane titlePane; // Value injected by FXMLLoader
     @FXML

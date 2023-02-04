@@ -12,15 +12,13 @@ import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-public class LoginGraphicController extends IGraphicController {
+public class LoginGraphicController extends AbsGraphicController {
     @FXML
     private Label msgLbl;
     @FXML
     private TextField userField;
     @FXML
     private PasswordField pswField;
-    @FXML
-    private CheckBox rememberChkb;                  //TODO: add a json to remember if login has to be done or not
     @FXML
     private Label signUpLbl;
 

@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-public class SignUpGraphicController extends IGraphicController {
+public class SignUpGraphicController extends AbsGraphicController {
     @FXML
     private TextField nameField;
     @FXML

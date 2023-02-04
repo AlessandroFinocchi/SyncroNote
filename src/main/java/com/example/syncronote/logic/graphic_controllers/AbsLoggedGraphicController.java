@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.exceptions.SessionUserException;
-import com.example.syncronote.logic.model.User;
+import com.example.syncronote.logic.app_controllers.HomeController;
+import com.example.syncronote.logic.beans.SessionUserBean;
 import com.example.syncronote.logic.session.SessionManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -10,10 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public abstract class ILoggedGraphicController extends IGraphicController {
+public abstract class AbsLoggedGraphicController extends AbsGraphicController {
     @FXML
     protected AnchorPane containerPane; // Value injected by FXMLLoader
     @FXML
@@ -49,27 +46,29 @@ public abstract class ILoggedGraphicController extends IGraphicController {
 
         changeUserSetUp();
 
+        userBtn.setOnMouseClicked(mouseEvent ->
+                goToPage("Home.fxml"));
+
         exitBtn.setOnMouseClicked(mouseEvent -> {
             goToPage("Login.fxml");
         });
 
         changeHBox.setOnMouseClicked(mouseEvent -> {
-            SessionManager sessionManager = SessionManager.getInstance();
-            if(sessionManager.getCurrentUser().getUsername().equals(selectUserCombo.getValue())){
-                sessionManager.changeCurrentUser(selectUserCombo.getValue());
+            HomeController homeController = new HomeController();
+            if(homeController.changeCurrentUser(selectUserCombo.getValue()).equals(selectUserCombo.getValue())){
                 goToPage("Home.fxml");
             }
         });
     }
 
     private void changeUserSetUp(){
+        HomeController homeController = new HomeController();
+        SessionUserBean sessionUserBean = homeController.getSessionInfos();
 
-        SessionManager sessionManager = SessionManager.getInstance();
-
-        for (User u: sessionManager.getLoggedUsers()) {
-            selectUserCombo.getItems().add(u.getUsername());
+        for (String username: sessionUserBean.getLoggedUsers()) {
+            selectUserCombo.getItems().add(username);
         }
 
-        selectUserCombo.setValue(sessionManager.getCurrentUser().getUsername());
+        selectUserCombo.setValue(sessionUserBean.getUsername());
     }
 }
