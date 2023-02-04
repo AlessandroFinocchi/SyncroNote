@@ -5,7 +5,6 @@ import com.example.syncronote.logic.exceptions.UserNotFoundException;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;

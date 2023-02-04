@@ -21,13 +21,15 @@ public class Main extends Application {
         Scene scene = new Scene(root, 800, 600);
         scene.setFill(Color.TRANSPARENT);
 
-        NavigatorSingleton.getInstance(primaryStage);
-        NavigatorSingleton.getStg().initStyle(StageStyle.TRANSPARENT);
-        NavigatorSingleton.getStg().setTitle("SyncroNotes");
-        NavigatorSingleton.getStg().setResizable(false);
-        NavigatorSingleton.getStg().setScene(scene);
-        NavigatorSingleton.getStg().getIcons().add(new Image(getClass().getResourceAsStream("/ProjectIcon.png")));
-        NavigatorSingleton.getStg().show();
+        NavigatorSingleton n = NavigatorSingleton.getInstance(primaryStage);
+
+        //NavigatorSingleton.getInstance(primaryStage);
+        n.getStg().initStyle(StageStyle.TRANSPARENT);
+        n.getStg().setTitle("SyncroNotes");
+        n.getStg().setResizable(false);
+        n.getStg().setScene(scene);
+        n.getStg().getIcons().add(new Image(getClass().getResourceAsStream("/ProjectIcon.png")));
+        n.getStg().show();
     }
 
     public static void main(String[] args) {

@@ -10,16 +10,16 @@ import java.util.Objects;
 
 public class NavigatorSingleton {
     private static NavigatorSingleton instance = null;
-    protected static Stage stg;
 
-    public static Stage getStg() {
-        return NavigatorSingleton.stg;
+    protected Stage stg;
+
+    public Stage getStg() {
+        return this.stg;
     }
 
     protected NavigatorSingleton(Stage stg) {
-        NavigatorSingleton.stg = stg;
+        this.stg = stg;
     }
-
 
     public static synchronized NavigatorSingleton getInstance(Stage stg){
         if(NavigatorSingleton.instance == null)

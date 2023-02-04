@@ -31,18 +31,27 @@ public abstract class IGraphicController {
         assert minimizeBtn != null : "fx:id=\"MinimizeBtn\" was not injected: check your FXML file.";
         assert titlePane != null : "fx:id=\"TitlePane\" was not injected: check your FXML file.";
 
+
         titlePane.setOnMouseDragged(mouseEvent -> {
-            NavigatorSingleton.getStg().setX(mouseEvent.getScreenX() - x);
-            NavigatorSingleton.getStg().setY(mouseEvent.getScreenY() - y);
+            NavigatorSingleton n = NavigatorSingleton.getInstance();
+            n.getStg().setX(mouseEvent.getScreenX() - x);
+            n.getStg().setY(mouseEvent.getScreenY() - y);
         });
 
         titlePane.setOnMousePressed(mouseEvent -> {
+            NavigatorSingleton n = NavigatorSingleton.getInstance();
             x = mouseEvent.getSceneX();
             y = mouseEvent.getSceneY();
         });
 
-        closeBtn.setOnMouseClicked(mouseEvent -> NavigatorSingleton.getStg().close());
-        minimizeBtn.setOnMouseClicked(mouseEvent -> NavigatorSingleton.getStg().setIconified(true));
+        closeBtn.setOnMouseClicked(mouseEvent -> {
+            NavigatorSingleton n = NavigatorSingleton.getInstance();
+            n.getStg().close();
+        });
+        minimizeBtn.setOnMouseClicked(mouseEvent -> {
+            NavigatorSingleton n = NavigatorSingleton.getInstance();
+            n.getStg().setIconified(true);
+        });
         
         errorAlert = new Alert(Alert.AlertType.ERROR);
     }
