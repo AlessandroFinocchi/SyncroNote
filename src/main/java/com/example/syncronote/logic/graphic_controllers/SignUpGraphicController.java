@@ -59,10 +59,10 @@ public class SignUpGraphicController extends IGraphicController {
 
         studentSelected();
         roleCombo.setValue(STUDENT);
-
     }
 
     public void userSignup(ActionEvent event){
+        String SignUpErrorString = "Sign up error";
         try{
             SignupBean signupBean = new SignupBean(
                     userField.getText(),
@@ -79,20 +79,20 @@ public class SignUpGraphicController extends IGraphicController {
             }
             else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");
-                showAlert("Sign up error", "Username already in use");
+                showAlert(SignUpErrorString, "Username already in use");
             }
             else {
                 logger.log(Level.INFO, "Unknown error");
-                showAlert("Sign up error", "Unknown error");
+                showAlert(SignUpErrorString, "Unknown error");
             }
         }
         catch (InvalidFormatException e){
             logger.log(Level.INFO, e.getMessage());
-            showAlert("Sign up error", e.getMessage());
+            showAlert(SignUpErrorString, e.getMessage());
         }
         catch (DAOException | SQLException e){
             logger.log(Level.INFO, "Error in database");
-            showAlert("Sign up error", "Error in database");
+            showAlert(SignUpErrorString, "Error in database");
         }
     }
 

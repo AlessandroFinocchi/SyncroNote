@@ -7,14 +7,14 @@ import com.example.syncronote.logic.dao.user_procedures.FindUsernameProcedureDAO
 import com.example.syncronote.logic.dao.user_procedures.InsertUserProcedureDAO;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.model.User;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
 
 public class SignUpController extends IController{
 
-    public int signUp(SignupBean signupBean) throws SQLException, DAOException{
+    public int signUp(SignupBean signupBean) throws SQLException, DAOException, InvalidFormatException{
         User user = null;
         int result = -1;
 
@@ -38,7 +38,7 @@ public class SignUpController extends IController{
                 break;
             case STUDENT : new InsertStudentProcedureDAO().execute(signupBean.getUsername(), signupBean.getUserTypeAttr());
                 break;
-            default: throw new RuntimeException("Unknown user type provided");
+            default: throw new InvalidFormatException("Unknown user type provided");
         }
 
         storeSessionUser(

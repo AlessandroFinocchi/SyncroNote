@@ -12,6 +12,8 @@ public class SignupBean {
     private final String userTypeAttr;
 
     public SignupBean(String username, String name, String surname, String email, String password, String role, String userTypeAttr) throws InvalidFormatException{
+        checkAttributesAreNotEmpty(username, name, surname, email, password, role, userTypeAttr);
+        checkEmailFormat(email);
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -49,7 +51,7 @@ public class SignupBean {
         return userTypeAttr;
     }
 
-    private void checkEmailFormat() throws InvalidFormatException{
+    private void checkEmailFormat(String email) throws InvalidFormatException{
         if(!email.matches("^.+@\\w+\\.\\w+$"))
             throw new InvalidFormatException("Invalid email format");
     }
