@@ -64,7 +64,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="exitBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Exit">
+                  <JFXButton fx:id="loginBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Exit">
                      <font>
                         <Font name="Calibri Italic" size="20.0" />
                      </font>

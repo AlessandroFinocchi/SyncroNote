@@ -17,16 +17,18 @@ public class AbsLoggedController {
             loggedUserNames.add(u.getUsername());
         }
 
-        SessionUserBean sessionUserBean = new SessionUserBean(
+        return new SessionUserBean(
                 sessionManager.getCurrentUser().getUsername(),
                 sessionManager.getCurrentUser().getUserType(),
                 loggedUserNames
         );
-
-        return sessionUserBean;
     }
 
     public String changeCurrentUser(String username){
         return SessionManager.getInstance().changeCurrentUser(username).getUsername();
+    }
+
+    public void logoutCurrentUser(){
+        SessionManager.getInstance().logout();
     }
 }

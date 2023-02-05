@@ -2,9 +2,9 @@ package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.SessionUserBean;
-import com.example.syncronote.logic.session.SessionManager;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +26,9 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
     @FXML
     protected JFXButton courseBtn;
     @FXML
-    protected JFXButton exitBtn;
+    protected JFXButton loginBtn;
+    @FXML
+    protected Button logoutBtn;
     @FXML
     protected HBox changeHBox;
     @FXML
@@ -49,13 +51,16 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
         userBtn.setOnMouseClicked(mouseEvent ->
                 goToPage("Home.fxml"));
 
-        exitBtn.setOnMouseClicked(mouseEvent -> {
+        loginBtn.setOnMouseClicked(mouseEvent ->
+            goToPage("Login.fxml"));
+
+        logoutBtn.setOnMouseClicked(mouseEvent -> {
+            new HomeController().logoutCurrentUser();
             goToPage("Login.fxml");
         });
 
         changeHBox.setOnMouseClicked(mouseEvent -> {
-            HomeController homeController = new HomeController();
-            if(homeController.changeCurrentUser(selectUserCombo.getValue()).equals(selectUserCombo.getValue())){
+            if(new HomeController().changeCurrentUser(selectUserCombo.getValue()).equals(selectUserCombo.getValue())){
                 goToPage("Home.fxml");
             }
         });

@@ -2,7 +2,6 @@ package com.example.syncronote.logic.session;
 
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class SessionManager {
 
     protected SessionManager() {
         loggedUsers = new ArrayList<>();
+        currentUser = null;
     }
 
     public static synchronized SessionManager getInstance(){
@@ -41,23 +41,14 @@ public class SessionManager {
             }
             loggedUsers.add(user);
         }
-        catch(SessionUserException ignored){
-
-        }
         finally {
             currentUser = user;
         }
     }
 
-    public synchronized void logout(String username) throws SessionUserException {
-        for (User u: loggedUsers) {
-            if (u.getUsername().equals(username)){
-                loggedUsers.remove(u);
-                return;
-            }
-        }
-
-        throw new SessionUserException("User was not logged in");
+    public synchronized void logout(){
+        loggedUsers.remove(currentUser);
+        currentUser = null;
     }
 
     public synchronized User changeCurrentUser(String username){

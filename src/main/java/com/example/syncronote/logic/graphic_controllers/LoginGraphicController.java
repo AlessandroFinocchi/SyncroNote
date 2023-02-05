@@ -60,7 +60,8 @@ public class LoginGraphicController extends AbsGraphicController {
         }
         catch (SessionUserException e){
             logger.log(Level.INFO, e.getMessage());
-            msgLbl.setText(e.getMessage());
+            msgLbl.setText("User already logged in");
+            goToPage("Home.fxml");
         }
     }
 }

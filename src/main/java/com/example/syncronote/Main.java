@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,7 +26,6 @@ public class Main extends Application {
         n.getStg().setTitle("SyncroNotes");
         n.getStg().setResizable(false);
         n.getStg().setScene(scene);
-        n.getStg().getIcons().add(new Image(getClass().getResourceAsStream("/ProjectIcon.png")));
         n.getStg().show();
     }
 
