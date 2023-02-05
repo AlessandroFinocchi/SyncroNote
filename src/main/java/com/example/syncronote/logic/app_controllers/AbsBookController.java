@@ -43,5 +43,5 @@ public abstract class AbsBookController  extends AbsLoggedController{
         return noteChosenBean;
     }
 
-    public abstract void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException;
+    public abstract void publishStudentNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException;
 }

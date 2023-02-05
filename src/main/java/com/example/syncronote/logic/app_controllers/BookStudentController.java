@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class BookStudentController extends AbsBookController{
 
-    public void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException {
+    public void publishStudentNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException {
 
         int result = new PublishNoteProcedureDAO().execute(
                 publicationStudentBean.getTitle(),
