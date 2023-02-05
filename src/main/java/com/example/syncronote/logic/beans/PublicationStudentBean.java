@@ -4,10 +4,10 @@ import com.example.syncronote.logic.exceptions.InvalidFormatException;
 
 import java.io.File;
 
-public class PublicizationBean extends NoteChosenBean{
-    private boolean privateNote;
+public class PublicationStudentBean extends NoteChosenBean{
+    protected boolean privateNote;
 
-    public PublicizationBean(File file, boolean privateNote) throws InvalidFormatException {
+    public PublicationStudentBean(File file, boolean privateNote) throws InvalidFormatException {
         super(file);
         this.privateNote = privateNote;
     }

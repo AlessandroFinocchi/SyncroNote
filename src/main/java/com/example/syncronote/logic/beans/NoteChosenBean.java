@@ -18,7 +18,7 @@ public class NoteChosenBean {
         return title;
     }
 
-    public File getFile() throws InvalidFormatException{
+    public File getFile() {
         return file;
     }
 

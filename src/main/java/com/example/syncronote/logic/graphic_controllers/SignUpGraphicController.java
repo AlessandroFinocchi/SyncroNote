@@ -80,20 +80,20 @@ public class SignUpGraphicController extends AbsGraphicController {
             }
             else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");
-                showAlert(signUpErrorString, "Username already in use");
+                showErrorAlert(signUpErrorString, "Username already in use");
             }
             else {
                 logger.log(Level.INFO, "Unknown error");
-                showAlert(signUpErrorString, "Unknown error");
+                showErrorAlert(signUpErrorString, "Unknown error");
             }
         }
         catch (InvalidFormatException | SessionUserException e){
             logger.log(Level.INFO, e.getMessage());
-            showAlert(signUpErrorString, e.getMessage());
+            showErrorAlert(signUpErrorString, e.getMessage());
         }
         catch (DAOException | SQLException e){
             logger.log(Level.INFO, "Error in database");
-            showAlert(signUpErrorString, "Error in database");
+            showErrorAlert(signUpErrorString, "Error in database");
         }
     }
 

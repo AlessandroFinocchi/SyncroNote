@@ -1,12 +1,7 @@
 package com.example.syncronote.logic.dao.note_procedures;
 
 import com.example.syncronote.logic.dao.GenericProcedureDAO;
-import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.enums.VisibilityTypes;
-import com.example.syncronote.logic.model.User;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<P>{
 

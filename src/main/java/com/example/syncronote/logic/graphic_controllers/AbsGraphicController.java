@@ -19,6 +19,7 @@ public abstract class AbsGraphicController {
     private ImageView minimizeBtn; // Value injected by FXMLLoader
 
     protected Alert errorAlert;
+    protected Alert infoAlert;
 
     private double x;
     private double y;
@@ -54,6 +55,7 @@ public abstract class AbsGraphicController {
         });
         
         errorAlert = new Alert(Alert.AlertType.ERROR);
+        infoAlert = new Alert(Alert.AlertType.INFORMATION);
     }
 
     protected void goToPage(String page) {
@@ -65,9 +67,15 @@ public abstract class AbsGraphicController {
         }
     }
 
-    protected void showAlert(String title, String header){
+    protected void showErrorAlert(String title, String header){
         errorAlert.setTitle(title);
         errorAlert.setHeaderText(header);
         errorAlert.show();
+    }
+
+    protected void showInfoAlert(String title, String header){
+        infoAlert.setTitle(title);
+        infoAlert.setHeaderText(header);
+        infoAlert.show();
     }
 }

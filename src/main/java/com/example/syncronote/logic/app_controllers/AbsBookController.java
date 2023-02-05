@@ -1,11 +1,9 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.NoteChosenBean;
-import com.example.syncronote.logic.beans.PublicizationBean;
-import com.example.syncronote.logic.dao.note_procedures.PublishNoteProcedureDAO;
+import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.session.SessionManager;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -13,13 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+public abstract class AbsBookController  extends AbsLoggedController{
 
-public class BookController extends AbsLoggedController{
-
-    public NoteChosenBean getNewNote(MouseEvent actionEvent) throws InvalidFormatException{
+    public NoteChosenBean getNewNote(MouseEvent actionEvent) throws InvalidFormatException {
         File noteFile;
         NoteChosenBean noteChosenBean;
         FileChooser fileChooser = new FileChooser();
@@ -48,20 +43,5 @@ public class BookController extends AbsLoggedController{
         return noteChosenBean;
     }
 
-    public void publishNote(PublicizationBean publicizationBean) throws DAOException, SQLException {
-
-        try {
-            int result = new PublishNoteProcedureDAO().execute(
-                    publicizationBean.getTitle(),
-                    SessionManager.getInstance().getCurrentUser().getUsername(),
-                    publicizationBean.getFile().getPath(),
-                    publicizationBean.isPrivateNote());
-
-            if (result == 0)
-                throw new DAOException("No rows affected!");
-        }
-        catch(InvalidFormatException e){
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
-        }
-    }
+    public abstract void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException;
 }
