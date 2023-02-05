@@ -28,8 +28,6 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
     @FXML
     protected JFXButton loginBtn;
     @FXML
-    protected Button logoutBtn;
-    @FXML
     protected HBox changeHBox;
     @FXML
     protected ComboBox<String> selectUserCombo;
@@ -51,13 +49,11 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
         userBtn.setOnMouseClicked(mouseEvent ->
                 goToPage("Home.fxml"));
 
+        bookBtn.setOnMouseClicked(
+                mouseEvent -> goToPage("Book.fxml"));
+
         loginBtn.setOnMouseClicked(mouseEvent ->
             goToPage("Login.fxml"));
-
-        logoutBtn.setOnMouseClicked(mouseEvent -> {
-            new HomeController().logoutCurrentUser();
-            goToPage("Login.fxml");
-        });
 
         changeHBox.setOnMouseClicked(mouseEvent -> {
             if(new HomeController().changeCurrentUser(selectUserCombo.getValue()).equals(selectUserCombo.getValue())){

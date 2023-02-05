@@ -32,7 +32,6 @@ public class NavigatorSingleton {
         return instance;
     }
 
-
     public void gotoPage(String fxml) throws IOException{
         Parent pane = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource(fxml)));
         stg.getScene().setRoot(pane);
