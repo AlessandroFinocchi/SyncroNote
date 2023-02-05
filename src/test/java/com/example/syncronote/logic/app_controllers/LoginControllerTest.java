@@ -1,6 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,8 +23,8 @@ class LoginControllerTest {
             assertEquals(loginController.login(loginCredentialsBean).getUsername(), testUsername);
 
         }
-        catch (Exception ignored){
-            assertEquals(1, 0, 0);
+        catch (Exception e){
+            Assertions.fail(e.getMessage());
         }
     }
 }
