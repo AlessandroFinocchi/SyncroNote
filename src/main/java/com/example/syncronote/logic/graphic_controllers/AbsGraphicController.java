@@ -24,7 +24,7 @@ public abstract class AbsGraphicController extends AbsAlertGenerator {
 
     protected Logger logger = Logger.getAnonymousLogger();
 
-    @FXML
+    @Override
     public void initialize(){
         super.initialize();
         assert closeBtn != null : "fx:id=\"CloseBtn\" was not injected: check your FXML file.";

@@ -5,9 +5,12 @@ import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.utilities.AbsAlertGenerator;
+import com.example.syncronote.logic.utilities.NavigatorSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class NoteComponentGraphicController extends AbsAlertGenerator {
     @FXML
@@ -18,10 +21,6 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     private Label descriptionLbl;
     @FXML
     private Label visibilityLbl;
-
-    @FXML
-    public void initialize(){
-    }
 
     public void setNoteValues(NoteComponentBean noteValues){
         titleLbl.setText(noteValues.getTitle());
@@ -36,6 +35,11 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     }
 
     @FXML
+    public void initialize(){
+        super.initialize();
+    }
+
+    @FXML
     private void deleteNote(ActionEvent actionEvent) {
         UserNotesController userNotesController = new UserNotesController();
         NoteComponentBean noteComponentBean = new NoteComponentBean(
@@ -47,9 +51,15 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
 
         try {
             userNotesController.deleteNote(noteComponentBean);
+            NavigatorSingleton.getInstance().gotoPage("UserNotes.fxml");
         }
         catch (DAOException e){
             showErrorAlert("Error", e.getMessage());
         }
+        catch (IOException e){
+            showInfoAlert("Error", e.getMessage());
+        }
+
+
     }
 }

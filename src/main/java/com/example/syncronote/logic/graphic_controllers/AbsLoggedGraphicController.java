@@ -6,7 +6,6 @@ import com.example.syncronote.logic.beans.SessionUserBean;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -56,7 +55,7 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
                 goToPage("Home.fxml"));
 
         bookBtn.setOnMouseClicked(
-                mouseEvent -> goToPage("NotesActionChoise.fxml"));
+                mouseEvent -> goToPage("NotesActionChoice.fxml"));
 
         loginBtn.setOnMouseClicked(mouseEvent ->
             goToPage("Login.fxml"));

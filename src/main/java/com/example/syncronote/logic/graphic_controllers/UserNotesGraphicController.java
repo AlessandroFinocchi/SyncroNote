@@ -11,8 +11,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class UserNotesGraphicController extends AbsLoggedGraphicController{
+public class UserNotesGraphicController extends AbsLoggedGraphicController {
     @FXML
     private VBox notesLayout;
 
@@ -44,6 +46,7 @@ public class UserNotesGraphicController extends AbsLoggedGraphicController{
         }
         catch (IOException e){
             showErrorAlert("Rendering error", "Couldn't render notes");
+            Logger.getAnonymousLogger().log(Level.INFO, e.getStackTrace().toString());
         }
     }
 }
