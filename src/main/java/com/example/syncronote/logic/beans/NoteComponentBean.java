@@ -7,12 +7,14 @@ public class NoteComponentBean {
     private final String category;
     private final String description;
     private final String visibility;
+    private final String filePath;
 
-    public NoteComponentBean(String title, String category, String description, VisibilityTypes visibility) {
+    public NoteComponentBean(String title, String category, String description, VisibilityTypes visibility, String filePath) {
         this.title = title;
         this.category = category;
         this.description = description;
         this.visibility = visibility.getId();
+        this.filePath = filePath;
     }
 
 
@@ -30,5 +32,9 @@ public class NoteComponentBean {
 
     public String getVisibility() {
         return visibility;
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }

@@ -9,7 +9,6 @@ import com.example.syncronote.logic.utilities.NavigatorSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
 import java.io.IOException;
 
 public class NoteComponentGraphicController extends AbsAlertGenerator {
@@ -22,21 +21,29 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     @FXML
     private Label visibilityLbl;
 
+    private String filePath;
+
+    @FXML
+    public void initialize(){
+        super.initialize();
+    }
+
     public void setNoteValues(NoteComponentBean noteValues){
         titleLbl.setText(noteValues.getTitle());
         categoryLbl.setText(noteValues.getCategory());
         descriptionLbl.setText(noteValues.getDescription());
         visibilityLbl.setText(noteValues.getVisibility());
+        filePath = noteValues.getFilePath();
     }
 
     @FXML
-    private void downloadNote(ActionEvent actionEvent) {
-        throw new UnsupportedOperationException();
-    }
-
-    @FXML
-    public void initialize(){
-        super.initialize();
+    private void openNote(ActionEvent actionEvent) {
+        UserNotesController userNotesController = new UserNotesController();
+        try {
+            userNotesController.openNote(filePath);
+        } catch (IOException e) {
+            showErrorAlert("Error", "Cannot open file");
+        }
     }
 
     @FXML
@@ -46,7 +53,8 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
                 titleLbl.getText(),
                 categoryLbl.getText(),
                 descriptionLbl.getText(),
-                VisibilityTypes.fromString(visibilityLbl.getText())
+                VisibilityTypes.fromString(visibilityLbl.getText()),
+                filePath
         );
 
         try {

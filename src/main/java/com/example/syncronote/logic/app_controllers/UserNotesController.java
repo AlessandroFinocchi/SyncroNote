@@ -8,6 +8,7 @@ import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicControll
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.SessionManager;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ public class UserNotesController extends AbsLoggedGraphicController {
                         note.getTitle(),
                         note.getCategory(),
                         note.getDescription(),
-                        note.getVisibility()
+                        note.getVisibility(),
+                        note.getFilePath()
                 );
 
                 noteBeansList.add(noteComponentBean);
@@ -52,4 +54,8 @@ public class UserNotesController extends AbsLoggedGraphicController {
         }
     }
 
+    public void openNote(String filePath) throws IOException {
+        Runtime r = Runtime.getRuntime();
+        r.exec("explorer.exe " + filePath);
+    }
 }

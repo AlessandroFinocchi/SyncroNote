@@ -44,14 +44,14 @@
       </Label>
       <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="90.0">
          <children>
-            <Button fx:id="downloadBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#downloadNote" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #54D39D;" stylesheets="@Style.css">
+            <Button fx:id="downloadBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openNote" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #54D39D;" stylesheets="@Style.css">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/download.png" />
+                        <Image url="@img/view.png" />
                      </image>
                   </ImageView>
                </graphic>
