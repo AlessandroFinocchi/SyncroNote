@@ -56,7 +56,7 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
                 goToPage("Home.fxml"));
 
         bookBtn.setOnMouseClicked(
-                mouseEvent -> goToPage("Notes.fxml"));
+                mouseEvent -> goToPage("NotesActionChoise.fxml"));
 
         loginBtn.setOnMouseClicked(mouseEvent ->
             goToPage("Login.fxml"));

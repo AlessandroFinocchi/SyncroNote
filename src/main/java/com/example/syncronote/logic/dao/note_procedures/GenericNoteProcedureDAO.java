@@ -10,6 +10,7 @@ public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<
     protected static final String DESCRIPTION = "Description";
     protected static final String FILEPATH = "File";
     protected static final String VISIBILITY = "Visibility";
+    protected static final String CATEGORY = "Category";
 
     protected VisibilityTypes getVisibility(boolean isPrivate){
         if(isPrivate)
