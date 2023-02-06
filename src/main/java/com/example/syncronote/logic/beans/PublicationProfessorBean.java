@@ -5,14 +5,14 @@ import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import java.io.File;
 
 public class PublicationProfessorBean extends PublicationStudentBean {
-    private final String course;
+    private final int courseId;
 
-    public PublicationProfessorBean(File file, boolean privateNote, String course) throws InvalidFormatException {
+    public PublicationProfessorBean(File file, boolean privateNote, int courseId) throws InvalidFormatException {
         super(file, privateNote);
-        this.course = course;
+        this.courseId = courseId;
     }
 
-    public String getCourse() {
-        return course;
+    public int getCourseId() {
+        return courseId;
     }
 }

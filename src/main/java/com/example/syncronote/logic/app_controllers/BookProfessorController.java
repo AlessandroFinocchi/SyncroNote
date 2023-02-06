@@ -1,6 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.CourseMapBean;
+import com.example.syncronote.logic.beans.PublicationProfessorBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.dao.course_procedures.FindProfessorCourseProcedureDAO;
 import com.example.syncronote.logic.dao.publication_procedures.InsertPublicationProcedureDAO;
@@ -14,12 +15,13 @@ import java.util.List;
 
 public class BookProfessorController extends BookStudentController{
 
-    public void publishProfessorNote(PublicationStudentBean publicationStudentBean, CourseMapBean courseBean) throws DAOException, SQLException {
-        super.publishStudentNote(publicationStudentBean);
+    @Override
+    public void publishNote(PublicationStudentBean publicationProfessorBean) throws DAOException, SQLException {
+        super.publishNote(publicationProfessorBean);
 
         new InsertPublicationProcedureDAO().execute(
-                publicationStudentBean.getTitle(),
-                courseBean.getCourseId()
+                publicationProfessorBean.getTitle(),
+                ((PublicationProfessorBean)publicationProfessorBean).getCourseId()
         );
     }
 

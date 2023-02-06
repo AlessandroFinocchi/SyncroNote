@@ -29,7 +29,6 @@ public class FindProfessorCourseProcedureDAO extends GenericNoteProcedureDAO<Lis
 
         PreparedStatement stmt = null;
         Connection conn = null;
-        Integer result = -1;
 
         conn = ConnectionFactory.getConnection();
 

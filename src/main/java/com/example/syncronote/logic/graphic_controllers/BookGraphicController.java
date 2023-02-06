@@ -5,6 +5,7 @@ import com.example.syncronote.logic.app_controllers.BookProfessorController;
 import com.example.syncronote.logic.app_controllers.BookStudentController;
 import com.example.syncronote.logic.beans.CourseMapBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
+import com.example.syncronote.logic.beans.PublicationProfessorBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
@@ -56,7 +57,7 @@ public class BookGraphicController extends AbsLoggedGraphicController {
                 courseLbl.setVisible(true);
                 courseCombo.setVisible(true);
 
-                if(courseMapBean.size() != 0){
+                if(!courseMapBean.isEmpty()){
                     for (CourseMapBean courseBean: courseMapBean) {
                         courseCombo.getItems().add(courseBean.getCourseName());
                     }
@@ -86,44 +87,47 @@ public class BookGraphicController extends AbsLoggedGraphicController {
 
     public void publishNote(ActionEvent actionEvent) {
         CourseMapBean courseBean = null;
+        PublicationStudentBean publicationBean;
         try{
             if(noteChosenBean == null)
                 throw new InvalidFormatException("File not selected");
 
-            PublicationStudentBean publicationStudentBean = new PublicationStudentBean(
-                    noteChosenBean.getFile(),
-                    privacyLbl.isSelected()
-            );
-
             if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.STUDENT)){
-                bookController.publishStudentNote(publicationStudentBean);
+
+                publicationBean = new PublicationStudentBean(
+                        noteChosenBean.getFile(),
+                        privacyLbl.isSelected()
+                );
+
+                bookController.publishNote(publicationBean);
             }
+
             else if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.PROFESSOR)){
 
                 if(courseCombo.getValue() == null)
                     throw new NoCoursesException("No courses found! Create one of them before");
 
                 for (CourseMapBean courseMap: courseMapBean) {
-                    if(courseMap.getCourseName().equals(courseCombo.getValue()))
+                    if(courseMap.getCourseName().equals(courseCombo.getValue())) {
                         courseBean = new CourseMapBean(
                                 courseMap.getCourseId(),
                                 courseMap.getCourseName()
                         );
+                        break;
+                    }
                 }
 
                 if(courseBean == null)
                     throw new InvalidFormatException("Couldn't find course");
 
-                ((BookProfessorController)bookController).publishProfessorNote(
-                        publicationStudentBean,
-                        courseBean
-                );
-            }
-            else {
-                showErrorAlert("Session problem", "Session user isn't set up");
-                goToPage("Login.fxml");
-            }
+                publicationBean = new PublicationProfessorBean(
+                        noteChosenBean.getFile(),
+                        privacyLbl.isSelected(),
+                        courseBean.getCourseId()
+                        );
 
+                bookController.publishNote(publicationBean);
+            }
 
             showInfoAlert("Publication", "Your note has been publicized");
             goToPage("Home.fxml");
