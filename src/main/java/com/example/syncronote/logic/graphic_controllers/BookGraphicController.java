@@ -9,6 +9,7 @@ import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
+import com.example.syncronote.logic.exceptions.NoCoursesException;
 import com.example.syncronote.logic.session.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,16 +52,21 @@ public class BookGraphicController extends AbsLoggedGraphicController {
             else if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.PROFESSOR)){
                 bookController = new BookProfessorController();
                 courseMapBean = ((BookProfessorController)bookController).getCourses();
+
                 courseLbl.setVisible(true);
                 courseCombo.setVisible(true);
 
-                for (CourseMapBean courseBean: courseMapBean) {
-                    courseCombo.getItems().add(courseBean.getCourseName());
+                if(courseMapBean.size() != 0){
+                    for (CourseMapBean courseBean: courseMapBean) {
+                        courseCombo.getItems().add(courseBean.getCourseName());
+                    }
+
+                    courseCombo.setValue(courseMapBean.get(0).getCourseName());
                 }
             }
             else {
                 showErrorAlert("Session problem", "Session user isn't set up");
-                goToPage("Login");
+                goToPage("Login.fxml");
             }
         } catch (DAOException | SQLException e) {
             showErrorAlert("Error!", e.getMessage());
@@ -89,22 +95,25 @@ public class BookGraphicController extends AbsLoggedGraphicController {
                     privacyLbl.isSelected()
             );
 
-            for (CourseMapBean courseMap: courseMapBean) {
-                if(courseMap.getCourseName().equals(courseCombo.getValue()))
-                    courseBean = new CourseMapBean(
-                            courseMap.getCourseId(),
-                            courseMap.getCourseName()
-                    );
-            }
-
-            if(courseBean == null)
-                throw new InvalidFormatException("Couldn't find course");
-
-
             if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.STUDENT)){
                 bookController.publishStudentNote(publicationStudentBean);
             }
             else if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.PROFESSOR)){
+
+                if(courseCombo.getValue() == null)
+                    throw new NoCoursesException("No courses found! Create one of them before");
+
+                for (CourseMapBean courseMap: courseMapBean) {
+                    if(courseMap.getCourseName().equals(courseCombo.getValue()))
+                        courseBean = new CourseMapBean(
+                                courseMap.getCourseId(),
+                                courseMap.getCourseName()
+                        );
+                }
+
+                if(courseBean == null)
+                    throw new InvalidFormatException("Couldn't find course");
+
                 ((BookProfessorController)bookController).publishProfessorNote(
                         publicationStudentBean,
                         courseBean
@@ -112,7 +121,7 @@ public class BookGraphicController extends AbsLoggedGraphicController {
             }
             else {
                 showErrorAlert("Session problem", "Session user isn't set up");
-                goToPage("Login");
+                goToPage("Login.fxml");
             }
 
 
@@ -125,6 +134,10 @@ public class BookGraphicController extends AbsLoggedGraphicController {
         catch (DAOException | SQLException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
             showErrorAlert("Publication Error", e.getMessage());
+        }
+        catch (NoCoursesException e){
+            showInfoAlert("Attention", e.getMessage());
+            goToPage("Home.fxml");
         }
     }
 }

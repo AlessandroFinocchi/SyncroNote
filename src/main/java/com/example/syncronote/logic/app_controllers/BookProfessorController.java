@@ -18,8 +18,8 @@ public class BookProfessorController extends BookStudentController{
         super.publishStudentNote(publicationStudentBean);
 
         new InsertPublicationProcedureDAO().execute(
-                courseBean.getCourseId(),
-                courseBean.getCourseName()
+                publicationStudentBean.getTitle(),
+                courseBean.getCourseId()
         );
     }
 
@@ -28,6 +28,7 @@ public class BookProfessorController extends BookStudentController{
         List<Course> courseList = new FindProfessorCourseProcedureDAO().execute(
                 sessionManager.getCurrentUser().getUsername()
         );
+
         List<CourseMapBean> courseMapBean = new ArrayList<>();
 
         for (Course course: courseList) {
