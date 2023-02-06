@@ -46,7 +46,7 @@ public class UserNotesGraphicController extends AbsLoggedGraphicController {
         }
         catch (IOException e){
             showErrorAlert("Rendering error", "Couldn't render notes");
-            Logger.getAnonymousLogger().log(Level.INFO, e.getStackTrace().toString());
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }
 }

@@ -23,7 +23,7 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
 
     private String filePath;
 
-    @FXML
+    @Override
     public void initialize(){
         super.initialize();
     }
@@ -62,10 +62,10 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
             NavigatorSingleton.getInstance().gotoPage("UserNotes.fxml");
         }
         catch (DAOException e){
-            showErrorAlert("Error", e.getMessage());
+            showErrorAlert("DB Error", e.getMessage());
         }
         catch (IOException e){
-            showInfoAlert("Error", e.getMessage());
+            showInfoAlert("Navigation Error", e.getMessage());
         }
 
 
