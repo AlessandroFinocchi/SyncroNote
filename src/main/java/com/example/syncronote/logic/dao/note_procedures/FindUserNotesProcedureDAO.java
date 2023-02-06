@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindUserPublishedNotesProcedureDAO extends GenericNoteProcedureDAO<List<Note>>{
+public class FindUserNotesProcedureDAO extends GenericNoteProcedureDAO<List<Note>>{
 
     @Override
     public List<Note> execute(Object... params) throws SQLException {

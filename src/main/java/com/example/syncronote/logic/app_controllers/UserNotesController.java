@@ -1,8 +1,9 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.NoteComponentBean;
-import com.example.syncronote.logic.dao.note_procedures.FindUserPublishedNotesProcedureDAO;
-import com.example.syncronote.logic.enums.VisibilityTypes;
+import com.example.syncronote.logic.dao.note_procedures.DeleteNoteProcedureDAO;
+import com.example.syncronote.logic.dao.note_procedures.FindUserNotesProcedureDAO;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicController;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.SessionManager;
@@ -22,7 +23,7 @@ public class UserNotesController extends AbsLoggedGraphicController {
 
         try {
             username = SessionManager.getInstance().getCurrentUser().getUsername();
-            notesList = new FindUserPublishedNotesProcedureDAO().execute(username);
+            notesList = new FindUserNotesProcedureDAO().execute(username);
 
             for (Note note : notesList) {
                 NoteComponentBean noteComponentBean = new NoteComponentBean(
@@ -40,6 +41,15 @@ public class UserNotesController extends AbsLoggedGraphicController {
         }
 
         return noteBeansList;
-
     }
+
+    public void deleteNote(NoteComponentBean noteComponentBean) throws DAOException {
+        try {
+            new DeleteNoteProcedureDAO().execute(noteComponentBean.getTitle());
+        }
+        catch (SQLException e){
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+        }
+    }
+
 }
