@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.sql.SQLException;
 
-public abstract class AbsBookController  extends AbsLoggedController{
+public abstract class AbsPublicationController extends AbsLoggedController{
 
     public NoteChosenBean getNewNote(MouseEvent actionEvent) throws InvalidFormatException {
         File noteFile;

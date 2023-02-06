@@ -13,4 +13,8 @@ public abstract class AbsController {
         User currentUser = new User(username, name, surname, email, userType);
         sessionManager.login(currentUser);
     }
+
+    public static UserTypes getCurrentUserType(){
+        return SessionManager.getInstance().getCurrentUser().getUserType();
+    }
 }

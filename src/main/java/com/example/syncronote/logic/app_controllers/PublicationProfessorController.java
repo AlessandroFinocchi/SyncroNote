@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookProfessorController extends BookStudentController{
+public class PublicationProfessorController extends PublicationStudentController {
 
     @Override
     public void publishNote(PublicationStudentBean publicationProfessorBean) throws DAOException, SQLException {

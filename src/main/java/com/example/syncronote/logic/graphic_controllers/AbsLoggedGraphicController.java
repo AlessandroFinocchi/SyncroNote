@@ -1,7 +1,9 @@
 package com.example.syncronote.logic.graphic_controllers;
 
+import com.example.syncronote.logic.app_controllers.AbsController;
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.SessionUserBean;
+import com.example.syncronote.logic.enums.UserTypes;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,9 +34,13 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
     @FXML
     protected ComboBox<String> selectUserCombo;
 
+    protected UserTypes userType;
+
     @Override
     public void initialize(){
         super.initialize();
+
+        userType = AbsController.getCurrentUserType();
 
         burger.setOnMouseClicked(mouseEvent -> {
             leftPane.setVisible(!leftPane.isVisible());
@@ -50,7 +56,7 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
                 goToPage("Home.fxml"));
 
         bookBtn.setOnMouseClicked(
-                mouseEvent -> goToPage("Book.fxml"));
+                mouseEvent -> goToPage("Notes.fxml"));
 
         loginBtn.setOnMouseClicked(mouseEvent ->
             goToPage("Login.fxml"));

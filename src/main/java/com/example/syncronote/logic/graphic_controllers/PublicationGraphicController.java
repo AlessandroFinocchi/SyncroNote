@@ -1,8 +1,8 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.app_controllers.AbsBookController;
-import com.example.syncronote.logic.app_controllers.BookProfessorController;
-import com.example.syncronote.logic.app_controllers.BookStudentController;
+import com.example.syncronote.logic.app_controllers.AbsPublicationController;
+import com.example.syncronote.logic.app_controllers.PublicationProfessorController;
+import com.example.syncronote.logic.app_controllers.PublicationStudentController;
 import com.example.syncronote.logic.beans.CourseMapBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.PublicationProfessorBean;
@@ -11,7 +11,6 @@ import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.exceptions.NoCoursesException;
-import com.example.syncronote.logic.session.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +24,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BookGraphicController extends AbsLoggedGraphicController {
+public class PublicationGraphicController extends AbsLoggedGraphicController {
     @FXML
     private Label fileLbl;
     @FXML
@@ -37,7 +36,7 @@ public class BookGraphicController extends AbsLoggedGraphicController {
     @FXML
     private ComboBox<String> courseCombo;
 
-    private AbsBookController bookController;
+    private AbsPublicationController bookController;
     private NoteChosenBean noteChosenBean;
     private List<CourseMapBean> courseMapBean;
 
@@ -45,14 +44,14 @@ public class BookGraphicController extends AbsLoggedGraphicController {
     public void initialize() {
         super.initialize();
         try{
-            if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.STUDENT)){
-                bookController = new BookStudentController();
+            if(userType.equals(UserTypes.STUDENT)){
+                bookController = new PublicationStudentController();
                 courseLbl.setVisible(false);
                 courseCombo.setVisible(false);
             }
-            else if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.PROFESSOR)){
-                bookController = new BookProfessorController();
-                courseMapBean = ((BookProfessorController)bookController).getCourses();
+            else if(userType.equals(UserTypes.PROFESSOR)){
+                bookController = new PublicationProfessorController();
+                courseMapBean = ((PublicationProfessorController)bookController).getCourses();
 
                 courseLbl.setVisible(true);
                 courseCombo.setVisible(true);
@@ -92,7 +91,7 @@ public class BookGraphicController extends AbsLoggedGraphicController {
             if(noteChosenBean == null)
                 throw new InvalidFormatException("File not selected");
 
-            if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.STUDENT)){
+            if(userType.equals(UserTypes.STUDENT)){
 
                 publicationBean = new PublicationStudentBean(
                         noteChosenBean.getFile(),
@@ -102,7 +101,7 @@ public class BookGraphicController extends AbsLoggedGraphicController {
                 bookController.publishNote(publicationBean);
             }
 
-            else if(SessionManager.getInstance().getCurrentUser().getUserType().equals(UserTypes.PROFESSOR)){
+            else if(userType.equals(UserTypes.PROFESSOR)){
 
                 if(courseCombo.getValue() == null)
                     throw new NoCoursesException("No courses found! Create one of them before");

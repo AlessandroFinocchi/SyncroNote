@@ -8,7 +8,7 @@ import com.example.syncronote.logic.session.SessionManager;
 import java.sql.SQLException;
 
 
-public class BookStudentController extends AbsBookController{
+public class PublicationStudentController extends AbsPublicationController {
 
     @Override
     public void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException {

@@ -14,8 +14,61 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.BookGraphicController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.PublicationGraphicController">
     <children>
+        <Pane fx:id="titlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
+            <children>
+                <ImageView fx:id="minimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/hide.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="closeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/close.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/SideBarImages/Menu.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="355.0" layoutY="9.0" text="SyncroNotes" textFill="#00acf5">
+                    <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
+         <children>
+            <Label contentDisplay="CENTER" layoutX="355.0" layoutY="81.0" prefHeight="23.0" prefWidth="85.0" style="-fx-alignment: center;" text="File name" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="fileLbl" contentDisplay="CENTER" layoutX="288.0" layoutY="104.0" onMouseClicked="#selectFile" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #00acf5; -fx-alignment: center; -fx-background-radius: 20 20 20 20;" text="Chose file here" textFill="#e4dddd">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="privacyLbl" layoutX="364.0" layoutY="179.0" mnemonicParsing="false" text="Private" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </CheckBox>
+            <Label fx:id="courseLbl" layoutX="322.0" layoutY="230.0" prefHeight="23.0" prefWidth="157.0" style="-fx-alignment: center;" text="Course selected" textFill="#00acf5">
+               <font>
+                  <Font name="Calibri Bold" size="20.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="courseCombo" layoutX="301.0" layoutY="253.0" prefHeight="40.0" prefWidth="200.0" promptText="Course" />
+            <Button fx:id="publishBtn" layoutX="358.0" layoutY="438.0" mnemonicParsing="false" onAction="#publishNote" style="-fx-background-color: #00acf5;" text="Publish" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
         <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
             <children>
                 <VBox layoutY="20.0" prefHeight="540.0" prefWidth="295.0" spacing="10.0">
@@ -32,7 +85,7 @@
                                 </ImageView>
                             </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Books">
+                        <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Notes">
                             <font>
                                 <Font name="Calibri Italic" size="20.0" />
                             </font>
@@ -101,58 +154,5 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <Pane fx:id="titlePane" prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: black;">
-            <children>
-                <ImageView fx:id="minimizeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="739.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@img/hide.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="closeBtn" fitHeight="20.0" fitWidth="20.0" layoutX="766.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@img/close.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="burger" fitHeight="31.0" fitWidth="36.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@img/SideBarImages/Menu.png" />
-                    </image>
-                </ImageView>
-                <Label layoutX="355.0" layoutY="9.0" text="SyncroNotes" textFill="#00acf5">
-                    <font>
-                        <Font name="Calibri Italic" size="18.0" />
-                    </font>
-                </Label>
-            </children>
-        </Pane>
-        <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
-         <children>
-            <Label contentDisplay="CENTER" layoutX="355.0" layoutY="81.0" prefHeight="23.0" prefWidth="85.0" style="-fx-alignment: center;" text="File name" textFill="#00acf5">
-               <font>
-                  <Font name="Calibri Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="fileLbl" contentDisplay="CENTER" layoutX="288.0" layoutY="104.0" onMouseClicked="#selectFile" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #00acf5; -fx-alignment: center; -fx-background-radius: 20 20 20 20;" text="Chose file here" textFill="#e4dddd">
-               <font>
-                  <Font name="Calibri Bold" size="18.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="privacyLbl" layoutX="364.0" layoutY="179.0" mnemonicParsing="false" text="Private" textFill="#00acf5">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </CheckBox>
-            <Label fx:id="courseLbl" layoutX="322.0" layoutY="230.0" prefHeight="23.0" prefWidth="157.0" style="-fx-alignment: center;" text="Course selected" textFill="#00acf5">
-               <font>
-                  <Font name="Calibri Bold" size="20.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="courseCombo" layoutX="301.0" layoutY="253.0" prefHeight="40.0" prefWidth="200.0" promptText="Course" />
-            <Button fx:id="publishBtn" layoutX="358.0" layoutY="438.0" mnemonicParsing="false" onAction="#publishNote" style="-fx-background-color: #00acf5;" text="Publish" textFill="WHITE">
-               <font>
-                  <Font name="Calibri" size="20.0" />
-               </font>
-            </Button>
-         </children></AnchorPane>
     </children>
 </AnchorPane>

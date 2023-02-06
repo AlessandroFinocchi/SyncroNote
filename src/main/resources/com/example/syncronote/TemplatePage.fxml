@@ -31,7 +31,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Books">
+                  <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Notes">
                      <font>
                         <Font name="Calibri Italic" size="20.0" />
                      </font>
