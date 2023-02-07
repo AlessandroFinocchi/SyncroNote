@@ -1,6 +1,5 @@
-package com.example.syncronote.logic.dao.note_procedures;
+package com.example.syncronote.logic.dao.revision_procedures;
 
-import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
@@ -11,31 +10,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindUserNotesProcedureDAO extends GenericNoteProcedureDAO<List<Note>>{
+//Finds every revisionable note of a student, which are the ones that are not already in a revision process
+public class SelectRevisionableNotesProcedureDAO extends GenericRevisionProcedureDAO<List<Note>> {
+
+    protected static final String NAME = "Name";
+    protected static final String MACRO_AREA = "Macroarea";
+    protected static final String GRADE = "Grade";
 
     @Override
     public List<Note> execute(Object... params) throws SQLException {
-        List<Note> notesList = new ArrayList<>();
-        String username = (String) params[0];
+        String author = (String) params[0];
+        List<Note> notes = new ArrayList<>();
 
         PreparedStatement stmt = null;
         Connection conn = null;
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "SELECT * FROM Note WHERE " + AUTHOR + " = ?";
+        String sql = "SELECT * FROM Note " +
+                "WHERE " + AUTHOR + " = ? AND " + TITLE + " NOT IN (SELECT "  + NOTE + " FROM Revision)";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        stmt.setString(1, username);
 
         ResultSet rs = stmt.executeQuery();
 
-        notesList = getNotes(rs);
+        notes = getNotes(rs);
 
         // Closing ResultSet and freeing resources
         rs.close();
         stmt.close();
 
-        return notesList;
+        return notes;
     }
 }

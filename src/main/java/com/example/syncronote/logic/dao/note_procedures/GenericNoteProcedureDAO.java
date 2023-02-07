@@ -2,6 +2,12 @@ package com.example.syncronote.logic.dao.note_procedures;
 
 import com.example.syncronote.logic.dao.GenericProcedureDAO;
 import com.example.syncronote.logic.enums.VisibilityTypes;
+import com.example.syncronote.logic.model.Note;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<P>{
 
@@ -17,6 +23,22 @@ public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<
             return VisibilityTypes.PRIVATE;
 
         return VisibilityTypes.PUBLIC;
+    }
+
+    protected List<Note> getNotes(ResultSet rs) throws SQLException {
+        List<Note> notes = new ArrayList<>();
+        while (rs.next()) {
+            Note note = new Note(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    VisibilityTypes.fromString(rs.getString(5)),
+                    rs.getString(6));
+            notes.add(note);
+        }
+
+        return notes;
     }
 
 }
