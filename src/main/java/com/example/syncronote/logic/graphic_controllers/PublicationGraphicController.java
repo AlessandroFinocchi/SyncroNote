@@ -3,10 +3,7 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.logic.app_controllers.AbsPublicationController;
 import com.example.syncronote.logic.app_controllers.PublicationProfessorController;
 import com.example.syncronote.logic.app_controllers.PublicationStudentController;
-import com.example.syncronote.logic.beans.CourseMapBean;
-import com.example.syncronote.logic.beans.NoteChosenBean;
-import com.example.syncronote.logic.beans.PublicationProfessorBean;
-import com.example.syncronote.logic.beans.PublicationStudentBean;
+import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
@@ -28,15 +25,17 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
     @FXML
     private Label fileLbl;
     @FXML
-    private Button publishBtn;
-    @FXML
     private CheckBox privacyLbl;
+    @FXML
+    private ComboBox<String> categoryCombo;
     @FXML
     private Label courseLbl;
     @FXML
     private ComboBox<String> courseCombo;
+    @FXML
+    private Button publishBtn;
 
-    private AbsPublicationController bookController;
+    private AbsPublicationController publicationController;
     private NoteChosenBean noteChosenBean;
     private List<CourseMapBean> courseMapBean;
 
@@ -45,13 +44,14 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         super.initialize();
         try{
             if(userType.equals(UserTypes.STUDENT)){
-                bookController = new PublicationStudentController();
+                publicationController = new PublicationStudentController();
+
                 courseLbl.setVisible(false);
                 courseCombo.setVisible(false);
             }
             else if(userType.equals(UserTypes.PROFESSOR)){
-                bookController = new PublicationProfessorController();
-                courseMapBean = ((PublicationProfessorController)bookController).getCourses();
+                publicationController = new PublicationProfessorController();
+                courseMapBean = ((PublicationProfessorController) publicationController).getCourses();
 
                 courseLbl.setVisible(true);
                 courseCombo.setVisible(true);
@@ -67,7 +67,15 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
             else {
                 showErrorAlert("Session problem", "Session user isn't set up");
                 goToPage("Login.fxml");
+                return;
             }
+
+            List<CategoryBean> categoryBeanList = publicationController.getCategories();
+
+            for (CategoryBean c: categoryBeanList) {
+                categoryCombo.getItems().add(c.getCategory());
+            }
+
         } catch (DAOException | SQLException e) {
             showErrorAlert("Error!", e.getMessage());
         }
@@ -75,7 +83,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
     public void selectFile(MouseEvent actionEvent) {
         try{
-            noteChosenBean = bookController.getNewNote(actionEvent);
+            noteChosenBean = publicationController.getNewNote(actionEvent);
             fileLbl.setText(noteChosenBean.getTitle());
         }
         catch (InvalidFormatException e){
@@ -95,10 +103,11 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
                 publicationBean = new PublicationStudentBean(
                         noteChosenBean.getFile(),
-                        privacyLbl.isSelected()
+                        privacyLbl.isSelected(),
+                        categoryCombo.getValue()
                 );
 
-                bookController.publishNote(publicationBean);
+                publicationController.publishNote(publicationBean);
             }
 
             else if(userType.equals(UserTypes.PROFESSOR)){
@@ -122,10 +131,11 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                 publicationBean = new PublicationProfessorBean(
                         noteChosenBean.getFile(),
                         privacyLbl.isSelected(),
+                        categoryCombo.getValue(),
                         courseBean.getCourseId()
                         );
 
-                bookController.publishNote(publicationBean);
+                publicationController.publishNote(publicationBean);
             }
 
             showInfoAlert("Publication", "Your note has been publicized");

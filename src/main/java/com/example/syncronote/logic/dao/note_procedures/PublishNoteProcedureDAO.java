@@ -18,6 +18,7 @@ public class PublishNoteProcedureDAO extends GenericNoteProcedureDAO<Integer> {
         String username = (String) params[1];
         String filePath = (String) params[2];
         boolean isPrivate = (boolean) params[3];
+        String category = (String) params[4];
 
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -25,14 +26,15 @@ public class PublishNoteProcedureDAO extends GenericNoteProcedureDAO<Integer> {
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "INSERT INTO Note (" + TITLE + ", " + AUTHOR +", " + FILEPATH + ", " + VISIBILITY + ")"
-                + " VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO Note (" + TITLE + ", " + AUTHOR +", " + FILEPATH + ", " + VISIBILITY + ", " + CATEGORY + ")"
+                + " VALUES(?, ?, ?, ?, ?)";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         stmt.setString(1, title);
         stmt.setString(2, username);
         stmt.setString(3, filePath);
         stmt.setString(4, getVisibility(isPrivate).getId());
+        stmt.setString(5, category);
 
         result = stmt.executeUpdate();
 

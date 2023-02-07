@@ -1,9 +1,9 @@
-package com.example.syncronote.logic.dao.course_procedures;
+package com.example.syncronote.logic.dao.category_procedures;
 
 import com.example.syncronote.logic.dao.note_procedures.GenericNoteProcedureDAO;
 import com.example.syncronote.logic.enums.GradeTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.model.Course;
+import com.example.syncronote.logic.model.Category;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;
@@ -13,46 +13,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindProfessorCourseProcedureDAO extends GenericNoteProcedureDAO<List<Course>> {
+public class SelectCategoriesProcedureDAO  extends GenericNoteProcedureDAO<List<Category>> {
 
-    protected static final String ID_COURSE = "IdCOurse";
     protected static final String NAME = "Name";
+    protected static final String MACRO_AREA = "Macroarea";
     protected static final String GRADE = "Grade";
-    protected static final String PROFESSOR = "Professor";
-    protected static final String CATEGORY = "Category";
 
     @Override
-    public List<Course> execute(Object... params) throws DAOException, SQLException {
-        List<Course> courseList = new ArrayList<>();
-        String professor = (String) params[0];
+    public List<Category> execute(Object... params) throws SQLException {
+        List<Category> categories = new ArrayList<>();
 
         PreparedStatement stmt = null;
         Connection conn = null;
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "SELECT " + ID_COURSE + "," + NAME + "," + GRADE + "," + PROFESSOR + "," + CATEGORY +
-                " FROM Course WHERE " + PROFESSOR + " = ?";
+        String sql = "SELECT * FROM Category";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        stmt.setString(1, professor);
 
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            Course course = new Course(
-                    rs.getInt(1),
+            Category category = new Category(
+                    rs.getString(1),
                     rs.getString(2),
-                    GradeTypes.fromString(rs.getString(3)),
-                    rs.getString(4),
-                    rs.getString(5));
-            courseList.add(course);
+                    GradeTypes.fromString(rs.getString(3)));
+            categories.add(category);
         }
 
         // Closing ResultSet and freeing resources
         rs.close();
         stmt.close();
 
-        return courseList;
+        return categories;
     }
 }

@@ -16,7 +16,8 @@ public class PublicationStudentController extends AbsPublicationController {
                 publicationStudentBean.getTitle(),
                 SessionManager.getInstance().getCurrentUser().getUsername(),
                 publicationStudentBean.getFile().getPath(),
-                publicationStudentBean.isPrivateNote());
+                publicationStudentBean.isPrivateNote(),
+                publicationStudentBean.getCategory());
 
         if (result == 0)
             throw new DAOException("No rows affected!");

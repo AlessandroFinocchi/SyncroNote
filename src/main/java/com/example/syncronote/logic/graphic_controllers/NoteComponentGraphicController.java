@@ -26,13 +26,16 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     @Override
     public void initialize(){
         super.initialize();
+        categoryLbl.setText("<no category>");
         descriptionLbl.setText("<no description>");
     }
 
     public void setNoteValues(NoteComponentBean noteValues){
         titleLbl.setText(noteValues.getTitle());
-        categoryLbl.setText(noteValues.getCategory());
-        descriptionLbl.setText(noteValues.getDescription());
+        if(noteValues.getCategory() != null)
+            categoryLbl.setText(noteValues.getCategory());
+        if(noteValues.getDescription() != null)
+            descriptionLbl.setText(noteValues.getDescription());
         visibilityLbl.setText(noteValues.getVisibility());
         filePath = noteValues.getFilePath();
     }
