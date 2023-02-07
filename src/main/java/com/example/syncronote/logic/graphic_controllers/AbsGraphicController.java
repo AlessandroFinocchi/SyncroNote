@@ -17,6 +17,9 @@ public abstract class AbsGraphicController extends AbsAlertGenerator {
     private ImageView closeBtn; // Value injected by FXMLLoader
     @FXML
     private ImageView minimizeBtn; // Value injected by FXMLLoader
+    protected static final String HOME = "Home.fxml";
+    protected static final String LOGIN = "Login.fxml";
+    protected static final String SIGN_UP = "SignUp.fxml";
 
 
     private double x;

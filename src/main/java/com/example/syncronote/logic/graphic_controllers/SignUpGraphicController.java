@@ -76,7 +76,7 @@ public class SignUpGraphicController extends AbsGraphicController {
             int result = signUpController.signUp(signupBean);
 
             if(result == 1){
-                goToPage("Home.fxml");
+                goToPage(HOME);
             }
             else if(result == -1){
                 logger.log(Level.INFO, "Username already in use");

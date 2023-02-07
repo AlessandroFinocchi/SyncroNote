@@ -31,7 +31,7 @@ public class LoginGraphicController extends AbsGraphicController {
         loginController = new LoginController();
 
         signUpLbl.setOnMouseClicked(mouseEvent -> {
-            goToPage("SignUp.fxml");
+            goToPage(SIGN_UP);
         });
     }
 
@@ -44,7 +44,7 @@ public class LoginGraphicController extends AbsGraphicController {
 
             loginController.login(credentialsBean);
 
-            goToPage("Home.fxml");
+            goToPage(HOME);
         }
         catch (InvalidFormatException e){
             logger.log(Level.INFO, e.getMessage());
@@ -61,7 +61,7 @@ public class LoginGraphicController extends AbsGraphicController {
         catch (SessionUserException e){
             logger.log(Level.INFO, e.getMessage());
             msgLbl.setText("User already logged in");
-            goToPage("Home.fxml");
+            goToPage(HOME);
         }
     }
 }

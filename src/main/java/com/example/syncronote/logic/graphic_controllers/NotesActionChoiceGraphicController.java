@@ -15,8 +15,8 @@ public class NotesActionChoiceGraphicController extends AbsLoggedGraphicControll
     @Override
     public void initialize() {
         super.initialize();
-        lookNotePlg.setOnMouseClicked(mouseEvent -> goToPage("UserNotes.fxml"));
-        publicationPlg.setOnMouseClicked(mouseEvent -> goToPage("Publication.fxml"));
+        lookNotePlg.setOnMouseClicked(mouseEvent -> goToPage(USER_NOTES));
+        publicationPlg.setOnMouseClicked(mouseEvent -> goToPage(PUBLICATION));
     }
 
 }

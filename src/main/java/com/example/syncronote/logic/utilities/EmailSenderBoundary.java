@@ -24,7 +24,7 @@ public class EmailSenderBoundary extends AbsAlertGenerator implements Observer {
     @Override
     public void update() {
 
-        try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("EmailSentFile.txt")))) {
+        try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(EMAIL_FILE)))) {
 
             checkFile();
             printWriter.println("Professor username: " + professor);

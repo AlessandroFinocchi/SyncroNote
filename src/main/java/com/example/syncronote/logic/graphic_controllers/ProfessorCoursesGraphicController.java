@@ -60,7 +60,7 @@ public class ProfessorCoursesGraphicController extends AbsLoggedGraphicControlle
 
             professorCoursesController.createCourse(courseBean);
 
-            goToPage("ProfessorCourses.fxml");
+            goToPage(PROFESSOR_COURSES);
 
         }
         catch (InvalidFormatException e) {
@@ -93,7 +93,7 @@ public class ProfessorCoursesGraphicController extends AbsLoggedGraphicControlle
             courses = professorCoursesController.getCurrentProfessorCourses();
             for (CourseBean courseBean : courses) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Objects.requireNonNull(Main.class.getResource("CourseComponent.fxml")));
+                fxmlLoader.setLocation(Objects.requireNonNull(Main.class.getResource(COURSE_COMPONENT)));
 
                 HBox courseGraphicComponent = fxmlLoader.load();
                 ProfessorCourseComponentGraphicController courseComponentGraphicController = fxmlLoader.getController();

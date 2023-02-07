@@ -28,7 +28,7 @@ public class HomeGraphicController extends AbsLoggedGraphicController {
 
         logoutBtn.setOnMouseClicked(mouseEvent -> {
             new HomeController().logoutCurrentUser();
-            goToPage("Login.fxml");
+            goToPage(LOGIN);
         });
     }
 }

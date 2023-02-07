@@ -49,7 +49,7 @@ public class UserNotesController extends AbsLoggedGraphicController {
     public void deleteNote(NoteComponentBean noteComponentBean) throws DAOException {
         try {
             new DeleteNoteProcedureDAO().execute(noteComponentBean.getTitle());
-            NavigatorSingleton.getInstance().gotoPage("UserNotes.fxml");
+            NavigatorSingleton.getInstance().gotoPage(USER_NOTES);
         }
         catch (SQLException | IOException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());

@@ -67,7 +67,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
             }
             else {
                 showErrorAlert("Session problem", "Session user isn't set up");
-                goToPage("Login.fxml");
+                goToPage(LOGIN);
                 return;
             }
 
@@ -134,7 +134,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
             showInfoAlert("Publication", "Your note has been publicized");
 
-            goToPage("Home.fxml");
+            goToPage(HOME);
         }
         catch (InvalidFormatException e){
             showErrorAlert("Alert", e.getMessage());
@@ -145,10 +145,10 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         }
         catch (NoCoursesException e){
             showInfoAlert("Attention", e.getMessage());
-            goToPage("Home.fxml");
+            goToPage(HOME);
         } catch (SessionUserException e) {
             showErrorAlert("User error", e.getMessage());
-            goToPage("Home.fxml");
+            goToPage(HOME);
         }
     }
 

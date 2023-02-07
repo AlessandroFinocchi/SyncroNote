@@ -35,7 +35,7 @@ public class UserNotesGraphicController extends AbsLoggedGraphicController {
         try {
             for (NoteComponentBean noteComponentBean : notesList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Objects.requireNonNull(Main.class.getResource("NoteComponent.fxml")));
+                fxmlLoader.setLocation(Objects.requireNonNull(Main.class.getResource(NOTE_COMPONENT)));
 
                 HBox noteGraphicComponent = fxmlLoader.load();
                 NoteComponentGraphicController noteComponentGraphicController = fxmlLoader.getController();

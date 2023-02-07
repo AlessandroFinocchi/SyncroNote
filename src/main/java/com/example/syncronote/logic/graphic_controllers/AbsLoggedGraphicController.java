@@ -34,6 +34,12 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
     protected ComboBox<String> selectUserCombo;
 
     protected UserTypes userType;
+    protected static final String COURSE_COMPONENT = "CourseComponent.fxml";
+    protected static final String NOTE_COMPONENT = "NoteComponent.fxml";
+    protected static final String NOTE_ACTION_CHOICE = "NotesActionChoice.fxml";
+    protected static final String PROFESSOR_COURSES = "ProfessorCourses.fxml";
+    protected static final String PUBLICATION = "Publication.fxml";
+    protected static final String USER_NOTES = "UserNotes.fxml";
 
     @Override
     public void initialize(){
@@ -52,22 +58,22 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
         changeUserSetUp();
 
         userBtn.setOnMouseClicked(mouseEvent ->
-                goToPage("Home.fxml"));
+                goToPage(HOME));
 
         bookBtn.setOnMouseClicked(
-                mouseEvent -> goToPage("NotesActionChoice.fxml"));
+                mouseEvent -> goToPage(NOTE_ACTION_CHOICE));
 
         courseBtn.setOnMouseClicked(mouseEvent -> {
             if(userType == UserTypes.PROFESSOR)
-                goToPage("ProfessorCourses.fxml");
+                goToPage(PROFESSOR_COURSES);
         });
 
         loginBtn.setOnMouseClicked(mouseEvent ->
-            goToPage("Login.fxml"));
+            goToPage(LOGIN));
 
         changeHBox.setOnMouseClicked(mouseEvent -> {
             if(new HomeController().changeCurrentUser(selectUserCombo.getValue()).equals(selectUserCombo.getValue())){
-                goToPage("Home.fxml");
+                goToPage(HOME);
             }
         });
     }
