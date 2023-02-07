@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao.course_procedures;
 
-import com.example.syncronote.logic.dao.note_procedures.GenericNoteProcedureDAO;
 import com.example.syncronote.logic.enums.GradeTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Course;

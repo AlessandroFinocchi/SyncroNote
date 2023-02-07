@@ -26,7 +26,7 @@ public class SelectRevisionableNotesProcedureDAO extends GenericRevisionProcedur
         String sql = "SELECT * FROM Note " +
                 "WHERE " + AUTHOR + " = ? AND " + TITLE + " NOT IN (SELECT "  + NOTE + " FROM Revision)";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
-        stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);;
+        stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         stmt.setString(1, author);
 
         ResultSet rs = stmt.executeQuery();

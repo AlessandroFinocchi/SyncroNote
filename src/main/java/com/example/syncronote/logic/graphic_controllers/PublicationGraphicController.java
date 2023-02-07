@@ -8,6 +8,7 @@ import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.exceptions.NoCoursesException;
+import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -106,8 +107,6 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         privacyLbl.isSelected(),
                         categoryCombo.getValue()
                 );
-
-                publicationController.publishNote(publicationBean);
             }
 
             else if(userType.equals(UserTypes.PROFESSOR)){
@@ -134,11 +133,16 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         categoryCombo.getValue(),
                         courseBean.getCourseId()
                         );
-
-                publicationController.publishNote(publicationBean);
             }
 
+            else{
+                throw new SessionUserException("User not set");
+            }
+
+            publicationController.publishNote(publicationBean);
+
             showInfoAlert("Publication", "Your note has been publicized");
+
             goToPage("Home.fxml");
         }
         catch (InvalidFormatException e){
@@ -151,6 +155,8 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         catch (NoCoursesException e){
             showInfoAlert("Attention", e.getMessage());
             goToPage("Home.fxml");
+        } catch (SessionUserException e) {
+            throw new RuntimeException(e);
         }
     }
 }
