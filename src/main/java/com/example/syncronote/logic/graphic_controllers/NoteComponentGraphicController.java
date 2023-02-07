@@ -26,6 +26,7 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     @Override
     public void initialize(){
         super.initialize();
+        descriptionLbl.setText("<no description>");
     }
 
     public void setNoteValues(NoteComponentBean noteValues){
