@@ -97,11 +97,9 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         CourseIdMapBean courseBean = null;
         PublicationStudentBean publicationBean;
         try{
-            if(noteChosenBean == null)
-                throw new InvalidFormatException("File not selected");
+            checkFileSelected();
 
             if(userType.equals(UserTypes.STUDENT)){
-
                 publicationBean = new PublicationStudentBean(
                         noteChosenBean.getFile(),
                         privacyLbl.isSelected(),
@@ -110,10 +108,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
             }
 
             else if(userType.equals(UserTypes.PROFESSOR)){
-
-                if(courseCombo.getValue() == null)
-                    throw new NoCoursesException("No courses found! Create one of them before");
-
+                checkCourseSelected();
                 for (CourseIdMapBean courseMap: courseIdMapBean) {
                     if(courseMap.getCourseName().equals(courseCombo.getValue())) {
                         courseBean = new CourseIdMapBean(
@@ -123,10 +118,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         break;
                     }
                 }
-
-                if(courseBean == null)
-                    throw new InvalidFormatException("Couldn't find course");
-
+                checkCourse(courseBean);
                 publicationBean = new PublicationProfessorBean(
                         noteChosenBean.getFile(),
                         privacyLbl.isSelected(),
@@ -134,7 +126,6 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         courseBean.getCourseId()
                         );
             }
-
             else{
                 throw new SessionUserException("User not set");
             }
@@ -156,7 +147,24 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
             showInfoAlert("Attention", e.getMessage());
             goToPage("Home.fxml");
         } catch (SessionUserException e) {
-            throw new RuntimeException(e);
+            showErrorAlert("User error", e.getMessage());
+            goToPage("Home.fxml");
         }
     }
+
+    private void checkFileSelected() throws InvalidFormatException {
+        if(noteChosenBean == null)
+            throw new InvalidFormatException("File not selected");
+    }
+
+    private void checkCourseSelected() throws NoCoursesException {
+        if(courseCombo.getValue() == null)
+            throw new NoCoursesException("No courses found! Create one of them before");
+    }
+
+    private void checkCourse(CourseIdMapBean courseBean) throws InvalidFormatException {
+        if(courseBean == null)
+            throw new InvalidFormatException("Couldn't find course");
+    }
+
 }

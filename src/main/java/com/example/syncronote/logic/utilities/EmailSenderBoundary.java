@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class EmailSenderBoundary extends AbsAlertGenerator implements Observer {
     private final String professor;
     private final String professorEmail;
-    private final String EMAIL_FILE = "EmailSentFile.txt";
+    private static final String EMAIL_FILE = "EmailSentFile.txt";
     private final EmailBean emailData;
 
     public EmailSenderBoundary(String professor, String professorEmail, EmailBean emailData) throws EmailSenderException {
