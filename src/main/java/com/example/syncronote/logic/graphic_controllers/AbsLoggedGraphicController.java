@@ -4,6 +4,7 @@ import com.example.syncronote.logic.app_controllers.AbsController;
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.SessionUserBean;
 import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.model.User;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -56,6 +57,12 @@ public abstract class AbsLoggedGraphicController extends AbsGraphicController {
 
         bookBtn.setOnMouseClicked(
                 mouseEvent -> goToPage("NotesActionChoice.fxml"));
+
+        courseBtn.setOnMouseClicked(mouseEvent -> {
+            UserTypes userType = AbsController.getCurrentUserType();
+            if(userType == UserTypes.PROFESSOR)
+                goToPage("ProfessorCourses.fxml");
+        });
 
         loginBtn.setOnMouseClicked(mouseEvent ->
             goToPage("Login.fxml"));

@@ -1,9 +1,9 @@
 package com.example.syncronote.logic.enums;
 
-public enum GradeTypes {STUDENT("Student"),
-    PRIMARY("Professor"),
-    SECONDARY("Admin"),
-    UNIVERSITY("Admin");
+public enum GradeTypes {
+    PRIMARY("Primary"),
+    SECONDARY("Secondary"),
+    UNIVERSITY("University");
 
     private final String id;
 

@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.app_controllers;
 
-import com.example.syncronote.logic.beans.CourseMapBean;
+import com.example.syncronote.logic.beans.CourseIdMapBean;
 import com.example.syncronote.logic.beans.PublicationProfessorBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.dao.course_procedures.FindProfessorCourseProcedureDAO;
@@ -25,21 +25,21 @@ public class PublicationProfessorController extends PublicationStudentController
         );
     }
 
-    public List<CourseMapBean> getCourses() throws DAOException, SQLException {
+    public List<CourseIdMapBean> getCourses() throws DAOException, SQLException {
         SessionManager sessionManager = SessionManager.getInstance();
         List<Course> courseList = new FindProfessorCourseProcedureDAO().execute(
                 sessionManager.getCurrentUser().getUsername()
         );
 
-        List<CourseMapBean> courseMapBean = new ArrayList<>();
+        List<CourseIdMapBean> courseIdMapBean = new ArrayList<>();
 
         for (Course course: courseList) {
-            courseMapBean.add(new CourseMapBean(
+            courseIdMapBean.add(new CourseIdMapBean(
                     course.getId(),
                     course.getName()
             ));
         }
 
-        return courseMapBean;
+        return courseIdMapBean;
     }
 }

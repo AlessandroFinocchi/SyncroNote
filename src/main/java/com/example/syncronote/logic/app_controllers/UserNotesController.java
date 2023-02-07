@@ -7,6 +7,7 @@ import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicController;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.SessionManager;
+import com.example.syncronote.logic.utilities.NavigatorSingleton;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -48,8 +49,9 @@ public class UserNotesController extends AbsLoggedGraphicController {
     public void deleteNote(NoteComponentBean noteComponentBean) throws DAOException {
         try {
             new DeleteNoteProcedureDAO().execute(noteComponentBean.getTitle());
+            NavigatorSingleton.getInstance().gotoPage("UserNotes.fxml");
         }
-        catch (SQLException e){
+        catch (SQLException | IOException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }

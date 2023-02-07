@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao.note_procedures;
 
-import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.ConnectionFactory;
 

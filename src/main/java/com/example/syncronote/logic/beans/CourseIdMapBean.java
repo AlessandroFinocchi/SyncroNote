@@ -1,10 +1,10 @@
 package com.example.syncronote.logic.beans;
 
-public class CourseMapBean {
+public class CourseIdMapBean {
     private final int courseId;
     private final String courseName;
 
-    public CourseMapBean(int courseId, String courseName) {
+    public CourseIdMapBean(int courseId, String courseName) {
         this.courseId = courseId;
         this.courseName = courseName;
     }

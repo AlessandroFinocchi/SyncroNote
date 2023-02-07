@@ -63,15 +63,10 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
 
         try {
             userNotesController.deleteNote(noteComponentBean);
-            NavigatorSingleton.getInstance().gotoPage("UserNotes.fxml");
+
         }
         catch (DAOException e){
             showErrorAlert("DB Error", e.getMessage());
         }
-        catch (IOException e){
-            showInfoAlert("Navigation Error", e.getMessage());
-        }
-
-
     }
 }

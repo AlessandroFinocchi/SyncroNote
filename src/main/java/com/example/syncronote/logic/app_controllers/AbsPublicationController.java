@@ -52,22 +52,4 @@ public abstract class AbsPublicationController extends AbsLoggedController{
 
     public abstract void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException;
 
-    public List<CategoryBean> getCategories() {
-        List<CategoryBean> categoryBeanList = new ArrayList<>();
-        List<Category> categories;
-
-        try{
-            categories = new SelectCategoriesProcedureDAO().execute();
-
-            for (Category c: categories) {
-                CategoryBean categoryBean = new CategoryBean(c.getName());
-                categoryBeanList.add(categoryBean);
-            }
-        }
-        catch (SQLException e){
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
-        }
-
-        return categoryBeanList;
-    }
 }

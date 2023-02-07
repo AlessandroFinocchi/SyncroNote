@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao.revision_procedures;
 
-import com.example.syncronote.logic.dao.GenericProcedureDAO;
 import com.example.syncronote.logic.dao.note_procedures.GenericNoteProcedureDAO;
 
 public abstract class GenericRevisionProcedureDAO<P> extends GenericNoteProcedureDAO<P> {

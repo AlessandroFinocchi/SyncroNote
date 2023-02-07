@@ -37,7 +37,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
     private AbsPublicationController publicationController;
     private NoteChosenBean noteChosenBean;
-    private List<CourseMapBean> courseMapBean;
+    private List<CourseIdMapBean> courseIdMapBean;
 
     @Override
     public void initialize() {
@@ -51,17 +51,17 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
             }
             else if(userType.equals(UserTypes.PROFESSOR)){
                 publicationController = new PublicationProfessorController();
-                courseMapBean = ((PublicationProfessorController) publicationController).getCourses();
+                courseIdMapBean = ((PublicationProfessorController) publicationController).getCourses();
 
                 courseLbl.setVisible(true);
                 courseCombo.setVisible(true);
 
-                if(!courseMapBean.isEmpty()){
-                    for (CourseMapBean courseBean: courseMapBean) {
+                if(!courseIdMapBean.isEmpty()){
+                    for (CourseIdMapBean courseBean: courseIdMapBean) {
                         courseCombo.getItems().add(courseBean.getCourseName());
                     }
 
-                    courseCombo.setValue(courseMapBean.get(0).getCourseName());
+                    courseCombo.setValue(courseIdMapBean.get(0).getCourseName());
                 }
             }
             else {
@@ -93,7 +93,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
     }
 
     public void publishNote(ActionEvent actionEvent) {
-        CourseMapBean courseBean = null;
+        CourseIdMapBean courseBean = null;
         PublicationStudentBean publicationBean;
         try{
             if(noteChosenBean == null)
@@ -115,9 +115,9 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                 if(courseCombo.getValue() == null)
                     throw new NoCoursesException("No courses found! Create one of them before");
 
-                for (CourseMapBean courseMap: courseMapBean) {
+                for (CourseIdMapBean courseMap: courseIdMapBean) {
                     if(courseMap.getCourseName().equals(courseCombo.getValue())) {
-                        courseBean = new CourseMapBean(
+                        courseBean = new CourseIdMapBean(
                                 courseMap.getCourseId(),
                                 courseMap.getCourseName()
                         );

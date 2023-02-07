@@ -13,13 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindProfessorCourseProcedureDAO extends GenericNoteProcedureDAO<List<Course>> {
-
-    protected static final String ID_COURSE = "IdCOurse";
-    protected static final String NAME = "Name";
-    protected static final String GRADE = "Grade";
-    protected static final String PROFESSOR = "Professor";
-    protected static final String CATEGORY = "Category";
+public class FindProfessorCourseProcedureDAO extends GenericCourseProcedureDAO<List<Course>> {
 
     @Override
     public List<Course> execute(Object... params) throws DAOException, SQLException {
