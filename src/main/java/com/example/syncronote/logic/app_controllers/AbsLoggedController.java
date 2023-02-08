@@ -2,7 +2,7 @@ package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.SessionUserBean;
-import com.example.syncronote.logic.dao.category_procedures.SelectCategoriesProcedureDAO;
+import com.example.syncronote.logic.dao.CategoryDAO;
 import com.example.syncronote.logic.model.Category;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.SessionManager;
@@ -44,7 +44,7 @@ public class AbsLoggedController {
         List<Category> categories;
 
         try{
-            categories = new SelectCategoriesProcedureDAO().execute();
+            categories = new CategoryDAO().SelectCategories();
 
             for (Category c: categories) {
                 CategoryBean categoryBean = new CategoryBean(c.getName());

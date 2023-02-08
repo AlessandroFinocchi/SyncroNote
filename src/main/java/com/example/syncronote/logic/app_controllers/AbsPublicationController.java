@@ -1,12 +1,9 @@
 package com.example.syncronote.logic.app_controllers;
 
-import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
-import com.example.syncronote.logic.dao.category_procedures.SelectCategoriesProcedureDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.model.Category;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -14,10 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class AbsPublicationController extends AbsLoggedController{
 

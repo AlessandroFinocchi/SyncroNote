@@ -1,8 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.NoteComponentBean;
-import com.example.syncronote.logic.dao.note_procedures.DeleteNoteProcedureDAO;
-import com.example.syncronote.logic.dao.note_procedures.FindUserNotesProcedureDAO;
+import com.example.syncronote.logic.dao.NoteDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicController;
 import com.example.syncronote.logic.model.Note;
@@ -25,7 +24,7 @@ public class UserNotesController extends AbsLoggedGraphicController {
 
         try {
             username = SessionManager.getInstance().getCurrentUser().getUsername();
-            notesList = new FindUserNotesProcedureDAO().execute(username);
+            notesList = new NoteDAO().findUserNotes(username);
 
             for (Note note : notesList) {
                 NoteComponentBean noteComponentBean = new NoteComponentBean(
@@ -48,7 +47,7 @@ public class UserNotesController extends AbsLoggedGraphicController {
 
     public void deleteNote(NoteComponentBean noteComponentBean) throws DAOException {
         try {
-            new DeleteNoteProcedureDAO().execute(noteComponentBean.getTitle());
+            new NoteDAO().deleteNote(noteComponentBean.getTitle());
             NavigatorSingleton.getInstance().gotoPage(USER_NOTES);
         }
         catch (SQLException | IOException e){

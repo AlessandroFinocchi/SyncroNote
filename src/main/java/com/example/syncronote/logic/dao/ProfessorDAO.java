@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.dao.note_procedures;
+package com.example.syncronote.logic.dao;
 
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.session.ConnectionFactory;
@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DeleteNoteProcedureDAO extends GenericNoteProcedureDAO<Integer>{
+public class ProfessorDAO {
 
-    @Override
-    public Integer execute(Object... params) throws SQLException, DAOException {
-        String title = (String) params[0];
+    public Integer insertProfessor(Object... params) throws DAOException, SQLException {
+        String username = (String) params[0];
+        String university = (String) params[1];
 
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -22,17 +22,18 @@ public class DeleteNoteProcedureDAO extends GenericNoteProcedureDAO<Integer>{
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "DELETE FROM Note WHERE Title = ?"; //ON CASCADE for the Note in Publication
+        String sql = "INSERT INTO Professor VALUES(?, ?)";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        stmt.setString(1, title);
+        stmt.setString(1, username);
+        stmt.setString(2, university);
 
         result = stmt.executeUpdate();
 
         if (result > 0) {
-            Logger.getAnonymousLogger().log(Level.INFO, "ROW DELETED");
+            Logger.getAnonymousLogger().log(Level.INFO, "PROFESSOR INSERTED");
         } else {
-            throw new DAOException("Couldn't delete note");
+            Logger.getAnonymousLogger().log(Level.INFO, "PROFESSOR NOT INSERTED");
         }
 
         stmt.close();

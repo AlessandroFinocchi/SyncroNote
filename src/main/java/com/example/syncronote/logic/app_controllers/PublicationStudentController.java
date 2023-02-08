@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.PublicationStudentBean;
-import com.example.syncronote.logic.dao.note_procedures.PublishNoteProcedureDAO;
+import com.example.syncronote.logic.dao.NoteDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.session.SessionManager;
 
@@ -12,7 +12,7 @@ public class PublicationStudentController extends AbsPublicationController {
 
     @Override
     public void publishNote(PublicationStudentBean publicationStudentBean) throws DAOException, SQLException {
-        int result = new PublishNoteProcedureDAO().execute(
+        int result = new NoteDAO().publishNote(
                 publicationStudentBean.getTitle(),
                 SessionManager.getInstance().getCurrentUser().getUsername(),
                 publicationStudentBean.getFile().getPath(),

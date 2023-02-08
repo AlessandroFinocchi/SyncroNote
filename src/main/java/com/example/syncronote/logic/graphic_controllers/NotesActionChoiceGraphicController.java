@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Polygon;
 

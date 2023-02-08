@@ -4,7 +4,6 @@ import com.example.syncronote.Main;
 import com.example.syncronote.logic.app_controllers.ProfessorCoursesController;
 import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.CourseBean;
-import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.enums.GradeTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;

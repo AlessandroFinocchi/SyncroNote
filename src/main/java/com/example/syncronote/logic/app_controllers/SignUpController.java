@@ -1,10 +1,9 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.SignupBean;
-import com.example.syncronote.logic.dao.professor_procedures.InsertProfessorDAO;
-import com.example.syncronote.logic.dao.student_procedures.InsertStudentProcedureDAO;
-import com.example.syncronote.logic.dao.user_procedures.FindUsernameProcedureDAO;
-import com.example.syncronote.logic.dao.user_procedures.InsertUserProcedureDAO;
+import com.example.syncronote.logic.dao.ProfessorDAO;
+import com.example.syncronote.logic.dao.StudentDAO;
+import com.example.syncronote.logic.dao.UserDAO;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
@@ -19,10 +18,10 @@ public class SignUpController extends AbsController {
         User user = null;
         int result = -1;
 
-        user = new FindUsernameProcedureDAO().execute(signupBean.getUsername());
+        user = new UserDAO().findUsername(signupBean.getUsername());
 
         if (user == null) {
-            result = new InsertUserProcedureDAO().execute(
+            result = new UserDAO().registerUser(
                     signupBean.getUsername(),
                     signupBean.getName(),
                     signupBean.getSurname(),
@@ -35,9 +34,9 @@ public class SignUpController extends AbsController {
         UserTypes userType = UserTypes.valueOf(signupBean.getRole().toUpperCase());     //because the enum is in upper case
 
         switch (userType){
-            case PROFESSOR : new InsertProfessorDAO().execute(signupBean.getUsername(), signupBean.getUserTypeAttr());
+            case PROFESSOR : new ProfessorDAO().insertProfessor(signupBean.getUsername(), signupBean.getUserTypeAttr());
                 break;
-            case STUDENT : new InsertStudentProcedureDAO().execute(signupBean.getUsername(), signupBean.getUserTypeAttr());
+            case STUDENT : new StudentDAO().insertStudent(signupBean.getUsername(), signupBean.getUserTypeAttr());
                 break;
             default: throw new InvalidFormatException("Unknown user type provided");
         }

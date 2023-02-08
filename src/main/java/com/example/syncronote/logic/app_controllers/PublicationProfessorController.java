@@ -3,8 +3,8 @@ package com.example.syncronote.logic.app_controllers;
 import com.example.syncronote.logic.beans.CourseIdMapBean;
 import com.example.syncronote.logic.beans.PublicationProfessorBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
-import com.example.syncronote.logic.dao.course_procedures.FindProfessorCourseProcedureDAO;
-import com.example.syncronote.logic.dao.publication_procedures.InsertPublicationProcedureDAO;
+import com.example.syncronote.logic.dao.CourseDAO;
+import com.example.syncronote.logic.dao.PublicationDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Course;
 import com.example.syncronote.logic.session.SessionManager;
@@ -19,7 +19,7 @@ public class PublicationProfessorController extends PublicationStudentController
     public void publishNote(PublicationStudentBean publicationProfessorBean) throws DAOException, SQLException {
         super.publishNote(publicationProfessorBean);
 
-        new InsertPublicationProcedureDAO().execute(
+        new PublicationDAO().insertPublication(
                 publicationProfessorBean.getTitle(),
                 ((PublicationProfessorBean)publicationProfessorBean).getCourseId()
         );
@@ -27,7 +27,7 @@ public class PublicationProfessorController extends PublicationStudentController
 
     public List<CourseIdMapBean> getCourses() throws DAOException, SQLException {
         SessionManager sessionManager = SessionManager.getInstance();
-        List<Course> courseList = new FindProfessorCourseProcedureDAO().execute(
+        List<Course> courseList = new CourseDAO().findProfessorCourse(
                 sessionManager.getCurrentUser().getUsername()
         );
 

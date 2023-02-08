@@ -1,9 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.CourseBean;
-import com.example.syncronote.logic.dao.course_procedures.CreateCourseProcedureDAO;
-import com.example.syncronote.logic.dao.course_procedures.DeleteCourseProcedureDAO;
-import com.example.syncronote.logic.dao.course_procedures.FindProfessorCourseProcedureDAO;
+import com.example.syncronote.logic.dao.CourseDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.model.Course;
@@ -21,8 +19,8 @@ public class ProfessorCoursesController extends AbsLoggedController {
 
     public void createCourse(CourseBean courseBean) throws DAOException {
         try{
-            CreateCourseProcedureDAO dao = new CreateCourseProcedureDAO();
-            dao.execute(
+            CourseDAO dao = new CourseDAO();
+            dao.createCourse(
                     courseBean.getName(),
                     courseBean.getGrade(),
                     SessionManager.getInstance().getCurrentUser().getUsername(),
@@ -36,8 +34,8 @@ public class ProfessorCoursesController extends AbsLoggedController {
 
     public void deleteCourse(String courseName) throws DAOException {
         try{
-            DeleteCourseProcedureDAO dao = new DeleteCourseProcedureDAO();
-            dao.execute(
+            CourseDAO dao = new CourseDAO();
+            dao.deleteCourse(
                     courseName,
                     SessionManager.getInstance().getCurrentUser().getUsername()
             );
@@ -49,7 +47,7 @@ public class ProfessorCoursesController extends AbsLoggedController {
     }
 
     public List<CourseBean> getCurrentProfessorCourses() throws DAOException, SQLException {
-        List<Course> courseList = new FindProfessorCourseProcedureDAO().execute(
+        List<Course> courseList = new CourseDAO().findProfessorCourse(
                 SessionManager.getInstance().getCurrentUser().getUsername()
         );
 

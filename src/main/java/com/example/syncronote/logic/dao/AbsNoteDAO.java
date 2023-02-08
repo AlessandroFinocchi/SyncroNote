@@ -1,6 +1,5 @@
-package com.example.syncronote.logic.dao.note_procedures;
+package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.dao.GenericProcedureDAO;
 import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.model.Note;
 
@@ -9,8 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<P>{
-
+public abstract class AbsNoteDAO {
     protected static final String TITLE = "Title";
     protected static final String AUTHOR = "Author";
     protected static final String DESCRIPTION = "Description";
@@ -40,5 +38,4 @@ public abstract class GenericNoteProcedureDAO<P> implements GenericProcedureDAO<
 
         return notes;
     }
-
 }
