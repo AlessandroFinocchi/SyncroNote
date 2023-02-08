@@ -111,7 +111,7 @@ public class RevisionDAO extends AbsNoteDAO{
 
     public List<Note> getRevisableNotes(Object... params) throws SQLException {
         String author = (String) params[0];
-        List<Note> notes = new ArrayList<>();
+        List<Note> notes;
 
         PreparedStatement stmt = null;
         Connection conn = null;

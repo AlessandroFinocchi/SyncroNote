@@ -77,8 +77,9 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                 categoryCombo.getItems().add(c.getCategory());
             }
 
-        } catch (DAOException | SQLException e) {
-            showErrorAlert("Error!", e.getMessage());
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+            showErrorAlert("Error", "Error in database");
         }
     }
 

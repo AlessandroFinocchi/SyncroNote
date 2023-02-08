@@ -119,12 +119,12 @@
                <left>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ComboBox fx:id="noteCombo" prefWidth="150.0" promptText="Note">
+                        <ComboBox fx:id="noteCombo" onAction="#onNoteSelected" prefWidth="150.0" promptText="Note">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
                         </ComboBox>
-                        <ComboBox fx:id="professorCombo" prefWidth="150.0" promptText="Professor">
+                        <ComboBox fx:id="professorCombo" onAction="#onProfessorSelected" prefWidth="150.0" promptText="Professor">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>

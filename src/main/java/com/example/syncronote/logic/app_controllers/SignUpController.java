@@ -5,7 +5,6 @@ import com.example.syncronote.logic.dao.ProfessorDAO;
 import com.example.syncronote.logic.dao.StudentDAO;
 import com.example.syncronote.logic.dao.UserDAO;
 import com.example.syncronote.logic.enums.UserTypes;
-import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.model.User;
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 
 public class SignUpController extends AbsController {
 
-    public int signUp(SignupBean signupBean) throws SQLException, DAOException, InvalidFormatException, SessionUserException {
+    public int signUp(SignupBean signupBean) throws SQLException, InvalidFormatException, SessionUserException {
         User user = null;
         int result = -1;
 

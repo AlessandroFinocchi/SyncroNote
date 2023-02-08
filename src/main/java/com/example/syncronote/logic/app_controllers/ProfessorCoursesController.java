@@ -46,7 +46,7 @@ public class ProfessorCoursesController extends AbsLoggedController {
         }
     }
 
-    public List<CourseBean> getCurrentProfessorCourses() throws DAOException, SQLException {
+    public List<CourseBean> getCurrentProfessorCourses() throws SQLException {
         List<Course> courseList = new CourseDAO().findProfessorCourse(
                 SessionManager.getInstance().getCurrentUser().getUsername()
         );

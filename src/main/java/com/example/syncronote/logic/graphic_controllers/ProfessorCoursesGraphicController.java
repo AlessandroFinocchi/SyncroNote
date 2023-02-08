@@ -41,11 +41,8 @@ public class ProfessorCoursesGraphicController extends AbsLoggedGraphicControlle
 
         setUpGradeCombo();
         setUpCategoryCombo();
-        try {
-            setNotesLayout();
-        } catch (DAOException e) {
-            showErrorAlert("Couldn't render course", e.getMessage());
-        }
+        setNotesLayout();
+
     }
 
     @FXML
@@ -86,7 +83,7 @@ public class ProfessorCoursesGraphicController extends AbsLoggedGraphicControlle
         categoryCombo.setValue(categories.get(0).getCategory());
     }
 
-    private void setNotesLayout() throws DAOException {
+    private void setNotesLayout(){
         List<CourseBean> courses;
         try {
             courses = professorCoursesController.getCurrentProfessorCourses();

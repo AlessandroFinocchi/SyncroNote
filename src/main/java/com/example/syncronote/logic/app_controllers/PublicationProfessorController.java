@@ -25,7 +25,7 @@ public class PublicationProfessorController extends PublicationStudentController
         );
     }
 
-    public List<CourseIdMapBean> getCourses() throws DAOException, SQLException {
+    public List<CourseIdMapBean> getCourses() throws SQLException {
         SessionManager sessionManager = SessionManager.getInstance();
         List<Course> courseList = new CourseDAO().findProfessorCourse(
                 sessionManager.getCurrentUser().getUsername()

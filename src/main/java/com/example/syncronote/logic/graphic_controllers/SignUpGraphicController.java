@@ -91,7 +91,7 @@ public class SignUpGraphicController extends AbsGraphicController {
             logger.log(Level.INFO, e.getMessage());
             showErrorAlert(signUpErrorString, e.getMessage());
         }
-        catch (DAOException | SQLException e){
+        catch (SQLException e){
             logger.log(Level.INFO, "Error in database");
             showErrorAlert(signUpErrorString, "Error in database");
         }

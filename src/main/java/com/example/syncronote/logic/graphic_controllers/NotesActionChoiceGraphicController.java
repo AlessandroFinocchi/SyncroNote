@@ -1,5 +1,8 @@
 package com.example.syncronote.logic.graphic_controllers;
 
+import com.example.syncronote.logic.app_controllers.AbsController;
+import com.example.syncronote.logic.app_controllers.AbsLoggedController;
+import com.example.syncronote.logic.enums.UserTypes;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Polygon;
 
@@ -16,6 +19,12 @@ public class NotesActionChoiceGraphicController extends AbsLoggedGraphicControll
         super.initialize();
         lookNotePlg.setOnMouseClicked(mouseEvent -> goToPage(USER_NOTES));
         publicationPlg.setOnMouseClicked(mouseEvent -> goToPage(PUBLICATION));
+        revisionPlg.setOnMouseClicked(mouseEvent -> {
+            UserTypes userTypes = AbsController.getCurrentUserType();
+            if(userTypes == UserTypes.STUDENT)
+                goToPage("StudentRevision.fxml");
+
+        });
     }
 
 }
