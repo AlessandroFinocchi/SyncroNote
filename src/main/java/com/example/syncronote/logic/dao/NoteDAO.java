@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.ConnectionFactory;
@@ -16,7 +15,7 @@ import java.util.logging.Logger;
 
 public class NoteDAO extends AbsNoteDAO{
 
-    public Integer publishNote(Object... params) throws DAOException, SQLException {
+    public Integer publishNote(Object... params) throws SQLException {
         String title = (String) params[0];
         String username = (String) params[1];
         String filePath = (String) params[2];

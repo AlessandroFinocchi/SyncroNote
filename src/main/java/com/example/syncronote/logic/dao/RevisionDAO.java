@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
@@ -24,7 +23,7 @@ public class RevisionDAO extends AbsNoteDAO{
      */
     protected static final String USERNAME = "Username";
 
-    public Integer finalizationRevision(Object... params) throws DAOException, SQLException {
+    public Integer finalizationRevision(Object... params) throws SQLException {
         String note = (String) params[0];
 
         PreparedStatement stmt = null;
@@ -51,7 +50,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return result;
     }
 
-    public Integer insertNewRevision(Object... params) throws DAOException, SQLException {
+    public Integer insertNewRevision(Object... params) throws SQLException {
         String note = (String) params[0];
         String professor = (String) params[1];
         String studentQuestion = (String) params[2];
@@ -136,7 +135,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return notes;
     }
 
-    public Integer updateRevision(Object... params) throws DAOException, SQLException {
+    public Integer updateRevision(Object... params) throws SQLException {
         String note = (String) params[0];
         String professorResponse = (String) params[0];
 

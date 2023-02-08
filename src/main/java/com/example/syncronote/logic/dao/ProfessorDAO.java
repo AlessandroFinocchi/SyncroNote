@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 
 public class ProfessorDAO {
 
-    public Integer insertProfessor(Object... params) throws DAOException, SQLException {
+    public Integer insertProfessor(Object... params) throws SQLException {
         String username = (String) params[0];
         String university = (String) params[1];
 

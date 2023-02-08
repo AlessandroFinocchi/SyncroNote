@@ -44,7 +44,7 @@ public class UserDAO {
 
     //DB calls
 
-    public User findUsername(Object... params) throws DAOException, SQLException {
+    public User findUsername(Object... params) throws SQLException {
         String username = (String) params[0];
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -110,7 +110,7 @@ public class UserDAO {
         return user;
     }
 
-    public Integer registerUser(Object... params) throws DAOException, SQLException {
+    public Integer registerUser(Object... params) throws SQLException {
         String username = (String) params[0];
         String name = (String) params[1];
         String surname = (String) params[2];

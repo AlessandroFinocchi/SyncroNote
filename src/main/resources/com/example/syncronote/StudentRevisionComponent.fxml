@@ -10,7 +10,7 @@
 
 <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="500.0" style="-fx-border-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.StudentRevisionComponentGraphicController">
    <children>
-      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" text="Note" textFill="#00acf5">
+      <Label fx:id="noteNameLbl" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" text="Note" textFill="#00acf5">
          <font>
             <Font name="Calibri Italic" size="20.0" />
          </font>
@@ -18,7 +18,7 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="140.0" text="State" textFill="#00acf5">
+      <Label fx:id="revisionStateLbl" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="140.0" text="State" textFill="#00acf5">
          <font>
             <Font name="Calibri Italic" size="20.0" />
          </font>

@@ -17,7 +17,7 @@ public class CategoryDAO {
     protected static final String MACRO_AREA = "Macroarea";
     protected static final String GRADE = "Grade";
 
-    public List<Category> SelectCategories(Object... params) throws SQLException {
+    public List<Category> selectCategories(Object... params) throws SQLException {
         List<Category> categories = new ArrayList<>();
 
         PreparedStatement stmt = null;

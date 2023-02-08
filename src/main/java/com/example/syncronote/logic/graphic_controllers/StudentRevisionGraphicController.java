@@ -21,10 +21,12 @@ public class StudentRevisionGraphicController extends AbsLoggedGraphicController
 
     @Override
     public void initialize(){
-
+        super.initialize();
+        questionTxt.getText();
     }
 
     @FXML
     private void startRevision(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException();
     }
 }

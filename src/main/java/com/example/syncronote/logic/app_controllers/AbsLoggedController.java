@@ -44,7 +44,7 @@ public class AbsLoggedController {
         List<Category> categories;
 
         try{
-            categories = new CategoryDAO().SelectCategories();
+            categories = new CategoryDAO().selectCategories();
 
             for (Category c: categories) {
                 CategoryBean categoryBean = new CategoryBean(c.getName());

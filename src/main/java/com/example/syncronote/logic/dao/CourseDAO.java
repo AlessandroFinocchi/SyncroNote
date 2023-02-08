@@ -22,7 +22,7 @@ public class CourseDAO {
     protected static final String PROFESSOR = "Professor";
     protected static final String CATEGORY = "Category";
 
-    public List<Course> findProfessorCourse(Object... params) throws DAOException, SQLException {
+    public List<Course> findProfessorCourse(Object... params) throws SQLException {
         List<Course> courseList = new ArrayList<>();
         String professor = (String) params[0];
 
