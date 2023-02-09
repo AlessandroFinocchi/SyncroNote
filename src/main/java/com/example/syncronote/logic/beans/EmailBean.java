@@ -1,38 +1,21 @@
 package com.example.syncronote.logic.beans;
 
+import java.util.List;
+
 public class EmailBean {
-    private final String student;
-    private final String studentEmail;
+    private List<String> studentEmails;
     private final String noteName;
-    private final String studentAnswer;
-    private final String professorResponse;
 
-    public EmailBean(String student, String studentEmail, String noteName, String studentAnswer, String professorResponse) {
-        this.student = student;
-        this.studentEmail = studentEmail;
+    public EmailBean(String noteName,  List<String> emails) {
+        studentEmails = emails;
         this.noteName = noteName;
-        this.studentAnswer = studentAnswer;
-        this.professorResponse = professorResponse;
     }
 
-
-    public String getStudent() {
-        return student;
-    }
-
-    public String getStudentEmail() {
-        return studentEmail;
+    public List<String> getStudentEmails() {
+        return studentEmails;
     }
 
     public String getNoteName() {
         return noteName;
-    }
-
-    public String getStudentAnswer() {
-        return studentAnswer;
-    }
-
-    public String getProfessorResponse() {
-        return professorResponse;
     }
 }

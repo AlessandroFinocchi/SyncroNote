@@ -5,10 +5,7 @@ import com.example.syncronote.logic.app_controllers.PublicationProfessorControll
 import com.example.syncronote.logic.app_controllers.PublicationStudentController;
 import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.enums.UserTypes;
-import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.exceptions.NoCoursesException;
-import com.example.syncronote.logic.exceptions.SessionUserException;
+import com.example.syncronote.logic.exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -37,8 +34,6 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
     private Label courseLbl;
     @FXML
     private ComboBox<String> courseCombo;
-    @FXML
-    private Button publishBtn;
 
     private AbsPublicationController publicationController;
     private NoteChosenBean noteChosenBean;
@@ -133,7 +128,6 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         categoryCombo.getValue()
                 );
             }
-
             else if(userType.equals(UserTypes.PROFESSOR)){
                 checkCourseSelected();
                 for (CourseIdMapBean courseMap: courseIdMapBean) {
@@ -146,11 +140,13 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                     }
                 }
                 checkCourse(courseBean);
+                SetupEmailSenderBean setupBean = ((PublicationProfessorController)publicationController).getEmailInfos(courseBean);
                 publicationBean = new PublicationProfessorBean(
                         noteChosenBean.getFile(),
                         privacyLbl.isSelected(),
                         categoryCombo.getValue(),
-                        courseBean.getCourseId()
+                        courseBean.getCourseId(),
+                        setupBean
                         );
             }
             else{
@@ -166,14 +162,15 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         catch (InvalidFormatException e){
             showErrorAlert("Alert", e.getMessage());
         }
-        catch (DAOException | SQLException e){
+        catch (DAOException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
             showErrorAlert("Publication Error", e.getMessage());
         }
-        catch (NoCoursesException e){
+        catch (NoCoursesException | EmailSenderException | SQLException e){
             showInfoAlert("Attention", e.getMessage());
             goToPage(HOME);
-        } catch (SessionUserException e) {
+        }
+        catch (SessionUserException e) {
             showErrorAlert("User error", e.getMessage());
             goToPage(HOME);
         }

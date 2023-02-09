@@ -15,7 +15,7 @@ public class CLIPrinter {
         throw new UnsupportedOperationException();
     }
     public static void printError(String s){
-        //Run the error printLine of s
+        //Run the logger log of s
         Logger.getAnonymousLogger().log(Level.INFO, "Not implemented PrintError!");
         throw new UnsupportedOperationException();
     }

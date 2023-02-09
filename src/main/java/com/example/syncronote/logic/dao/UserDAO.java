@@ -75,9 +75,7 @@ public class UserDAO {
         return user;
     }
 
-    public User findUser(Object... params) throws DAOException, SQLException {
-        String username = (String) params[0];
-        String password = (String) params[1];
+    public User findUser(String username, String password) throws DAOException, SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;
@@ -109,14 +107,7 @@ public class UserDAO {
         return user;
     }
 
-    public Integer registerUser(Object... params) throws SQLException {
-        String username = (String) params[0];
-        String name = (String) params[1];
-        String surname = (String) params[2];
-        String email = (String) params[3];
-        String psw = (String) params[4];
-        String role = (String) params[5];
-
+    public Integer registerUser(String username, String name, String surname, String email, String psw, String role) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

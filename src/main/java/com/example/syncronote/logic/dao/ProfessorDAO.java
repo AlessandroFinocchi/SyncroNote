@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.model.Professor;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;

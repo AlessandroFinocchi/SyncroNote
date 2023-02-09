@@ -27,18 +27,17 @@ public class EmailSenderBoundary extends AbsDialogGenerator implements Observer 
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(EMAIL_FILE)))) {
 
             checkFile();
-            printWriter.println("Professor username: " + professor);
-            printWriter.println("Professor username: " + professorEmail);
-            printWriter.println("Student username: " + emailData.getStudent());
-            printWriter.println("Student username: " + emailData.getStudentEmail());
-            printWriter.println("Note name: " + emailData.getNoteName());
-            printWriter.println("Answer: " + emailData.getStudentAnswer());
-            printWriter.println("Question: " + emailData.getProfessorResponse());
 
-            for (int i = 0; i < 40; i++)
-                printWriter.print("-");
+            for (String email: emailData.getStudentEmails()) {
+                printWriter.println("Email sent to: " + email);
+                printWriter.println("Professor username: " + professor);
+                printWriter.println("Has published note name: " + emailData.getNoteName());
 
-            printWriter.print("\n\n");
+                for (int i = 0; i < 40; i++)
+                    printWriter.print("-");
+
+                printWriter.print("\n\n");
+            }
 
         }
         catch (IOException e) {

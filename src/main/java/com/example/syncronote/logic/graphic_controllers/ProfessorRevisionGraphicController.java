@@ -3,9 +3,7 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.Main;
 import com.example.syncronote.logic.app_controllers.ProfessorRevisionComponentController;
 import com.example.syncronote.logic.app_controllers.ProfessorRevisionController;
-import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
 import com.example.syncronote.logic.beans.ProfessorRevisionBean;
-import com.example.syncronote.logic.beans.StudentRevisionBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
@@ -17,7 +15,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProfessorRevisionGraphicController extends AbsLoggedGraphicController{
+public class ProfessorRevisionGraphicController extends AbsLoggedGraphicController {
 
     @FXML
     private VBox revisionLayout;

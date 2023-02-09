@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProfessorRevisionComponentController {
+public class ProfessorRevisionComponentController{
     private RevisionDAO revisionDAO;
 
     public ProfessorRevisionComponentController(){

@@ -1,12 +1,17 @@
 package com.example.syncronote.logic.patterns;
 
+import com.example.syncronote.logic.beans.PublicationStudentBean;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subject {
+public class Subject extends PublicationStudentBean {
     private List<Observer> observers;
 
-    protected Subject() {
+    protected Subject(File file, boolean privateNote, String category) throws InvalidFormatException {
+        super(file, privateNote, category);
         observers = new ArrayList<>() ;
     }
 
