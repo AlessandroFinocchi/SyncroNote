@@ -28,7 +28,7 @@
       </Label>
       <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="247.0">
          <children>
-            <Button fx:id="lookResponse" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #00acf5;" stylesheets="@Style.css">
+            <Button fx:id="lookResponseBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #00acf5;" stylesheets="@Style.css">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -40,11 +40,35 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="updateNoteBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#updateNote" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #00acf5;" stylesheets="@Style.css">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="checkBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalizeRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #54D39D;" stylesheets="@Style.css">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/check-mark.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="deleteBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #E37A7A;" stylesheets="@Style.css">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/trash.png" />
                      </image>
                   </ImageView>
                </graphic>

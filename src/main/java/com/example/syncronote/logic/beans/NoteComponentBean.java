@@ -17,7 +17,6 @@ public class NoteComponentBean {
         this.filePath = filePath;
     }
 
-
     public String getTitle() {
         return title;
     }

@@ -22,7 +22,7 @@ public class NotesActionChoiceGraphicController extends AbsLoggedGraphicControll
         revisionPlg.setOnMouseClicked(mouseEvent -> {
             UserTypes userTypes = AbsController.getCurrentUserType();
             if(userTypes == UserTypes.STUDENT)
-                goToPage("StudentRevision.fxml");
+                goToPage(STUDENT_REVISION);
 
         });
     }

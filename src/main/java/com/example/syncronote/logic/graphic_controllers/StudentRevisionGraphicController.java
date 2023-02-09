@@ -1,17 +1,31 @@
 package com.example.syncronote.logic.graphic_controllers;
 
+import com.example.syncronote.Main;
+import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
 import com.example.syncronote.logic.app_controllers.StudentRevisionController;
+import com.example.syncronote.logic.beans.CourseBean;
 import com.example.syncronote.logic.beans.RevisionableNoteBean;
+import com.example.syncronote.logic.beans.StartNewRevisionBean;
+import com.example.syncronote.logic.beans.StudentRevisionBean;
+import com.example.syncronote.logic.exceptions.DAOException;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StudentRevisionGraphicController extends AbsLoggedGraphicController{
     @FXML
@@ -32,6 +46,7 @@ public class StudentRevisionGraphicController extends AbsLoggedGraphicController
         super.initialize();
         controller = new StudentRevisionController();
         setUpNoteCombo();
+        setUpRevisionLayout();
         professorCombo.setVisible(false);
         revisionBtn.setVisible(false);
     }
@@ -65,13 +80,47 @@ public class StudentRevisionGraphicController extends AbsLoggedGraphicController
         revisionBtn.setVisible(true);
     }
 
+    private void setUpRevisionLayout() {
+        List<StudentRevisionBean> currentRevisions;
+        try {
+            currentRevisions = controller.getInRevisionNotes();
+            StudentRevisionComponentController componentController = new StudentRevisionComponentController();
+            for (StudentRevisionBean currentRevision : currentRevisions) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(Objects.requireNonNull(Main.class.getResource(STUDENT_REVISION_COMPONENT)));
+
+                HBox studentRevisionGraphicComponent = fxmlLoader.load();
+                StudentRevisionComponentGraphicController componentGraphicController = fxmlLoader.getController();
+                componentGraphicController.setRevisionValues(currentRevision, componentController);
+
+                revisionLayout.getChildren().add(studentRevisionGraphicComponent);
+            }
+        }
+        catch (IOException e){
+            showErrorAlert("Rendering error", "Couldn't render notes");
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+        }
+
+    }
+
     @FXML
     private void startRevision(ActionEvent actionEvent) {
-        if(questionTxt.getText().isEmpty())
-            showErrorAlert("Complete the procedure", "Ask a question about your note to the professor");
-
-        //CONTINUA DA QUI: INSERISCI SU DB LA REVISIONE, GOTO PAGE QUESTA
-        // NELL'INITIALIZE SETUPPA LA SCROLL PANE
+        StartNewRevisionBean bean;
+        try{
+            bean = new StartNewRevisionBean(
+                    noteCombo.getValue(),
+                    professorCombo.getValue(),
+                    questionTxt.getText()
+            );
+            controller.startNewRevision(bean);
+            goToPage(STUDENT_REVISION);
+        }
+        catch (InvalidFormatException e) {
+            showInfoAlert("Invalid format", e.getMessage());
+        }
+        catch (DAOException e) {
+            showErrorAlert("Database error", e.getMessage());
+        }
     }
 
 }

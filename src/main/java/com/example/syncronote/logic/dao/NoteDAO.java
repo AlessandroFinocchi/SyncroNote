@@ -15,13 +15,7 @@ import java.util.logging.Logger;
 
 public class NoteDAO extends AbsNoteDAO{
 
-    public Integer publishNote(Object... params) throws SQLException {
-        String title = (String) params[0];
-        String username = (String) params[1];
-        String filePath = (String) params[2];
-        boolean isPrivate = (boolean) params[3];
-        String category = (String) params[4];
-
+    public Integer publishNote(String title, String username, String filePath, boolean isPrivate, String category) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;
@@ -51,9 +45,35 @@ public class NoteDAO extends AbsNoteDAO{
         return result;
     }
 
-    public List<Note> findUserNotes(Object... params) throws SQLException {
+    public Integer updatePublishedNote(String noteName, String filePath) throws SQLException, DAOException {
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        Integer result = -1;
+
+        conn = ConnectionFactory.getConnection();
+
+        String sql = "UPDATE FROM Note " +
+                "SET File = ? WHERE Title = ?"; //ON CASCADE for the Note in Publication
+        // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
+        stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        stmt.setString(1, filePath);
+        stmt.setString(2, noteName);
+
+        result = stmt.executeUpdate();
+
+        if (result > 0) {
+            Logger.getAnonymousLogger().log(Level.INFO, "ROW UPDATED");
+        } else {
+            throw new DAOException("Couldn't update note");
+        }
+
+        stmt.close();
+
+        return result;
+    }
+
+    public List<Note> findUserNotes(String username) throws SQLException {
         List<Note> notesList = new ArrayList<>();
-        String username = (String) params[0];
 
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -76,9 +96,7 @@ public class NoteDAO extends AbsNoteDAO{
         return notesList;
     }
 
-    public Integer deleteNote(Object... params) throws SQLException, DAOException {
-        String title = (String) params[0];
-
+    public Integer deleteNote(String title) throws SQLException, DAOException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

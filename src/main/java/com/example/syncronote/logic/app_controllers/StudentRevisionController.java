@@ -1,11 +1,15 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.RevisionableNoteBean;
+import com.example.syncronote.logic.beans.StartNewRevisionBean;
+import com.example.syncronote.logic.beans.StudentRevisionBean;
 import com.example.syncronote.logic.dao.ProfessorDAO;
 import com.example.syncronote.logic.dao.RevisionDAO;
+import com.example.syncronote.logic.enums.RevisionState;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.graphic_controllers.ProfessorUsernamesBean;
 import com.example.syncronote.logic.model.Note;
-import com.example.syncronote.logic.model.Professor;
+import com.example.syncronote.logic.model.Revision;
 import com.example.syncronote.logic.session.SessionManager;
 
 import java.sql.SQLException;
@@ -50,5 +54,48 @@ public class StudentRevisionController extends AbsLoggedController{
         }
 
         return new ProfessorUsernamesBean(professors);
+    }
+
+    public void startNewRevision(StartNewRevisionBean bean) throws DAOException {
+        try{
+            revisionDAO.insertNewRevision(
+                    bean.getNote(),
+                    bean.getProfessor(),
+                    bean.getQuestion()
+            );
+        }
+        catch (SQLException e) {
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+        }
+    }
+
+    public List<StudentRevisionBean> getInRevisionNotes() {
+        List<Revision> inRevisionNotes;
+        List<StudentRevisionBean> studentRevisionBeans = new ArrayList<>();
+
+        try {
+            inRevisionNotes = revisionDAO.getCurrentRevisions(
+                    SessionManager.getInstance().getCurrentUser().getUsername());
+
+            for (Revision revision : inRevisionNotes) {
+                RevisionState state;
+                if(revision.getQuestion() == null)
+                    state = RevisionState.COMPLETED;
+                else if(revision.getResponse() == null)
+                    state = RevisionState.IN_REVISION;
+                else
+                    state = RevisionState.REVISED;
+
+                StudentRevisionBean revisionableNoteBean = new StudentRevisionBean(
+                        revision.getTitle(),
+                        state,
+                        revision.getResponse());
+                studentRevisionBeans.add(revisionableNoteBean);
+            }
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+        }
+
+        return studentRevisionBeans;
     }
 }

@@ -1,6 +1,9 @@
 package com.example.syncronote.logic.dao;
 
+import com.example.syncronote.logic.enums.VisibilityTypes;
+import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Note;
+import com.example.syncronote.logic.model.Revision;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;
@@ -23,9 +26,7 @@ public class RevisionDAO extends AbsNoteDAO{
      */
     protected static final String USERNAME = "Username";
 
-    public Integer finalizationRevision(Object... params) throws SQLException {
-        String note = (String) params[0];
-
+    public Integer finalizationRevision(String note) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;
@@ -50,10 +51,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return result;
     }
 
-    public Integer insertNewRevision(Object... params) throws SQLException {
-        String note = (String) params[0];
-        String professor = (String) params[1];
-        String studentQuestion = (String) params[2];
+    public Integer insertNewRevision(String note, String professor, String studentQuestion) throws SQLException, DAOException {
 
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -62,7 +60,7 @@ public class RevisionDAO extends AbsNoteDAO{
         conn = ConnectionFactory.getConnection();
 
         String sql = "INSERT INTO Revision (" + NOTE + ", " + PROFESSOR +", " + STUDENT_QUESTION + ")"
-                + " VALUES(?, ?, ?, ?)";
+                + " VALUES(?, ?, ?)";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         stmt.setString(1, note);
@@ -71,10 +69,10 @@ public class RevisionDAO extends AbsNoteDAO{
 
         result = stmt.executeUpdate();
 
-        if (result > 0) {
-            Logger.getAnonymousLogger().log(Level.INFO, "ROW INSERTED");
+        if (result == 1) {
+            Logger.getAnonymousLogger().log(Level.INFO, "NEW REVISION INSERTED");
         } else {
-            Logger.getAnonymousLogger().log(Level.INFO, "ROW NOT INSERTED");
+            throw new DAOException("New revision not correctly inserted");
         }
 
         stmt.close();
@@ -135,6 +133,32 @@ public class RevisionDAO extends AbsNoteDAO{
         return notes;
     }
 
+    public List<Revision> getCurrentRevisions(String author) throws SQLException {
+        List<Revision> revisions;
+
+        PreparedStatement stmt = null;
+        Connection conn = null;
+
+        conn = ConnectionFactory.getConnection();
+
+        String sql = "SELECT r." + NOTE + ", r." + STUDENT_QUESTION + ", r." + PROFESSOR_RESPONSE +
+                " FROM Revision r JOIN Note n ON r.Note = n.Title" +
+                " WHERE " + AUTHOR + " = ?";
+        // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
+        stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        stmt.setString(1, author);
+
+        ResultSet rs = stmt.executeQuery();
+
+        revisions = getRevisions(rs);
+
+        // Closing ResultSet and freeing resources
+        rs.close();
+        stmt.close();
+
+        return revisions;
+    }
+
     public Integer updateRevision(Object... params) throws SQLException {
         String note = (String) params[0];
         String professorResponse = (String) params[0];
@@ -162,6 +186,19 @@ public class RevisionDAO extends AbsNoteDAO{
         stmt.close();
 
         return result;
+    }
+
+    protected List<Revision> getRevisions(ResultSet rs) throws SQLException {
+        List<Revision> revisions = new ArrayList<>();
+        while (rs.next()) {
+            Revision revision = new Revision(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3));
+            revisions.add(revision);
+        }
+
+        return revisions;
     }
 
 }
