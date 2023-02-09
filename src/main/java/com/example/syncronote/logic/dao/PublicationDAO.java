@@ -12,10 +12,7 @@ import java.util.logging.Logger;
 
 public class PublicationDAO {
 
-    public Integer insertPublication(Object... params) throws DAOException, SQLException {
-        String title = (String) params[0];
-        int course = (int) params[1];
-
+    public Integer insertPublication(String title, int course) throws DAOException, SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

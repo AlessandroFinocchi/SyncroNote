@@ -10,13 +10,11 @@ import java.sql.SQLException;
 
 public class LoginController extends AbsController {
 
-    public User login(LoginCredentialsBean credentialsBean) throws DAOException, SQLException, SessionUserException {
+    public void login(LoginCredentialsBean credentialsBean) throws DAOException, SQLException, SessionUserException {
         User user = new UserDAO().findUser(
                 credentialsBean.getUsername(),
                 credentialsBean.getPassword());
 
         storeSessionUser(user.getUsername(), user.getName(), user.getSurname(), user.getEmail(), user.getUserType());
-
-        return user;
     }
 }

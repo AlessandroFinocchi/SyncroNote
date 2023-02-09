@@ -17,6 +17,12 @@ public class CourseBean {
         this.category = category;
     }
 
+    public CourseBean(String name){
+        this.name = name;
+        this.grade = null;
+        this.category = null;
+    }
+
     private void checkName(String name) throws InvalidFormatException {
         if(name == null || name.isEmpty())
             throw new InvalidFormatException("Course name cannot be empty");

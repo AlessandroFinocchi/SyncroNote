@@ -38,7 +38,6 @@ public class AbsLoggedController {
         SessionManager.getInstance().logout();
     }
 
-
     public List<CategoryBean> getCategories() {
         List<CategoryBean> categoryBeanList = new ArrayList<>();
         List<Category> categories;

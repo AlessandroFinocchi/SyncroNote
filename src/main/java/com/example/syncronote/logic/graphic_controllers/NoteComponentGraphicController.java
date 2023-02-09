@@ -1,7 +1,9 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.UserNotesController;
+import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.NoteComponentBean;
+import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.utilities.AbsAlertGenerator;
@@ -44,7 +46,8 @@ public class NoteComponentGraphicController extends AbsAlertGenerator {
     private void openNote(ActionEvent actionEvent) {
         UserNotesController userNotesController = new UserNotesController();
         try {
-            userNotesController.openNote(filePath);
+            NoteFilePathBean noteFilePathBean = new NoteFilePathBean(filePath);
+            userNotesController.openNote(noteFilePathBean);
         } catch (IOException e) {
             showErrorAlert("Error", "Cannot open file");
         }

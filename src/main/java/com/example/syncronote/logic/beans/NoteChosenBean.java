@@ -14,6 +14,11 @@ public class NoteChosenBean {
         this.file = file;
     }
 
+    public NoteChosenBean(String title){
+        this.title = title;
+        this.file = null;
+    }
+
     public String getTitle() {
         return title;
     }

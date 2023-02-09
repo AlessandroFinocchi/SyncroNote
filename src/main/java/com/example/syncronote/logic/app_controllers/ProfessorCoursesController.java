@@ -32,11 +32,11 @@ public class ProfessorCoursesController extends AbsLoggedController {
         }
     }
 
-    public void deleteCourse(String courseName) throws DAOException {
+    public void deleteCourse(CourseBean courseBean) throws DAOException {
         try{
             CourseDAO dao = new CourseDAO();
             dao.deleteCourse(
-                    courseName,
+                    courseBean.getName(),
                     SessionManager.getInstance().getCurrentUser().getUsername()
             );
             NavigatorSingleton.getInstance().gotoPage("ProfessorCourses.fxml");

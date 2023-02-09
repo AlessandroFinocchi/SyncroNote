@@ -1,5 +1,6 @@
 package com.example.syncronote.logic.app_controllers;
 
+import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.RevisionableNoteBean;
 import com.example.syncronote.logic.beans.StartNewRevisionBean;
 import com.example.syncronote.logic.beans.StudentRevisionBean;
@@ -45,10 +46,10 @@ public class StudentRevisionController extends AbsLoggedController{
         return revisableNotesBean;
     }
 
-    public ProfessorUsernamesBean getProfessors(String selectedNote) {
+    public ProfessorUsernamesBean getProfessors(NoteChosenBean noteChosenBean) {
         List<String> professors = null;
         try {
-            professors = professorDAO.getRevisionProfessorUsernames(selectedNote);
+            professors = professorDAO.getRevisionProfessorUsernames(noteChosenBean.getTitle());
         } catch (SQLException e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }

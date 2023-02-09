@@ -22,9 +22,8 @@ public class CourseDAO {
     protected static final String PROFESSOR = "Professor";
     protected static final String CATEGORY = "Category";
 
-    public List<Course> findProfessorCourse(Object... params) throws SQLException {
+    public List<Course> findProfessorCourse(String professor) throws SQLException {
         List<Course> courseList = new ArrayList<>();
-        String professor = (String) params[0];
 
         PreparedStatement stmt = null;
         Connection conn = null;
@@ -56,10 +55,7 @@ public class CourseDAO {
         return courseList;
     }
 
-    public Integer deleteCourse(Object... params) throws DAOException, SQLException {
-        String name = (String) params[0];
-        String professor = (String) params[1];
-
+    public Integer deleteCourse(String name, String professor) throws DAOException, SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;
@@ -86,12 +82,7 @@ public class CourseDAO {
         return result;
     }
 
-    public Integer createCourse(Object... params) throws DAOException, SQLException {
-        String name = (String) params[0];
-        GradeTypes grade = (GradeTypes) params[1];
-        String professor = (String) params[2];
-        String category = (String) params[3];
-
+    public Integer createCourse(String name, GradeTypes grade, String professor, String category) throws DAOException, SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

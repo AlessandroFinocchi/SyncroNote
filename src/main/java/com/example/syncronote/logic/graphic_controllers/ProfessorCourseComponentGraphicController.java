@@ -35,7 +35,8 @@ public class ProfessorCourseComponentGraphicController extends AbsAlertGenerator
 
     public void deleteCourse(ActionEvent actionEvent) {
         try {
-            controller.deleteCourse(courseNameLbl.getText());
+            CourseBean courseBean = new CourseBean(courseNameLbl.getText());
+            controller.deleteCourse(courseBean);
 
         } catch (DAOException e) {
             showErrorAlert("Database error", e.getMessage());

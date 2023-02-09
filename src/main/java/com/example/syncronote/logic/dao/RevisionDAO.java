@@ -80,8 +80,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return result;
     }
 
-    public List<Note> getNotesToRevise(Object... params) throws SQLException {
-        String professor = (String) params[0];
+    public List<Note> getNotesToRevise(String professor) throws SQLException {
         List<Note> notes = new ArrayList<>();
 
         PreparedStatement stmt = null;
@@ -107,8 +106,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return notes;
     }
 
-    public List<Note> getRevisableNotes(Object... params) throws SQLException {
-        String author = (String) params[0];
+    public List<Note> getRevisableNotes(String author) throws SQLException {
         List<Note> notes;
 
         PreparedStatement stmt = null;
@@ -133,7 +131,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return notes;
     }
 
-    public List<Revision> getCurrentRevisions(String author) throws SQLException {
+    public List<Revision> getCurrentRevisions(String author, String professorResponse) throws SQLException {
         List<Revision> revisions;
 
         PreparedStatement stmt = null;
@@ -159,10 +157,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return revisions;
     }
 
-    public Integer updateRevision(Object... params) throws SQLException {
-        String note = (String) params[0];
-        String professorResponse = (String) params[0];
-
+    public Integer updateRevision(String note, String professorResponse) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

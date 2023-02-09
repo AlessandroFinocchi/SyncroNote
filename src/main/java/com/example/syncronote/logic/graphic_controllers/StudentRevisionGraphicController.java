@@ -3,10 +3,7 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.Main;
 import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
 import com.example.syncronote.logic.app_controllers.StudentRevisionController;
-import com.example.syncronote.logic.beans.CourseBean;
-import com.example.syncronote.logic.beans.RevisionableNoteBean;
-import com.example.syncronote.logic.beans.StartNewRevisionBean;
-import com.example.syncronote.logic.beans.StudentRevisionBean;
+import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import javafx.collections.FXCollections;
@@ -21,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -68,7 +64,8 @@ public class StudentRevisionGraphicController extends AbsLoggedGraphicController
     }
 
     private void setUpProfessorCombo(String selectedNote) {
-        ProfessorUsernamesBean professors = controller.getProfessors(selectedNote);
+        NoteChosenBean noteChosenBean = new NoteChosenBean(selectedNote);
+        ProfessorUsernamesBean professors = controller.getProfessors(noteChosenBean);
         ObservableList<String> list = FXCollections.observableArrayList();
 
         list.addAll(professors.getProfessorNames());

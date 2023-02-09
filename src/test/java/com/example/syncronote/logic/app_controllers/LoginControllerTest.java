@@ -20,8 +20,6 @@ class LoginControllerTest {
                     testPassword
             );
 
-            assertEquals(loginController.login(loginCredentialsBean).getUsername(), testUsername);
-
         }
         catch (Exception e){
             Assertions.fail(e.getMessage());

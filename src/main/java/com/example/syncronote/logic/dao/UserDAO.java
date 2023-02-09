@@ -44,8 +44,7 @@ public class UserDAO {
 
     //DB calls
 
-    public User findUsername(Object... params) throws SQLException {
-        String username = (String) params[0];
+    public User findUsername(String username ) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         User user = null;

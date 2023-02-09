@@ -1,6 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.NoteComponentBean;
+import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.dao.NoteDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicController;
@@ -55,8 +56,8 @@ public class UserNotesController extends AbsLoggedGraphicController {
         }
     }
 
-    public void openNote(String filePath) throws IOException {
+    public void openNote(NoteFilePathBean noteFilePathBean) throws IOException {
         Runtime r = Runtime.getRuntime();
-        r.exec("explorer.exe " + filePath);
+        r.exec("explorer.exe " + noteFilePathBean.getFilePath());
     }
 }

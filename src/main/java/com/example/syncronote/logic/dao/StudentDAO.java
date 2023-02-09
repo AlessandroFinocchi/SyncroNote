@@ -11,10 +11,7 @@ import java.util.logging.Logger;
 
 public class StudentDAO {
 
-    public Integer insertStudent(Object... params) throws SQLException {
-        String username = (String) params[0];
-        String freshman = (String) params[1];
-
+    public Integer insertStudent(String username, String freshman) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;

@@ -11,12 +11,16 @@ import com.example.syncronote.logic.exceptions.NoCoursesException;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -85,7 +89,29 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
     public void selectFile(MouseEvent actionEvent) {
         try{
-            noteChosenBean = publicationController.getNewNote(actionEvent);
+            File noteFile;
+            FileChooser fileChooser = new FileChooser();
+
+            //configuration of the file explorer
+            fileChooser.setTitle("Upload new note");
+            fileChooser.setInitialDirectory(
+                    new File("src/main/resources/com/example/syncronote/notes"));
+
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("All images", "*.*"),
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png"),
+                    new FileChooser.ExtensionFilter("PDF", "*.pdf")
+            );
+
+            //showing the file explorer
+            Stage currentStage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            noteFile = fileChooser.showOpenDialog(currentStage);
+
+            if(noteFile == null)
+                throw new InvalidFormatException("File not selected");
+
+            noteChosenBean = new NoteChosenBean(noteFile);
             fileLbl.setText(noteChosenBean.getTitle());
         }
         catch (InvalidFormatException e){
