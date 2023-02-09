@@ -1,5 +1,6 @@
 package com.example.syncronote.logic.app_controllers;
 
+import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.RevisionableNoteBean;
 import com.example.syncronote.logic.dao.NoteDAO;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class StudentRevisionComponentController extends AbsLoggedController{
+public class StudentRevisionComponentController{
     private NoteDAO noteDAO;
     private RevisionDAO revisionDAO;
 
@@ -21,17 +22,21 @@ public class StudentRevisionComponentController extends AbsLoggedController{
         revisionDAO = new RevisionDAO();
     }
 
-    public void republishNote(NoteChosenBean noteBean) throws DAOException {
+    public void republishNote(CorrectionNoteBean noteBean) throws DAOException {
         try {
             noteDAO.updatePublishedNote(noteBean.getTitle(), noteBean.getFile().getPath());
-        } catch (SQLException e) {
+            revisionDAO.updateRevision(noteBean.getTitle(), noteBean.getNewQuestion(), null);
+
+            NavigatorSingleton.getInstance().gotoPage("StudentRevision.fxml");
+        } catch (SQLException | IOException e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }
 
-    public void deleteRevision(RevisionableNoteBean noteBean) throws DAOException {
+    public void finalizeRevision(NoteChosenBean noteBean) throws DAOException {
+
         try {
-            revisionDAO.finalizationRevision(noteBean.getNoteName());
+            revisionDAO.finalizationRevision(noteBean.getTitle());
             NavigatorSingleton.getInstance().gotoPage("StudentRevision.fxml");
         } catch (SQLException | IOException e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());

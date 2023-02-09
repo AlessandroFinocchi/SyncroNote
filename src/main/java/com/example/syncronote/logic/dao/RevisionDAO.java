@@ -4,6 +4,7 @@ import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.model.Revision;
+import com.example.syncronote.logic.model.UnansweredRevisableNote;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class RevisionDAO extends AbsNoteDAO{
      */
     protected static final String USERNAME = "Username";
 
-    public Integer finalizationRevision(String note) throws SQLException {
+    public Integer finalizationRevision(String note) throws SQLException, DAOException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;
@@ -43,7 +44,7 @@ public class RevisionDAO extends AbsNoteDAO{
         if (result == 1) {
             Logger.getAnonymousLogger().log(Level.INFO, "ROW DELETE");
         } else {
-            Logger.getAnonymousLogger().log(Level.INFO, "ROW NOT CORRECTLY DELETE");
+            throw new DAOException("Revision not correctly finalized");
         }
 
         stmt.close();
@@ -80,28 +81,46 @@ public class RevisionDAO extends AbsNoteDAO{
         return result;
     }
 
-    public List<Note> getNotesToRevise(String professor) throws SQLException {
-        List<Note> notes = new ArrayList<>();
+    public List<UnansweredRevisableNote> getNotesToRevise(String professor) throws SQLException {
+        List<UnansweredRevisableNote> notes;
 
         PreparedStatement stmt = null;
         Connection conn = null;
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "SELECT n." + TITLE + ", n." + AUTHOR + ", n." + DESCRIPTION + ", n." + FILEPATH + ", n." + VISIBILITY + ", n." + CATEGORY +
-                " FROM Note n JOIN Revision ON r ON n." + TITLE + " = r." + NOTE +
-                " WHERE r." + PROFESSOR_RESPONSE + " IS NULL AND r." + PROFESSOR + " = ?";
+        String sql = "SELECT n." + TITLE + ", n." + AUTHOR + ", n." + CATEGORY + ", r." + STUDENT_QUESTION +
+                ", n." + DESCRIPTION + ", n." + FILEPATH +
+                " FROM Note n JOIN Revision r ON n." + TITLE + " = r." + NOTE +
+                " WHERE r." + PROFESSOR_RESPONSE + " IS NULL " +
+                " AND r." + STUDENT_QUESTION + " IS NOT NULL AND r." + PROFESSOR + " = ?";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         stmt.setString(1, professor);
 
         ResultSet rs = stmt.executeQuery();
 
-        notes = getNotes(rs);
+        notes = getUnansweredRevisableNotes(rs);
 
         // Closing ResultSet and freeing resources
         rs.close();
         stmt.close();
+
+        return notes;
+    }
+
+    private List<UnansweredRevisableNote> getUnansweredRevisableNotes(ResultSet rs) throws SQLException {
+        List<UnansweredRevisableNote> notes = new ArrayList<>();
+        while (rs.next()) {
+            UnansweredRevisableNote note = new UnansweredRevisableNote(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6));
+            notes.add(note);
+        }
 
         return notes;
     }
@@ -131,7 +150,7 @@ public class RevisionDAO extends AbsNoteDAO{
         return notes;
     }
 
-    public List<Revision> getCurrentRevisions(String author, String professorResponse) throws SQLException {
+    public List<Revision> getCurrentRevisions(String author) throws SQLException {
         List<Revision> revisions;
 
         PreparedStatement stmt = null;
@@ -157,18 +176,19 @@ public class RevisionDAO extends AbsNoteDAO{
         return revisions;
     }
 
-    public Integer updateRevision(String note, String professorResponse) throws SQLException {
+    public Integer updateRevision(String note, String studentQuestion, String professorResponse) throws SQLException {
         PreparedStatement stmt = null;
         Connection conn = null;
         Integer result = -1;
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "UPDATE Revision SET " + PROFESSOR_RESPONSE +  " = ? WHERE " + NOTE + " = ?";
+        String sql = "UPDATE Revision SET " + STUDENT_QUESTION +  " = ?, " + PROFESSOR_RESPONSE + " = ? WHERE " + NOTE + " = ?";
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        stmt.setString(1, professorResponse);
-        stmt.setString(2, note);
+        stmt.setString(1, studentQuestion);
+        stmt.setString(2, professorResponse);
+        stmt.setString(3, note);
 
         result = stmt.executeUpdate();
 

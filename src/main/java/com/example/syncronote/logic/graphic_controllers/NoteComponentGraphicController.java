@@ -1,19 +1,17 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.UserNotesController;
-import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.utilities.AbsAlertGenerator;
-import com.example.syncronote.logic.utilities.NavigatorSingleton;
+import com.example.syncronote.logic.utilities.AbsDialogGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
-public class NoteComponentGraphicController extends AbsAlertGenerator {
+public class NoteComponentGraphicController extends AbsDialogGenerator {
     @FXML
     private Label titleLbl;
     @FXML

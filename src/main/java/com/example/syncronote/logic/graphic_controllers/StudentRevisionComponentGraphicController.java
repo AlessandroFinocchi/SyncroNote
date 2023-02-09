@@ -1,14 +1,14 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
+import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
-import com.example.syncronote.logic.beans.NoteComponentBean;
-import com.example.syncronote.logic.beans.RevisionableNoteBean;
 import com.example.syncronote.logic.beans.StudentRevisionBean;
 import com.example.syncronote.logic.enums.RevisionState;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.utilities.AbsAlertGenerator;
+import com.example.syncronote.logic.utilities.AbsDialogGenerator;
+import com.example.syncronote.logic.utilities.NavigatorSingleton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,19 +18,19 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class StudentRevisionComponentGraphicController extends AbsAlertGenerator {
+public class StudentRevisionComponentGraphicController extends AbsDialogGenerator {
 
     @FXML
     private Label noteNameLbl;
     @FXML
     private Label revisionStateLbl;
     @FXML
-    private Button checkBtn;
-    @FXML
     private Button lookResponseBtn;
+    @FXML
+    private Button updateNoteBtn;
+    @FXML
+    private Button checkBtn;
     @FXML
     private Button deleteBtn;
 
@@ -41,8 +41,9 @@ public class StudentRevisionComponentGraphicController extends AbsAlertGenerator
     @Override
     public void initialize() {
         super.initialize();
-        checkBtn.setVisible(false);
         lookResponseBtn.setVisible(false);
+        updateNoteBtn.setVisible(false);
+        checkBtn.setVisible(false);
         deleteBtn.setVisible(false);
     }
 
@@ -73,7 +74,9 @@ public class StudentRevisionComponentGraphicController extends AbsAlertGenerator
             if(noteFile == null)
                 throw new InvalidFormatException("File not selected");
 
-            NoteChosenBean noteBean = new NoteChosenBean(noteFile);
+            String response = showTextAlert("Question", "Ask a question about " + noteName, "Enter question");
+
+            CorrectionNoteBean noteBean = new CorrectionNoteBean(response, noteFile);
 
             controller.republishNote(noteBean);
         } catch (InvalidFormatException e) {
@@ -85,16 +88,12 @@ public class StudentRevisionComponentGraphicController extends AbsAlertGenerator
 
     @FXML
     private void finalizeRevision(ActionEvent actionEvent) {
-        throw new UnsupportedOperationException();
-    }
 
-    @FXML
-    private void deleteRevision(ActionEvent actionEvent) {
-        RevisionableNoteBean noteBean = new RevisionableNoteBean(noteName);
+        NoteChosenBean noteBean = new NoteChosenBean(noteName);
         try {
-            controller.deleteRevision(noteBean);
+            controller.finalizeRevision(noteBean);
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.INFO,e.getMessage());
+            showErrorAlert("Database error", e.getMessage());
         }
     }
 
@@ -109,8 +108,9 @@ public class StudentRevisionComponentGraphicController extends AbsAlertGenerator
             deleteBtn.setVisible(true);
         }
         else if(currentRevision.getState() == RevisionState.REVISED) {
-            revisionStateLbl.setText(RevisionState.IN_REVISION.getId());
+            revisionStateLbl.setText(RevisionState.REVISED.getId());
             lookResponseBtn.setVisible(true);
+            updateNoteBtn.setVisible(true);
             professorResponse = currentRevision.getResponse();
         }
         else if(currentRevision.getState() == RevisionState.COMPLETED) {

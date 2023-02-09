@@ -24,6 +24,7 @@ public class StudentRevisionController extends AbsLoggedController{
     private ProfessorDAO professorDAO;
 
     public StudentRevisionController(){
+        super();
         revisionDAO = new RevisionDAO();
         professorDAO = new ProfessorDAO();
     }

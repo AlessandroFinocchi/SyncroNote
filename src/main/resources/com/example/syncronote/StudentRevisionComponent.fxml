@@ -64,7 +64,7 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="deleteBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #E37A7A;" stylesheets="@Style.css">
+            <Button fx:id="deleteBtn" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalizeRevision" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #E37A7A;" stylesheets="@Style.css">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

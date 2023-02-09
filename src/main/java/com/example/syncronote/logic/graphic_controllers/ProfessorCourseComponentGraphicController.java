@@ -3,12 +3,12 @@ package com.example.syncronote.logic.graphic_controllers;
 import com.example.syncronote.logic.app_controllers.ProfessorCoursesController;
 import com.example.syncronote.logic.beans.CourseBean;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.utilities.AbsAlertGenerator;
+import com.example.syncronote.logic.utilities.AbsDialogGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ProfessorCourseComponentGraphicController extends AbsAlertGenerator {
+public class ProfessorCourseComponentGraphicController extends AbsDialogGenerator {
     @FXML
     private Label courseNameLbl;
 

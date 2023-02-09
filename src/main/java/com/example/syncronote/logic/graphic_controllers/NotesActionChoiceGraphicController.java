@@ -23,7 +23,8 @@ public class NotesActionChoiceGraphicController extends AbsLoggedGraphicControll
             UserTypes userTypes = AbsController.getCurrentUserType();
             if(userTypes == UserTypes.STUDENT)
                 goToPage(STUDENT_REVISION);
-
+            else if(userTypes == UserTypes.PROFESSOR)
+                goToPage(PROFESSOR_REVISION);
         });
     }
 

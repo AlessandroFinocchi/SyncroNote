@@ -52,7 +52,7 @@ public class NoteDAO extends AbsNoteDAO{
 
         conn = ConnectionFactory.getConnection();
 
-        String sql = "UPDATE FROM Note " +
+        String sql = "UPDATE Note " +
                 "SET File = ? WHERE Title = ?"; //ON CASCADE for the Note in Publication
         // TYPE_SCROLL_INSENSITIVE: ResultSet can be slided but is sensible to db data variations
         stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
