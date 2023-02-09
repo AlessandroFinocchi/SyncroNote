@@ -8,7 +8,7 @@ import com.example.syncronote.logic.dao.ProfessorDAO;
 import com.example.syncronote.logic.dao.RevisionDAO;
 import com.example.syncronote.logic.enums.RevisionState;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.graphic_controllers.ProfessorUsernamesBean;
+import com.example.syncronote.logic.beans.ProfessorUsernamesBean;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.model.Revision;
 import com.example.syncronote.logic.session.SessionManager;

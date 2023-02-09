@@ -2,7 +2,6 @@ package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
-import com.example.syncronote.logic.beans.RevisionableNoteBean;
 import com.example.syncronote.logic.dao.NoteDAO;
 import com.example.syncronote.logic.dao.RevisionDAO;
 import com.example.syncronote.logic.exceptions.DAOException;

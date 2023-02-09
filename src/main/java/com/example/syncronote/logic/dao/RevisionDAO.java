@@ -1,6 +1,5 @@
 package com.example.syncronote.logic.dao;
 
-import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.model.Revision;

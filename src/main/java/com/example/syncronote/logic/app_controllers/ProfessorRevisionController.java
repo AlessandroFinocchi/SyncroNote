@@ -1,11 +1,7 @@
 package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.ProfessorRevisionBean;
-import com.example.syncronote.logic.beans.StudentRevisionBean;
 import com.example.syncronote.logic.dao.RevisionDAO;
-import com.example.syncronote.logic.enums.RevisionState;
-import com.example.syncronote.logic.model.Note;
-import com.example.syncronote.logic.model.Revision;
 import com.example.syncronote.logic.model.UnansweredRevisableNote;
 import com.example.syncronote.logic.session.SessionManager;
 

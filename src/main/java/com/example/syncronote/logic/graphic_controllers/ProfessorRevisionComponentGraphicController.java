@@ -29,6 +29,7 @@ public class ProfessorRevisionComponentGraphicController extends AbsDialogGenera
     @Override
     public void initialize(){
         super.initialize();
+        categoryLbl.setText("<no category>");
     }
 
     public void setRevisionValues(ProfessorRevisionBean currentRevision, ProfessorRevisionComponentController componentController) {

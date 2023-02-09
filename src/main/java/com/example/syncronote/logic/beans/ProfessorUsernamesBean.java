@@ -1,6 +1,5 @@
-package com.example.syncronote.logic.graphic_controllers;
+package com.example.syncronote.logic.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorUsernamesBean {
