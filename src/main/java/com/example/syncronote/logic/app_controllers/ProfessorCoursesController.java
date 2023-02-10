@@ -6,9 +6,7 @@ import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.model.Course;
 import com.example.syncronote.logic.session.SessionManager;
-import com.example.syncronote.logic.utilities.NavigatorSingleton;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

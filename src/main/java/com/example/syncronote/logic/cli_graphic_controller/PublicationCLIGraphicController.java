@@ -43,7 +43,7 @@ public class PublicationCLIGraphicController extends AbsCLIGraphicController{
                     case 1 -> publishNote();
                     case 2 -> gotoHomepage();
                     case 3 -> System.exit(0);
-                    default -> throw new RuntimeException("Invalid choice");
+                    default -> throw new InvalidFormatException("Invalid choice");
                 }
             }
         }
@@ -77,7 +77,7 @@ public class PublicationCLIGraphicController extends AbsCLIGraphicController{
         if(AbsController.getCurrentUserType() == UserTypes.STUDENT){
             publicationBean = new PublicationStudentBean(
                     noteFile,
-                    visibilityString.toLowerCase().equals("yes"),
+                    visibilityString.equalsIgnoreCase("yes"),
                     category
             );
         }
@@ -98,7 +98,7 @@ public class PublicationCLIGraphicController extends AbsCLIGraphicController{
             SetupEmailSenderBean setupBean = ((PublicationProfessorController)controller).getEmailInfos(courseBean);
             publicationBean = new PublicationProfessorBean(
                     noteFile,
-                    visibilityString.toLowerCase().equals("yes"),
+                    visibilityString.equalsIgnoreCase("yes"),
                     category,
                     courseBean.getCourseId(),
                     setupBean

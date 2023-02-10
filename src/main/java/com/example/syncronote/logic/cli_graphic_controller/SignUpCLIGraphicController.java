@@ -23,9 +23,9 @@ public class SignUpCLIGraphicController extends AbsCLIGraphicController {
                     case 1 -> signup();
                     case 2 -> new SignUpCLIGraphicController().start();
                     case 3 -> System.exit(0);
-                    default -> throw new RuntimeException("Invalid choice");
+                    default -> throw new InvalidFormatException("Invalid choice");
                 }
-            } catch (IOException e) {
+            } catch (IOException | InvalidFormatException e) {
                 logger.log(Level.INFO, e.getMessage());
             }
         }

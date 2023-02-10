@@ -1,10 +1,10 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
 import com.example.syncronote.logic.app_controllers.AbsController;
-import com.example.syncronote.logic.app_controllers.AbsLoggedController;
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.HomeInfosBean;
 import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.utilities.CLIPrinter;
 
@@ -34,9 +34,10 @@ public class HomeCLIGraphicController extends AbsLoggedCLIGraphicController{
                     case 6-> changeUser();
                     case 7-> logout();
                     case 8 -> System.exit(0);
-                    default -> throw new RuntimeException("Invalid choice");
+                    default -> throw new InvalidFormatException("Invalid choice");
                 }
-            } catch (IOException e) {
+            }
+            catch (IOException | InvalidFormatException e) {
                 logger.log(Level.INFO, e.getMessage());
             }
         }
@@ -63,11 +64,12 @@ public class HomeCLIGraphicController extends AbsLoggedCLIGraphicController{
         new PublicationCLIGraphicController().start();
     }
 
-    private void manageNotes() {
-
+    private void manageNotes() throws InvalidFormatException {
+        throw new InvalidFormatException("Not implemented");
     }
 
-    private void manageRevisions() {
+    private void manageRevisions() throws InvalidFormatException {
+        throw new InvalidFormatException("Not implemented");
     }
 
     private void manageCourses() {

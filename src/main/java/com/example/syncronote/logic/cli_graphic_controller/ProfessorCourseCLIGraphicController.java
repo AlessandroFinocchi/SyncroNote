@@ -38,7 +38,7 @@ public class ProfessorCourseCLIGraphicController extends AbsLoggedCLIGraphicCont
                     case 3 -> visualizeCourse();
                     case 4 -> gotoHomepage();
                     case 5 -> System.exit(0);
-                    default -> throw new RuntimeException("Invalid choice");
+                    default -> throw new InvalidFormatException("Invalid choice");
                 }
             }
         }

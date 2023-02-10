@@ -5,20 +5,16 @@ import com.example.syncronote.logic.beans.PublicationProfessorBean;
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.beans.SetupEmailSenderBean;
 import com.example.syncronote.logic.dao.CourseDAO;
-import com.example.syncronote.logic.dao.ProfessorDAO;
 import com.example.syncronote.logic.dao.PublicationDAO;
 import com.example.syncronote.logic.dao.StudentDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.model.Course;
-import com.example.syncronote.logic.model.Professor;
 import com.example.syncronote.logic.model.Student;
 import com.example.syncronote.logic.session.SessionManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PublicationProfessorController extends PublicationStudentController {
 

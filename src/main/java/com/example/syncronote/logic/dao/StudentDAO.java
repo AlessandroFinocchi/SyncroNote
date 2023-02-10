@@ -1,7 +1,6 @@
 package com.example.syncronote.logic.dao;
 
 import com.example.syncronote.logic.enums.UserTypes;
-import com.example.syncronote.logic.model.Professor;
 import com.example.syncronote.logic.model.Student;
 import com.example.syncronote.logic.session.ConnectionFactory;
 
