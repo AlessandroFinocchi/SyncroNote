@@ -29,8 +29,8 @@ class HomeControllerTest {
             bean = homeController.getHomepageInfos();
 
             Assertions.assertAll(
-                    ()->assertEquals(bean.getName(), "Alessandro Finocchi"),
-                    ()->assertEquals(bean.getUserType(), UserTypes.STUDENT.getId())
+                    ()->assertEquals("Alessandro Finocchi", bean.getName()),
+                    ()->assertEquals(UserTypes.STUDENT.getId(), bean.getUserType())
             );
 
         } catch (SessionUserException e) {

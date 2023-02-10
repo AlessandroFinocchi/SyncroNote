@@ -34,7 +34,6 @@ class PublicationStudentControllerTest {
                     true,
                     "Fun");
             controller.publishNote(bean);
-            assertEquals(1,1);
         }
         catch (Exception e) {
             Assertions.fail(e.getMessage());
