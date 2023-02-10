@@ -1,5 +1,5 @@
 Email sent to: a@a.it
 Professor username: Barto
-Has published note name: note1
+Has published note name: note2
 ----------------------------------------
 

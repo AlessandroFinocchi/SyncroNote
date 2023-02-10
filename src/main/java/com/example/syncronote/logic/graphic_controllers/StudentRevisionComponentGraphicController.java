@@ -7,8 +7,7 @@ import com.example.syncronote.logic.beans.StudentRevisionBean;
 import com.example.syncronote.logic.enums.RevisionState;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.utilities.AbsDialogGenerator;
-import com.example.syncronote.logic.utilities.NavigatorSingleton;
+import com.example.syncronote.logic.utilities.AbsDialogNavigatorController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,7 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class StudentRevisionComponentGraphicController extends AbsDialogGenerator {
+public class StudentRevisionComponentGraphicController extends AbsDialogNavigatorController {
 
     @FXML
     private Label noteNameLbl;

@@ -1,7 +1,10 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
+import com.example.syncronote.logic.app_controllers.AbsController;
+import com.example.syncronote.logic.app_controllers.AbsLoggedController;
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.HomeInfosBean;
+import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.utilities.CLIPrinter;
 
@@ -23,12 +26,14 @@ public class HomeCLIGraphicController extends AbsLoggedCLIGraphicController{
             try {
                 choice = showMenu();
                 switch(choice) {
-                    case 1 -> manageNotes();
-                    case 2 -> manageCourses();
-                    case 3 -> gotoLogin();
-                    case 4-> changeUser();
-                    case 5-> logout();
-                    case 6 -> System.exit(0);
+                    case 1 -> publishNotes();
+                    case 2 -> manageNotes();
+                    case 3 -> manageRevisions();
+                    case 4 -> manageCourses();
+                    case 5 -> gotoLogin();
+                    case 6-> changeUser();
+                    case 7-> logout();
+                    case 8 -> System.exit(0);
                     default -> throw new RuntimeException("Invalid choice");
                 }
             } catch (IOException e) {
@@ -42,22 +47,32 @@ public class HomeCLIGraphicController extends AbsLoggedCLIGraphicController{
         HomeInfosBean homeInfosBean = homeController.getHomepageInfos();
 
         CLIPrinter.printMessage("*** What should I do for you " + homeInfosBean.getUserType() + " " + homeInfosBean.getName() + " ? ***\n");
-        CLIPrinter.printMessage("1) Manage notes\n");
-        CLIPrinter.printMessage("2) Manage courses\n");
-        CLIPrinter.printMessage("3) Go to login\n");
-        CLIPrinter.printMessage("4) Change user\n");
-        CLIPrinter.printMessage("5) Logout\n");
-        CLIPrinter.printMessage("6) Quit\n");
+        CLIPrinter.printMessage("1) Publish notes\n");
+        CLIPrinter.printMessage("2) Manage notes\n");
+        CLIPrinter.printMessage("3) Revision section\n");
+        CLIPrinter.printMessage("4) Manage courses\n");
+        CLIPrinter.printMessage("5) Go to login\n");
+        CLIPrinter.printMessage("6) Change user\n");
+        CLIPrinter.printMessage("7) Logout\n");
+        CLIPrinter.printMessage("8) Quit\n");
 
         return getMenuChoice(1, 6);
     }
 
+    private void publishNotes() {
+        new PublicationCLIGraphicController().start();
+    }
+
     private void manageNotes() {
-        CLIPrinter.printMessage("1\n");
+
+    }
+
+    private void manageRevisions() {
     }
 
     private void manageCourses() {
-        CLIPrinter.printMessage("2\n");
+        if(AbsController.getCurrentUserType() == UserTypes.PROFESSOR)
+            new ProfessorCourseCLIGraphicController().start();
     }
 
     private void gotoLogin() {

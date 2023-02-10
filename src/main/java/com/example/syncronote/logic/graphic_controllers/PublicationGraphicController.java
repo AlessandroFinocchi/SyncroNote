@@ -112,7 +112,6 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         catch (InvalidFormatException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
-
     }
 
     public void publishNote(ActionEvent actionEvent) {

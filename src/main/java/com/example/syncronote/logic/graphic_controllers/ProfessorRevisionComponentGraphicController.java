@@ -5,14 +5,14 @@ import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.beans.ProfessorRevisionBean;
 import com.example.syncronote.logic.beans.ResponseBean;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.utilities.AbsDialogGenerator;
+import com.example.syncronote.logic.utilities.AbsDialogNavigatorController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class ProfessorRevisionComponentGraphicController extends AbsDialogGenerator {
+public class ProfessorRevisionComponentGraphicController extends AbsDialogNavigatorController {
     @FXML
     private Label noteLbl;
 

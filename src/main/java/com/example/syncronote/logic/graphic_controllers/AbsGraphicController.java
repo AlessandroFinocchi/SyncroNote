@@ -1,16 +1,14 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.utilities.AbsDialogGenerator;
+import com.example.syncronote.logic.utilities.AbsDialogNavigatorController;
 import com.example.syncronote.logic.utilities.NavigatorSingleton;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbsGraphicController extends AbsDialogGenerator {
+public abstract class AbsGraphicController extends AbsDialogNavigatorController {
     @FXML
     private Pane titlePane; // Value injected by FXMLLoader
     @FXML
@@ -55,14 +53,5 @@ public abstract class AbsGraphicController extends AbsDialogGenerator {
             NavigatorSingleton n = NavigatorSingleton.getInstance();
             n.getStg().setIconified(true);
         });
-    }
-
-    protected void goToPage(String page) {
-        try{
-            NavigatorSingleton.getInstance().gotoPage(page);
-        }
-        catch (IOException e){
-            logger.log(Level.INFO, e.getMessage());
-        }
     }
 }

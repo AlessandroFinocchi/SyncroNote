@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmailSenderBoundary extends AbsDialogGenerator implements Observer {
+public class EmailSenderBoundary extends AbsDialogNavigatorController implements Observer {
     private final String professor;
     private final String professorEmail;
     private static final String EMAIL_FILE = "EmailSentFile.txt";

@@ -5,13 +5,13 @@ import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.enums.VisibilityTypes;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.utilities.AbsDialogGenerator;
+import com.example.syncronote.logic.utilities.AbsDialogNavigatorController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
-public class NoteComponentGraphicController extends AbsDialogGenerator {
+public class NoteComponentGraphicController extends AbsDialogNavigatorController {
     @FXML
     private Label titleLbl;
     @FXML

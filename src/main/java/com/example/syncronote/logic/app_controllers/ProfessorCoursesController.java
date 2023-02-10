@@ -39,9 +39,8 @@ public class ProfessorCoursesController extends AbsLoggedController {
                     courseBean.getName(),
                     SessionManager.getInstance().getCurrentUser().getUsername()
             );
-            NavigatorSingleton.getInstance().gotoPage("ProfessorCourses.fxml");
         }
-        catch (SQLException | IOException e){
+        catch (SQLException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }
