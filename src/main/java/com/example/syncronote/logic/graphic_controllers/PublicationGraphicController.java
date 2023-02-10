@@ -114,20 +114,34 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
         }
     }
 
-    public void publishNote(ActionEvent actionEvent) {
+    public void publishNote(ActionEvent actionEvent) throws DAOException, SQLException {
         CourseIdMapBean courseBean = null;
         PublicationStudentBean publicationBean;
         try{
             checkFileSelected();
 
-            if(userType.equals(UserTypes.STUDENT)){
+            recognizePublication();
+        }
+        catch (StudentPublicationException e){
+            try {
                 publicationBean = new PublicationStudentBean(
                         noteChosenBean.getFile(),
                         privacyLbl.isSelected(),
                         categoryCombo.getValue()
                 );
+
+                publicationController.publishNote(publicationBean);
+
+                showInfoAlert("Publication", "Your note has been publicized");
+
+                goToPage(HOME);
             }
-            else if(userType.equals(UserTypes.PROFESSOR)){
+            catch (InvalidFormatException ex) {
+                showErrorAlert("Alert", ex.getMessage());
+            }
+        }
+        catch (ProfessorPublicationException e){
+            try {
                 checkCourseSelected();
                 for (CourseIdMapBean courseMap: courseIdMapBean) {
                     if(courseMap.getCourseName().equals(courseCombo.getValue())) {
@@ -146,33 +160,37 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                         categoryCombo.getValue(),
                         courseBean.getCourseId(),
                         setupBean
-                        );
+                );
+
+                publicationController.publishNote(publicationBean);
+
+                showInfoAlert("Publication", "Your note has been publicized");
+
+                goToPage(HOME);
             }
-            else{
-                throw new SessionUserException("User not set");
+            catch (DAOException ex){
+                Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+                showErrorAlert("Publication Error", ex.getMessage());
             }
+            catch (NoCoursesException | EmailSenderException | SQLException ex){
+                showInfoAlert("Attention", ex.getMessage());
+                goToPage(HOME);
+            }
+            catch (InvalidFormatException ex){
+                showErrorAlert("Alert", ex.getMessage());
+            }
+        }
+        catch (InvalidFormatException ex){
+            showErrorAlert("Alert", ex.getMessage());
+        }
+    }
 
-            publicationController.publishNote(publicationBean);
-
-            showInfoAlert("Publication", "Your note has been publicized");
-
-            goToPage(HOME);
+    public void recognizePublication() throws StudentPublicationException, ProfessorPublicationException {
+        if(userType == UserTypes.STUDENT){
+            throw new StudentPublicationException();
         }
-        catch (InvalidFormatException e){
-            showErrorAlert("Alert", e.getMessage());
-        }
-        catch (DAOException e){
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
-            showErrorAlert("Publication Error", e.getMessage());
-        }
-        catch (NoCoursesException | EmailSenderException | SQLException e){
-            showInfoAlert("Attention", e.getMessage());
-            goToPage(HOME);
-        }
-        catch (SessionUserException e) {
-            showErrorAlert("User error", e.getMessage());
-            goToPage(HOME);
-        }
+        else
+            throw new ProfessorPublicationException();
     }
 
     private void checkFileSelected() throws InvalidFormatException {
