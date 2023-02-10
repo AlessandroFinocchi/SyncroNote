@@ -46,7 +46,8 @@ public class ProfessorRevisionComponentGraphicController extends AbsDialogNaviga
         try {
             controller.openNote(noteFilePathBean);
             showInfoAlert("Student question: ", studentQuestion);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             showErrorAlert("Error", "Cannot open file");
         }
     }
