@@ -34,10 +34,6 @@ public class AbsLoggedController {
         return SessionManager.getInstance().changeCurrentUser(username).getUsername();
     }
 
-    public void logoutCurrentUser(){
-        SessionManager.getInstance().logout();
-    }
-
     public List<CategoryBean> getCategories() {
         List<CategoryBean> categoryBeanList = new ArrayList<>();
         List<Category> categories;

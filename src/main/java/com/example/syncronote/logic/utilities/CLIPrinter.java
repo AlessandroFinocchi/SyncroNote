@@ -10,13 +10,6 @@ public class CLIPrinter {
     }
 
     public static void printMessage(String s){
-        //Run the out printLine of s
-        Logger.getAnonymousLogger().log(Level.INFO, "Not implemented PrintMessage!");
-        throw new UnsupportedOperationException();
-    }
-    public static void printError(String s){
-        //Run the logger log of s
-        Logger.getAnonymousLogger().log(Level.INFO, "Not implemented PrintError!");
-        throw new UnsupportedOperationException();
+        System.out.print(s);
     }
 }

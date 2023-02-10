@@ -2,13 +2,12 @@ package com.example.syncronote.logic.beans;
 
 import com.example.syncronote.logic.exceptions.EmailSenderException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
-import com.example.syncronote.logic.patterns.Subject;
+import com.example.syncronote.logic.patterns.PublicationProfessorSubject;
 import com.example.syncronote.logic.utilities.EmailSenderBoundary;
 
 import java.io.File;
-import java.util.List;
 
-public class PublicationProfessorBean extends Subject {
+public class PublicationProfessorBean extends PublicationProfessorSubject {
     private final int courseId;
 
     public PublicationProfessorBean(File file, boolean privateNote, String category, int courseId,

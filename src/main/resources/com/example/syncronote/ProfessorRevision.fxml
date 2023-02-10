@@ -16,91 +16,6 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.syncronote.logic.graphic_controllers.ProfessorRevisionGraphicController">
     <children>
-        <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
-         <children>
-            <VBox layoutY="20.0" prefHeight="540.0" prefWidth="295.0" spacing="10.0">
-               <children>
-                  <JFXButton fx:id="userBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="User">
-                     <font>
-                        <Font name="Calibri Italic" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/LoginIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Notes">
-                     <font>
-                        <Font name="Calibri Italic" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/SideBarImages/Books.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="searchBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Search">
-                     <font>
-                        <Font name="Calibri Italic" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/SideBarImages/Search.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="courseBtn" alignment="BASELINE_LEFT" prefHeight="64.0" prefWidth="294.0" text="Courses">
-                     <font>
-                        <Font name="Calibri Italic" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/SideBarImages/Professor.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="loginBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Login">
-                     <font>
-                        <Font name="Calibri Italic" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/SideBarImages/Logout.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <HBox fx:id="changeHBox" prefHeight="50.0" prefWidth="295.0">
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/SideBarImages/ChangeUser.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <ComboBox fx:id="selectUserCombo" prefHeight="30.0" prefWidth="180.0" promptText="Username">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-        </AnchorPane>
         <AnchorPane fx:id="containerPane" layoutY="40.0" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #FF7F50, #6A5ACD);">
          <children>
             <BorderPane prefHeight="560.0" prefWidth="800.0">
@@ -187,5 +102,90 @@
                 </Label>
             </children>
         </Pane>
+        <AnchorPane fx:id="leftPane" layoutY="40.0" prefHeight="560.0" prefWidth="295.0" style="-fx-background-color: linear-gradient(#e66465, #9198e5);">
+         <children>
+            <VBox layoutY="20.0" prefHeight="540.0" prefWidth="295.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="userBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="User">
+                     <font>
+                        <Font name="Calibri Italic" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/LoginIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="bookBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Notes">
+                     <font>
+                        <Font name="Calibri Italic" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/SideBarImages/Books.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="searchBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Search">
+                     <font>
+                        <Font name="Calibri Italic" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/SideBarImages/Search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="courseBtn" alignment="BASELINE_LEFT" prefHeight="64.0" prefWidth="294.0" text="Courses">
+                     <font>
+                        <Font name="Calibri Italic" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/SideBarImages/Professor.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="loginBtn" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="295.0" text="Login">
+                     <font>
+                        <Font name="Calibri Italic" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/SideBarImages/Logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <HBox fx:id="changeHBox" prefHeight="50.0" prefWidth="295.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/SideBarImages/ChangeUser.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ComboBox fx:id="selectUserCombo" prefHeight="30.0" prefWidth="180.0" promptText="Username">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

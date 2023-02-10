@@ -7,10 +7,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subject extends PublicationStudentBean {
+public class PublicationProfessorSubject extends PublicationStudentBean {
     private List<Observer> observers;
 
-    protected Subject(File file, boolean privateNote, String category) throws InvalidFormatException {
+    protected PublicationProfessorSubject(File file, boolean privateNote, String category) throws InvalidFormatException {
         super(file, privateNote, category);
         observers = new ArrayList<>() ;
     }

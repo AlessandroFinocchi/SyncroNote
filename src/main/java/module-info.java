@@ -11,4 +11,6 @@ module com.example.syncronote {
     opens com.example.syncronote.logic.graphic_controllers to javafx.fxml;
     exports com.example.syncronote.logic.beans;
     opens com.example.syncronote.logic.beans to javafx.fxml;
+    exports com.example.syncronote.logic.patterns;
+    opens com.example.syncronote.logic.patterns to javafx.fxml;
 }

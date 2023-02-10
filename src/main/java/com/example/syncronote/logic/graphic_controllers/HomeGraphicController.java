@@ -2,6 +2,7 @@ package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.HomeInfosBean;
+import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,7 +28,11 @@ public class HomeGraphicController extends AbsLoggedGraphicController {
         nameLbl.setText(homeInfosBean.getName());
 
         logoutBtn.setOnMouseClicked(mouseEvent -> {
-            new HomeController().logoutCurrentUser();
+            try {
+                new HomeController().logoutCurrentUser();
+            } catch (SessionUserException e) {
+                showErrorAlert("Error", e.getMessage());
+            }
             goToPage(LOGIN);
         });
     }
