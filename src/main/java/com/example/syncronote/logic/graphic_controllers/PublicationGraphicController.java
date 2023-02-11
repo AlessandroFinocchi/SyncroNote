@@ -175,7 +175,7 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
 
     private void publishAsProfessor(){
         CourseIdMapBean courseBean = null;
-        PublicationStudentBean publicationBean;
+        PublicationProfessorBean publicationBean;
         try {
             checkCourseSelected();
             for (CourseIdMapBean courseMap: courseIdMapBean) {
@@ -188,13 +188,11 @@ public class PublicationGraphicController extends AbsLoggedGraphicController {
                 }
             }
             checkCourse(courseBean);
-            SetupEmailSenderBean setupBean = ((PublicationProfessorController)publicationController).getEmailInfos(courseBean);
             publicationBean = new PublicationProfessorBean(
                     noteChosenBean.getFile(),
                     privacyLbl.isSelected(),
                     categoryCombo.getValue(),
-                    courseBean.getCourseId(),
-                    setupBean
+                    courseBean.getCourseId()
             );
 
             publicationController.publishNote(publicationBean);

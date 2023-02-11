@@ -6,20 +6,21 @@ import com.example.syncronote.logic.patterns.PublicationProfessorSubject;
 import com.example.syncronote.logic.utilities.EmailSenderBoundary;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PublicationProfessorBean extends PublicationProfessorSubject {
     private final int courseId;
+    private String professor;
+    private String professorEmail;
+    private List<String> studentEmails;
 
-    public PublicationProfessorBean(File file, boolean privateNote, String category, int courseId,
-                                    SetupEmailSenderBean setupBean) throws InvalidFormatException, EmailSenderException {
+    public PublicationProfessorBean(File file, boolean privateNote, String category, int courseId) throws InvalidFormatException, EmailSenderException {
         super(file, privateNote, category);
         this.courseId = courseId;
+        this.studentEmails = new ArrayList<>();
 
-        EmailBean emailBean = new EmailBean(getTitle(), setupBean.getStudentEmails());
-        EmailSenderBoundary emailSender = new EmailSenderBoundary(
-                setupBean.getProfessor(),
-                setupBean.getProfessorEmail(),
-                emailBean);
+        EmailSenderBoundary emailSender = new EmailSenderBoundary(this);
 
         this.attach(emailSender);
     }
@@ -30,5 +31,29 @@ public class PublicationProfessorBean extends PublicationProfessorSubject {
 
     public void notifyPublication(){
         super.notifyObservers();
+    }
+
+    public String getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(String professor) {
+        this.professor = professor;
+    }
+
+    public String getProfessorEmail() {
+        return professorEmail;
+    }
+
+    public void setProfessorEmail(String professorEmail) {
+        this.professorEmail = professorEmail;
+    }
+
+    public List<String> getSubscribedEmails() {
+        return studentEmails;
+    }
+
+    public void addSubscribedEmail(String email){
+        studentEmails.add(email);
     }
 }

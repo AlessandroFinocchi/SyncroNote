@@ -95,13 +95,11 @@ public class PublicationCLIGraphicController extends AbsCLIGraphicController{
                 }
             }
             checkCourse(courseBean);
-            SetupEmailSenderBean setupBean = ((PublicationProfessorController)controller).getEmailInfos(courseBean);
             publicationBean = new PublicationProfessorBean(
                     noteFile,
                     visibilityString.equalsIgnoreCase("yes"),
                     category,
-                    courseBean.getCourseId(),
-                    setupBean
+                    courseBean.getCourseId()
             );
 
         }
