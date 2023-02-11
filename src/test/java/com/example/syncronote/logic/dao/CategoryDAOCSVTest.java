@@ -3,6 +3,7 @@ package com.example.syncronote.logic.dao;
 import com.example.syncronote.logic.enums.GradeTypes;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.model.Category;
+import com.example.syncronote.logic.utilities.CLIPrinter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,11 @@ class CategoryDAOCSVTest {
         try{
             CategoryDAO categoryDAO = new CategoryDAOCSV();
             List<Category> categoryList = categoryDAO.selectCategories();
-            System.out.println("ciao");
+
+            for (Category c: categoryList) {
+                CLIPrinter.printMessage(c.getName() + "\n");
+            }
+
         } catch (Exception e) {
             Assertions.fail(e.getMessage());
         }
