@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+//Make it an abstract factory if u want a more general dao factory for JDBCDaos or CSVDaos
 public class CategoryDAOFactory {
 
     public CategoryDAO createCategoryDAO() throws IOException{
