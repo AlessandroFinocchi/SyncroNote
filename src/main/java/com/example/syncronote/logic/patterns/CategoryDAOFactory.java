@@ -16,9 +16,9 @@ public class CategoryDAOFactory {
         Properties properties = new Properties();
         properties.load(input);
 
-        String category_dao_type = properties.getProperty("CATEGORY_DAO_TYPE");
+        String categoryDaoType = properties.getProperty("CATEGORY_DAO_TYPE");
 
-        switch (category_dao_type){
+        switch (categoryDaoType){
             case "jdbc": return new CategoryDAOJDBC();
             case "csv": return new CategoryDAOCSV();
             default: throw new IOException("Configuration file error");

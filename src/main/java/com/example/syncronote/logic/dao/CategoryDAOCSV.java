@@ -9,48 +9,38 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 
 public class CategoryDAOCSV implements CategoryDAO{
 
     private File fd;
     private static final String CSV_FILE_NAME = "localDBFile.csv";
+    private static final int INDEX_NAME = 1;
+    private static final int INDEX_MACRO_AREA = 2;
+    private static final int INDEX_GRADE = 3;
 
     public CategoryDAOCSV() throws IOException {
         this.fd = new File(CSV_FILE_NAME);
 
         if (!fd.exists()) {
-            fd.createNewFile();
-        }
-    }
-
-    private static class CategoryAttributesOrder {
-        public static int getIndex_Name() {
-            return 0;
-        }
-
-        public static int getIndex_MacroArea() {
-            return 1;
-        }
-
-        public static int getIndex_Grade() {
-            return 2;
+            throw new IOException(CSV_FILE_NAME + " file does not exist");
         }
     }
 
     @Override
-    public List<Category> selectCategories() throws Exception{
+    public List<Category> selectCategories() throws IOException, CsvValidationException {
         return selectCategories(fd);
     }
 
-    private List<Category> selectCategories(File fd) throws Exception{
+    private List<Category> selectCategories(File fd) throws IOException, CsvValidationException {
         CSVReader csvReader = new CSVReader(new BufferedReader(new FileReader(fd)));
-        String[] record;
+        String[] categoryRecord;
         List<Category> categoryList = new ArrayList<>();
 
-        while ((record = csvReader.readNext()) != null) {
-            String name = record[CategoryAttributesOrder.getIndex_Name()];
-            String macroArea = record[CategoryAttributesOrder.getIndex_MacroArea()];
-            String gradeString = record[CategoryAttributesOrder.getIndex_Grade()];
+        while ((categoryRecord = csvReader.readNext()) != null) {
+            String name = categoryRecord[INDEX_NAME];
+            String macroArea = categoryRecord[INDEX_MACRO_AREA];
+            String gradeString = categoryRecord[INDEX_GRADE];
             GradeTypes gradeType = GradeTypes.fromString(gradeString);
 
             Category category = new Category(name, macroArea, gradeType);
@@ -60,24 +50,19 @@ public class CategoryDAOCSV implements CategoryDAO{
 
         csvReader.close();
 
-        if (categoryList.isEmpty()) {
-            Exception e = new Exception("No Categories found");
-            throw e;
-        }
-
         return categoryList;
     }
 
     public void createCategory(Category category) throws Exception {
         CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new FileWriter(fd, true)));
 
-        String[] record = new String[3];
+        String[] categoryRecord = new String[3];
 
-        record[CategoryAttributesOrder.getIndex_Name()] = category.getName();
-        record[CategoryAttributesOrder.getIndex_MacroArea()] = category.getMacroArea();
-        record[CategoryAttributesOrder.getIndex_Grade()] = category.getGrade().getId();
+        categoryRecord[INDEX_NAME] = category.getName();
+        categoryRecord[INDEX_MACRO_AREA] = category.getMacroArea();
+        categoryRecord[INDEX_GRADE] = category.getGrade().getId();
 
-        csvWriter.writeNext(record);
+        csvWriter.writeNext(categoryRecord);
         csvWriter.flush();
         csvWriter.close();
     }

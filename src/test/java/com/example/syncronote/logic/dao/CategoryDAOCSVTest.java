@@ -37,7 +37,7 @@ class CategoryDAOCSVTest {
             CategoryDAOCSV dao = new CategoryDAOCSV();
             dao.createCategory(category);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assertions.fail(e.getMessage());
         }
     }
 }
