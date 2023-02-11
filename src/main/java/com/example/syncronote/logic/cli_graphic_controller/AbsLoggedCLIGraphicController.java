@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
-import com.example.syncronote.logic.app_controllers.AbsController;
+import com.example.syncronote.logic.enums.app_controllers.AbsController;
 import com.example.syncronote.logic.enums.UserTypes;
 
 public abstract class AbsLoggedCLIGraphicController extends AbsCLIGraphicController{

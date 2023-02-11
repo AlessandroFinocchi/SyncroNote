@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.app_controllers;
+package com.example.syncronote.logic.enums.app_controllers;
 
 import com.example.syncronote.logic.beans.CourseIdMapBean;
 import com.example.syncronote.logic.beans.PublicationProfessorBean;
@@ -16,24 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublicationProfessorController extends PublicationStudentController {
-
-    public List<CourseIdMapBean> getCourses() throws SQLException {
-        SessionManager sessionManager = SessionManager.getInstance();
-        List<Course> courseList = new CourseDAO().findProfessorCourse(
-                sessionManager.getCurrentUser().getUsername()
-        );
-
-        List<CourseIdMapBean> courseIdMapBean = new ArrayList<>();
-
-        for (Course course: courseList) {
-            courseIdMapBean.add(new CourseIdMapBean(
-                    course.getId(),
-                    course.getName()
-            ));
-        }
-
-        return courseIdMapBean;
-    }
 
     @Override
     public void publishNote(PublicationStudentBean publicationProfessorBean) throws DAOException, SQLException {
@@ -57,7 +39,7 @@ public class PublicationProfessorController extends PublicationStudentController
         ((PublicationProfessorBean)publicationProfessorBean).notifyPublication();
     }
 
-    public List<Student> getEmailInfos(int courseId) throws DAOException {
+    private List<Student> getEmailInfos(int courseId) throws DAOException {
         StudentDAO studentDAO = new StudentDAO();
         List<Student> students;
 
@@ -67,5 +49,23 @@ public class PublicationProfessorController extends PublicationStudentController
         } catch (SQLException e) {
             throw new DAOException("Database error: couldn't get subscribed to the course");
         }
+    }
+
+    public List<CourseIdMapBean> getCourses() throws SQLException {
+        SessionManager sessionManager = SessionManager.getInstance();
+        List<Course> courseList = new CourseDAO().findProfessorCourse(
+                sessionManager.getCurrentUser().getUsername()
+        );
+
+        List<CourseIdMapBean> courseIdMapBean = new ArrayList<>();
+
+        for (Course course: courseList) {
+            courseIdMapBean.add(new CourseIdMapBean(
+                    course.getId(),
+                    course.getName()
+            ));
+        }
+
+        return courseIdMapBean;
     }
 }

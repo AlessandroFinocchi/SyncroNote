@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublicationProfessorSubject extends PublicationStudentBean {
+public abstract class PublicationProfessorSubject extends PublicationStudentBean {
     private List<Observer> observers;
 
     protected PublicationProfessorSubject(File file, boolean privateNote, String category) throws InvalidFormatException {

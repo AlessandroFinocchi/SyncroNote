@@ -224,6 +224,7 @@ USE `SyncroNotesDB`;
 INSERT INTO `SyncroNotesDB`.`User` (`Username`, `Name`, `Surname`, `Email`, `Password`, `Role`) VALUES ('Alex', 'Alessandro', 'Finocchi', 'a@a.it', '1234', 'Student');
 INSERT INTO `SyncroNotesDB`.`User` (`Username`, `Name`, `Surname`, `Email`, `Password`, `Role`) VALUES ('Barto', 'Daniele', 'Bartolucci', 'd@d.en', '1111', 'Professor');
 INSERT INTO `SyncroNotesDB`.`User` (`Username`, `Name`, `Surname`, `Email`, `Password`, `Role`) VALUES ('d', 'd', 'd', 'd2@d.it', 'd', 'Professor');
+INSERT INTO `SyncroNotesDB`.`User` (`Username`, `Name`, `Surname`, `Email`, `Password`, `Role`) VALUES ('gio', 'Giorgio', 'Caputo', 'g@g.it', 'gio', 'Student');
 
 COMMIT;
 
@@ -267,6 +268,7 @@ COMMIT;
 START TRANSACTION;
 USE `SyncroNotesDB`;
 INSERT INTO `SyncroNotesDB`.`Student` (`Username`, `freshman`) VALUES ('Alex', '12345678');
+INSERT INTO `SyncroNotesDB`.`Student` (`Username`, `freshman`) VALUES ('gio', '11111111');
 
 COMMIT;
 
@@ -277,6 +279,7 @@ COMMIT;
 START TRANSACTION;
 USE `SyncroNotesDB`;
 INSERT INTO `SyncroNotesDB`.`Subscribed` (`Student`, `Course`) VALUES ('Alex', 1);
+INSERT INTO `SyncroNotesDB`.`Subscribed` (`Student`, `Course`) VALUES ('gio', 1);
 
 COMMIT;
 

@@ -2,17 +2,13 @@ package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.enums.UserTypes;
-import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.exceptions.InvalidFormatException;
+import com.example.syncronote.logic.enums.app_controllers.PublicationStudentController;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.SessionManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PublicationStudentControllerTest {
 

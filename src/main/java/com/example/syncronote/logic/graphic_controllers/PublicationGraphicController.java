@@ -1,15 +1,14 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.app_controllers.AbsPublicationController;
-import com.example.syncronote.logic.app_controllers.PublicationProfessorController;
-import com.example.syncronote.logic.app_controllers.PublicationStudentController;
+import com.example.syncronote.logic.enums.app_controllers.AbsPublicationController;
+import com.example.syncronote.logic.enums.app_controllers.PublicationProfessorController;
+import com.example.syncronote.logic.enums.app_controllers.PublicationStudentController;
 import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;

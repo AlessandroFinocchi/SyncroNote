@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
-import com.example.syncronote.logic.app_controllers.ProfessorCoursesController;
+import com.example.syncronote.logic.enums.app_controllers.ProfessorCoursesController;
 import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.CourseBean;
 import com.example.syncronote.logic.enums.GradeTypes;

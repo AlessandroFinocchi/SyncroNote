@@ -3,6 +3,7 @@ module com.example.syncronote {
     requires javafx.fxml;
     requires java.sql;
     requires com.jfoenix;
+    requires com.opencsv;
 
 
     opens com.example.syncronote to javafx.fxml;

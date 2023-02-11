@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
+import com.example.syncronote.logic.enums.app_controllers.StudentRevisionComponentController;
 import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.StudentRevisionBean;

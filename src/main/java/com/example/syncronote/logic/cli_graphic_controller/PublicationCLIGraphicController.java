@@ -1,8 +1,11 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
-import com.example.syncronote.logic.app_controllers.*;
 import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.enums.UserTypes;
+import com.example.syncronote.logic.enums.app_controllers.AbsController;
+import com.example.syncronote.logic.enums.app_controllers.AbsPublicationController;
+import com.example.syncronote.logic.enums.app_controllers.PublicationProfessorController;
+import com.example.syncronote.logic.enums.app_controllers.PublicationStudentController;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.EmailSenderException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;

@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
-import com.example.syncronote.logic.app_controllers.LoginController;
+import com.example.syncronote.logic.enums.app_controllers.LoginController;
 import com.example.syncronote.logic.beans.LoginCredentialsBean;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;
 import com.example.syncronote.logic.exceptions.SessionUserException;

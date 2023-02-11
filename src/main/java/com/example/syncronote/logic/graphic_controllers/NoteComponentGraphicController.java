@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.app_controllers.UserNotesController;
+import com.example.syncronote.logic.enums.app_controllers.UserNotesController;
 import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.enums.VisibilityTypes;

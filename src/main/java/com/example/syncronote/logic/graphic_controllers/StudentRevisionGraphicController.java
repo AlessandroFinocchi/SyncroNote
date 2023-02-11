@@ -1,8 +1,8 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.Main;
-import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
-import com.example.syncronote.logic.app_controllers.StudentRevisionController;
+import com.example.syncronote.logic.enums.app_controllers.StudentRevisionComponentController;
+import com.example.syncronote.logic.enums.app_controllers.StudentRevisionController;
 import com.example.syncronote.logic.beans.*;
 import com.example.syncronote.logic.exceptions.DAOException;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;

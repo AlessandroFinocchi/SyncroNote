@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.app_controllers;
+package com.example.syncronote.logic.enums.app_controllers;
 
 import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;

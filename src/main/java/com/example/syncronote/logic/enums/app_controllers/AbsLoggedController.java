@@ -1,13 +1,13 @@
-package com.example.syncronote.logic.app_controllers;
+package com.example.syncronote.logic.enums.app_controllers;
 
 import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.SessionUserBean;
 import com.example.syncronote.logic.dao.CategoryDAO;
 import com.example.syncronote.logic.model.Category;
 import com.example.syncronote.logic.model.User;
+import com.example.syncronote.logic.patterns.CategoryDAOFactory;
 import com.example.syncronote.logic.session.SessionManager;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,16 +37,18 @@ public class AbsLoggedController {
     public List<CategoryBean> getCategories() {
         List<CategoryBean> categoryBeanList = new ArrayList<>();
         List<Category> categories;
+        CategoryDAOFactory categoryDAOFactory = new CategoryDAOFactory();
 
         try{
-            categories = new CategoryDAO().selectCategories();
+            CategoryDAO categoryDAO = categoryDAOFactory.createCategoryDAO();
+            categories = categoryDAO.selectCategories();
 
             for (Category c: categories) {
                 CategoryBean categoryBean = new CategoryBean(c.getName());
                 categoryBeanList.add(categoryBean);
             }
         }
-        catch (SQLException e){
+        catch (Exception e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
 

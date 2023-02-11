@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.app_controllers.HomeController;
+import com.example.syncronote.logic.enums.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.HomeInfosBean;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import javafx.fxml.FXML;
