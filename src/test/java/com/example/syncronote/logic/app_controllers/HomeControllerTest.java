@@ -2,7 +2,6 @@ package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.HomeInfosBean;
 import com.example.syncronote.logic.enums.UserTypes;
-import com.example.syncronote.logic.enums.app_controllers.HomeController;
 import com.example.syncronote.logic.exceptions.SessionUserException;
 import com.example.syncronote.logic.model.User;
 import com.example.syncronote.logic.session.SessionManager;

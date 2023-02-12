@@ -1,12 +1,12 @@
 Email sent from: d@d.en
 Email sent to: a@a.it
 Professor username: Barto
-Has published note name: note1
+Has published note name: note2
 ----------------------------------------
 
 Email sent from: d@d.en
 Email sent to: g@g.it
 Professor username: Barto
-Has published note name: note1
+Has published note name: note2
 ----------------------------------------
 

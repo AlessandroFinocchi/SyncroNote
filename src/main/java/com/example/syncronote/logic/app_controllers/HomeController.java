@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.enums.app_controllers;
+package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.HomeInfosBean;
 import com.example.syncronote.logic.exceptions.SessionUserException;

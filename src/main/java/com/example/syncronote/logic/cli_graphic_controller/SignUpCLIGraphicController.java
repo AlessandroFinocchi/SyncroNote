@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.cli_graphic_controller;
 
-import com.example.syncronote.logic.enums.app_controllers.SignUpController;
+import com.example.syncronote.logic.app_controllers.SignUpController;
 import com.example.syncronote.logic.beans.SignupBean;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.example.syncronote.logic.exceptions.InvalidFormatException;

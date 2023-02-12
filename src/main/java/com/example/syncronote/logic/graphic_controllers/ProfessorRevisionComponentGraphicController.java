@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.enums.app_controllers.ProfessorRevisionComponentController;
+import com.example.syncronote.logic.app_controllers.ProfessorRevisionComponentController;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.beans.ProfessorRevisionBean;
 import com.example.syncronote.logic.beans.ResponseBean;
@@ -58,6 +58,7 @@ public class ProfessorRevisionComponentGraphicController extends AbsDialogNaviga
             String response = showTextAlert("Response", "Comment note " + noteLbl.getText(), "Enter comment");
             ResponseBean responseBean = new ResponseBean(noteLbl.getText(), studentQuestion, response);
             controller.correctNote(responseBean);
+            goToPage(PROFESSOR_REVISION);
         } catch (InvalidFormatException e) {
             showErrorAlert("Error", e.getMessage());
         }
@@ -67,5 +68,6 @@ public class ProfessorRevisionComponentGraphicController extends AbsDialogNaviga
     void finalizeRevision(ActionEvent event) {
         ResponseBean responseBean = new ResponseBean(noteLbl.getText(), null, null);
         controller.correctNote(responseBean);
+        goToPage(PROFESSOR_REVISION);
     }
 }

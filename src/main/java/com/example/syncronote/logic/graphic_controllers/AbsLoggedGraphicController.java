@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.enums.app_controllers.AbsController;
-import com.example.syncronote.logic.enums.app_controllers.HomeController;
+import com.example.syncronote.logic.app_controllers.AbsController;
+import com.example.syncronote.logic.app_controllers.HomeController;
 import com.example.syncronote.logic.beans.SessionUserBean;
 import com.example.syncronote.logic.enums.UserTypes;
 import com.jfoenix.controls.JFXButton;

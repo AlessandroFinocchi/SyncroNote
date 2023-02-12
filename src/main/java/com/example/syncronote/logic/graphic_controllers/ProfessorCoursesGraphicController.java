@@ -1,7 +1,7 @@
 package com.example.syncronote.logic.graphic_controllers;
 
 import com.example.syncronote.Main;
-import com.example.syncronote.logic.enums.app_controllers.ProfessorCoursesController;
+import com.example.syncronote.logic.app_controllers.ProfessorCoursesController;
 import com.example.syncronote.logic.beans.CategoryBean;
 import com.example.syncronote.logic.beans.CourseBean;
 import com.example.syncronote.logic.enums.GradeTypes;

@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.enums.app_controllers;
+package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserNotesController extends AbsLoggedGraphicController {
+public class UserNotesController extends AbsLoggedController {
 
     public List<NoteComponentBean> getUserNotes() {
         List<NoteComponentBean> noteBeansList = new ArrayList<>();
@@ -49,9 +49,8 @@ public class UserNotesController extends AbsLoggedGraphicController {
     public void deleteNote(NoteComponentBean noteComponentBean) throws DAOException {
         try {
             new NoteDAO().deleteNote(noteComponentBean.getTitle());
-            NavigatorSingleton.getInstance().gotoPage(USER_NOTES);
         }
-        catch (SQLException | IOException e){
+        catch (SQLException e){
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }

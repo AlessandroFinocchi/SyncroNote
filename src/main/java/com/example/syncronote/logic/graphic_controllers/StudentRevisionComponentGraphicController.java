@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.enums.app_controllers.StudentRevisionComponentController;
+import com.example.syncronote.logic.app_controllers.StudentRevisionComponentController;
 import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
 import com.example.syncronote.logic.beans.StudentRevisionBean;
@@ -78,6 +78,8 @@ public class StudentRevisionComponentGraphicController extends AbsDialogNavigato
             CorrectionNoteBean noteBean = new CorrectionNoteBean(response, noteFile);
 
             controller.republishNote(noteBean);
+
+            goToPage(STUDENT_REVISION);
         } catch (InvalidFormatException e) {
             showErrorAlert("Error", e.getMessage());
         } catch (DAOException e) {
@@ -91,6 +93,7 @@ public class StudentRevisionComponentGraphicController extends AbsDialogNavigato
         NoteChosenBean noteBean = new NoteChosenBean(noteName);
         try {
             controller.finalizeRevision(noteBean);
+            goToPage(STUDENT_REVISION);
         } catch (DAOException e) {
             showErrorAlert("Database error", e.getMessage());
         }

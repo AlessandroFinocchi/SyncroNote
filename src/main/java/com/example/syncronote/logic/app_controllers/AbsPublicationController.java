@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.enums.app_controllers;
+package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.PublicationStudentBean;
 import com.example.syncronote.logic.exceptions.DAOException;

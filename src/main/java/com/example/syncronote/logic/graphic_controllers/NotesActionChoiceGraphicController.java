@@ -1,6 +1,6 @@
 package com.example.syncronote.logic.graphic_controllers;
 
-import com.example.syncronote.logic.enums.app_controllers.AbsController;
+import com.example.syncronote.logic.app_controllers.AbsController;
 import com.example.syncronote.logic.enums.UserTypes;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Polygon;

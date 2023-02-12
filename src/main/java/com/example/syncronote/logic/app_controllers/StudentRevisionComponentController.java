@@ -1,4 +1,4 @@
-package com.example.syncronote.logic.enums.app_controllers;
+package com.example.syncronote.logic.app_controllers;
 
 import com.example.syncronote.logic.beans.CorrectionNoteBean;
 import com.example.syncronote.logic.beans.NoteChosenBean;
@@ -26,8 +26,7 @@ public class StudentRevisionComponentController{
             noteDAO.updatePublishedNote(noteBean.getTitle(), noteBean.getFile().getPath());
             revisionDAO.updateRevision(noteBean.getTitle(), noteBean.getNewQuestion(), null);
 
-            NavigatorSingleton.getInstance().gotoPage("StudentRevision.fxml");
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }
@@ -36,8 +35,7 @@ public class StudentRevisionComponentController{
 
         try {
             revisionDAO.finalizationRevision(noteBean.getTitle());
-            NavigatorSingleton.getInstance().gotoPage("StudentRevision.fxml");
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
     }
