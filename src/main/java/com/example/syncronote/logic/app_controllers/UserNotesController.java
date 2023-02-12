@@ -4,10 +4,8 @@ import com.example.syncronote.logic.beans.NoteComponentBean;
 import com.example.syncronote.logic.beans.NoteFilePathBean;
 import com.example.syncronote.logic.dao.NoteDAO;
 import com.example.syncronote.logic.exceptions.DAOException;
-import com.example.syncronote.logic.graphic_controllers.AbsLoggedGraphicController;
 import com.example.syncronote.logic.model.Note;
 import com.example.syncronote.logic.session.SessionManager;
-import com.example.syncronote.logic.utilities.NavigatorSingleton;
 
 import java.io.IOException;
 import java.sql.SQLException;
