@@ -1,2 +1,2 @@
 # SyncroNote
-Esame ISPW Alessandro Finocchi
+Codice Syncronotes, Esame ISPW Alessandro Finocchi
