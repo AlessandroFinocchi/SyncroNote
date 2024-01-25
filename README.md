@@ -20,14 +20,21 @@ Server and Proxy have to be executed before the clinet, so that when they are bo
 0. Make sure to have Go language properly installed on your computer.
 
 1. To run the server:
-   go run server/server.go
+   <pre>
+      go run server/server.go
+   </pre>
+   
 
-2. To run the load balancer:
-   go run proxy/proxy.go
+3. To run the load balancer:
+   <pre>
+      go run proxy/proxy.go
+   </pre>
 
-3. To run the client:
-   go run client/client
+4. To run the client:
+   <pre>
+      go run client/client
+   </pre>
 
-4. Once the client is running, specify the elements of the list separated by a blankspace and press enter when the list is finished.
+5. Once the client is running, specify the elements of the list separated by a blankspace and press enter when the list is finished.
    > Enter the first list: 1 2 3 4 5
    > Enter the second list: 1 2 3 4
