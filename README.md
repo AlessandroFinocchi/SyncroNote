@@ -36,5 +36,7 @@ Server and Proxy have to be executed before the clinet, so that when they are bo
    </pre>
 
 5. Once the client is running, specify the elements of the list separated by a blankspace and press enter when the list is finished.
-   > Enter the first list: 1 2 3 4 5
-   > Enter the second list: 1 2 3 4
+   <pre>
+      > Enter the first list: 1 2 3 4 5
+      > Enter the second list: 1 2 3 4
+   </pre>
